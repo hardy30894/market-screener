@@ -240,8 +240,11 @@ def main() -> None:
     tmpl = HERE / "dashboard_template.html"
     if tmpl.exists():
         html = tmpl.read_text().replace("__DATA__", json.dumps(data))
-        (HERE / "results" / "dashboard.html").write_text(html)
-        print("Wrote results/dashboard.html")
+        docs = HERE / "docs"
+        docs.mkdir(exist_ok=True)
+        (docs / "index.html").write_text(html)   # served by GitHub Pages at the site root
+        (docs / ".nojekyll").write_text("")        # tell Pages not to run Jekyll
+        print("Wrote docs/index.html")
 
 
 if __name__ == "__main__":
