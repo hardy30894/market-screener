@@ -1,0 +1,24 @@
+# Monitored names — one ticker per line. Lines starting with # are ignored.
+# The daily report runs the exit monitor (HOLD/TRIM/EXIT) on these.
+# Pre-filled with the basket we've been tracking. Edit to your ACTUAL positions
+# whenever you want exit signals on what you really hold.
+
+# memory / storage
+MU
+WDC
+STX
+RMBS
+# AI compute
+NVDA
+AMD
+AVGO
+MRVL
+# photonics / optical
+COHR
+LITE
+CIEN
+# connectivity / rack-scale
+ALAB
+CRDO
+# other tracked
+NOK
