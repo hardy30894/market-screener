@@ -239,12 +239,24 @@ def main() -> None:
     }
     tmpl = HERE / "dashboard_template.html"
     if tmpl.exists():
-        html = tmpl.read_text().replace("__DATA__", json.dumps(data))
         docs = HERE / "docs"
-        docs.mkdir(exist_ok=True)
+        ddir = docs / "data"
+        ddir.mkdir(parents=True, exist_ok=True)
+        # save this day's data + maintain the date index (newest first)
+        (ddir / f"{date}.json").write_text(json.dumps(data))
+        idx_path = ddir / "index.json"
+        try:
+            idx = json.loads(idx_path.read_text()) if idx_path.exists() else []
+        except Exception:
+            idx = []
+        idx = sorted(set(idx) | {date}, reverse=True)
+        idx_path.write_text(json.dumps(idx))
+        # dashboard: inline latest data + the index, history loads on click
+        html = (tmpl.read_text().replace("__DATA__", json.dumps(data))
+                .replace("__INDEX__", json.dumps(idx)))
         (docs / "index.html").write_text(html)   # served by GitHub Pages at the site root
         (docs / ".nojekyll").write_text("")        # tell Pages not to run Jekyll
-        print("Wrote docs/index.html")
+        print(f"Wrote docs/index.html ({len(idx)} days in history)")
 
 
 if __name__ == "__main__":
