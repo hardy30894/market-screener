@@ -14,49 +14,7 @@ if [ -z "$PY" ]; then
   fi
 fi
 cd "$DIR" || exit 1
-mkdir -p results
-DATE=$(date +%Y-%m-%d)
-OUT="results/$DATE.md"
-
-{
-  echo "# Daily Sector Report — $DATE"
-  echo "_Generated $(date '+%Y-%m-%d %H:%M %Z'). Not investment advice._"
-  echo
-
-  echo "## 1. Screener — all themes (picks + EARNINGS WATCH at top)"
-  echo '```'
-  "$PY" screener.py --all-themes --min-score 55
-  SC=$?
-  echo '```'
-  if [ $SC -ne 0 ]; then
-    echo
-    echo "> ⚠ **screener exited $SC** — data source degraded; picks above may be aborted/incomplete. Do not trust today's rankings."
-  fi
-  echo
-
-  echo "## 2. Position monitor — exit signals on tracked names"
-  echo '```'
-  "$PY" monitor.py --file holdings.txt
-  echo '```'
-  echo
-
-  echo "## 3. Market regime — risk context"
-  echo '```'
-  "$PY" regime.py
-  echo '```'
-  echo
-
-  echo "## 4. Macro thesis (standing reference)"
-  echo "_Static thesis compiled 2026-05-28. Whether it still holds is tracked daily"
-  echo "by the cloud catalyst monitor (claude.ai routines), separate from this file._"
-  echo
-  if [ -f MARKET_OUTLOOK_2026_2027.md ]; then
-    # skip the file's own H1 so heading levels stay consistent under section 4
-    tail -n +2 MARKET_OUTLOOK_2026_2027.md
-  else
-    echo "_MARKET_OUTLOOK_2026_2027.md not found._"
-  fi
-} > "$OUT" 2>&1
-
-cp "$OUT" results/latest.md   # stable path for the email step
-echo "Wrote $OUT"
+# report.py builds the clean briefing (TL;DR -> summary -> full detail -> thesis)
+# and writes results/<date>.md + results/latest.md. Script chatter stays on
+# stdout (here), out of the report itself.
+"$PY" report.py

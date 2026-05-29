@@ -141,16 +141,9 @@ The ceiling: yfinance is still an unofficial scraper with no SLA. The real fix i
 
 ## Automation
 
-Two jobs, each placed where it actually works:
-
-| Job | Home | Schedule |
-|-----|------|----------|
-| Screener + earnings + exits + regime + thesis | **GitHub Actions** (this repo) | daily 13:00 UTC (9am ET) |
-| Catalyst-news digest | Claude routine (cloud) | daily |
-
-GitHub Actions runs in the cloud with open internet, so it is laptop-independent and commits each day's report to [`results/`](results). A local launchd job (macOS) can serve as a backup. The Claude cloud environment blocks outbound network to Yahoo, which is why the data job lives on GitHub Actions and only the web-search news job lives there.
-
-To read the latest report: open the newest file in [`results/`](results).
+A GitHub Actions workflow runs the full report every day and commits it to
+[`results/`](results), so it is hands-off and independent of any local machine.
+Read the latest at [`results/latest.md`](results/latest.md).
 
 ## Limitations and roadmap
 

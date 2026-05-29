@@ -55,7 +55,8 @@ def slope50(s: pd.Series) -> float:
     return float(s.iloc[-1] / s.iloc[-50] - 1) if len(s) > 50 else np.nan
 
 
-def main() -> None:
+def compute_regime() -> dict:
+    """Compute regime gauges -> {verdict, composite, n, gauges}. Shared by CLI and report.py."""
     px = load()
 
     def col(t):
@@ -106,6 +107,12 @@ def main() -> None:
     composite = sum(g[3] for g in gauges)
     n = len(gauges)
     verdict = "RISK-ON" if composite >= 2 else "RISK-OFF" if composite <= -2 else "NEUTRAL"
+    return {"verdict": verdict, "composite": composite, "n": n, "gauges": gauges}
+
+
+def main() -> None:
+    r = compute_regime()
+    verdict, composite, n, gauges = r["verdict"], r["composite"], r["n"], r["gauges"]
 
     print("\n" + "=" * 72)
     print(f"MARKET REGIME DASHBOARD   ->   {verdict}   (score {composite:+d} / range ±{n})")

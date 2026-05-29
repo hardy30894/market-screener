@@ -276,6 +276,47 @@ def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int =
     }
 
 
+def build_universe(src, themes, *, growth=None, cap_min=300e6, vol_min=200_000,
+                   all_tech=False, limit=40, extra_seeds=(), with_quantum=False) -> list[dict]:
+    """Discover per sub-sector (so theme labels are real), split by cap band, add seeds."""
+    if all_tech:
+        cands = src.discover(["__all_tech__"], cap_min, vol_min, growth, True, max_pull=600)
+    else:
+        seen, cands = set(), []
+        for t in themes:
+            for c in src.discover(THEME_INDUSTRIES[t], cap_min, vol_min, growth, False, max_pull=600):
+                if c["symbol"] not in seen:
+                    seen.add(c["symbol"])
+                    c["theme"] = t
+                    cands.append(c)
+    core_c = sorted([c for c in cands if c["mcap"] >= LARGE_CAP_FLOOR],
+                    key=lambda c: c["mcap"], reverse=True)[:limit]
+    early_c = sorted([c for c in cands if 0 < c["mcap"] < LARGE_CAP_FLOOR],
+                     key=lambda c: c["mcap"], reverse=True)[:limit]
+    seeds = list(QUANTUM_SEEDS) if with_quantum else []
+    seeds += [s.strip().upper() for s in extra_seeds if s and s.strip()]
+    have = {c["symbol"] for c in core_c + early_c}
+    seed_c = [{"symbol": s, "mcap": 0, "theme": "quantum" if s in QUANTUM_SEEDS else "seed"}
+              for s in dict.fromkeys(seeds) if s not in have]
+    return core_c + early_c + seed_c
+
+
+def score_universe(src, cands, earn_window=14, min_score=0.0, progress=False) -> pd.DataFrame:
+    """Score candidates into a sorted DataFrame. Shared by the CLI and report.py."""
+    bench_b = src.bundle(BENCHMARK)
+    bench = bench_b["hist"]["Close"] if bench_b else None
+    rows = []
+    for i, c in enumerate(cands, 1):
+        r = score_ticker(src, c["symbol"], c["theme"], bench, earn_window)
+        if progress:
+            print(f"  [{i}/{len(cands)}] {c['symbol']:6} {'ok ' if r else 'skip'}", end="\r")
+        if r and r["score"] >= min_score:
+            rows.append(r)
+    if progress:
+        print(" " * 50, end="\r")
+    return pd.DataFrame(rows).sort_values("score", ascending=False) if rows else pd.DataFrame()
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("tickers", nargs="*", help="score exactly these (skips discovery)")
@@ -309,41 +350,18 @@ def main() -> None:
             [t.strip() for t in args.themes.split(",") if t.strip() in THEME_INDUSTRIES]
         if args.solar and "solar" not in themes:
             themes.append("solar")
-        industries = sorted({ind for t in themes for ind in THEME_INDUSTRIES[t]})
         print(f"Themes: {themes}")
         try:
-            cands = src.discover(industries, args.cap_min, args.vol_min,
-                                 args.growth, args.all_tech, max_pull=600)
+            cands = build_universe(src, themes, growth=args.growth, cap_min=args.cap_min,
+                                   vol_min=args.vol_min, all_tech=args.all_tech, limit=args.limit,
+                                   extra_seeds=args.seeds.split(","),
+                                   with_quantum=(args.quantum or args.all_themes))
         except DataError as e:
             print(f"\n{e}")
             sys.exit(2)
-        # deep-score each cap band separately so small/mid names aren't starved
-        core_c = sorted([c for c in cands if c["mcap"] >= LARGE_CAP_FLOOR],
-                        key=lambda c: c["mcap"], reverse=True)[:args.limit]
-        early_c = sorted([c for c in cands if 0 < c["mcap"] < LARGE_CAP_FLOOR],
-                         key=lambda c: c["mcap"], reverse=True)[:args.limit]
-        # force-include quantum seeds and any explicit --seeds, bypassing filters
-        seeds = list(QUANTUM_SEEDS) if (args.quantum or args.all_themes) else []
-        seeds += [s.strip().upper() for s in args.seeds.split(",") if s.strip()]
-        have = {c["symbol"] for c in core_c + early_c}
-        seed_c = [{"symbol": s, "mcap": 0,
-                   "theme": "quantum" if s in QUANTUM_SEEDS else "seed"}
-                  for s in dict.fromkeys(seeds) if s not in have]
-        print(f"Deep-scoring {len(core_c)} large-cap + {len(early_c)} small/mid "
-              f"+ {len(seed_c)} seeded (top {args.limit}/band by cap; raise with --limit).")
-        cands = core_c + early_c + seed_c
 
     print(f"\nScoring {len(cands)} tickers...\n")
-    bench_b = src.bundle(BENCHMARK)
-    bench = bench_b["hist"]["Close"] if bench_b else None
-
-    rows = []
-    for i, c in enumerate(cands, 1):
-        r = score_ticker(src, c["symbol"], c["theme"], bench, args.earn_days)
-        print(f"  [{i}/{len(cands)}] {c['symbol']:6} {'ok ' if r else 'skip'}", end="\r")
-        if r and r["score"] >= args.min_score:
-            rows.append(r)
-    print(" " * 50, end="\r")
+    df = score_universe(src, cands, args.earn_days, args.min_score, progress=True)
 
     # LOUD FAILURE: refuse to print rankings if the data source is too degraded
     try:
@@ -352,11 +370,9 @@ def main() -> None:
         print(f"\n{e}")
         sys.exit(2)
 
-    if not rows:
+    if df.empty:
         print("No candidates passed the gates.")
         return
-
-    df = pd.DataFrame(rows).sort_values("score", ascending=False)
     cols = ["ticker", "theme", "verdict", "score", "earn_in", "next_earn",
             "cov", "mcap_$B", "price", "rev_accel", "margin_exp", "eps_rev",
             "surprise", "near_high", "mom", "trend", "rel_str", "squeeze", "vol_dry"]

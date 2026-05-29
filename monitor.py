@@ -107,6 +107,24 @@ def action(sigs: list, severe: bool) -> str:
     return "HOLD"
 
 
+def monitor_holdings(src, syms, bench=None) -> list[dict]:
+    """Score a holdings list into HOLD/TRIM/EXIT rows. Shared by CLI and report.py."""
+    if bench is None:
+        bench_b = src.bundle(BENCH)
+        bench = bench_b["hist"]["Close"] if bench_b else None
+    rows = []
+    for s in syms:
+        b = src.bundle(s)
+        if b is None:
+            rows.append({"ticker": s, "action": "NO DATA", "signals": "fetch failed"})
+            continue
+        sigs, m = exit_signals(b, bench)
+        rows.append({"ticker": s, "action": action(sigs, m["severe"]),
+                     "price": m["px"], "stop": m["stop"], "to_stop_%": m["to_stop_%"],
+                     "signals": "; ".join(sigs) if sigs else "clean"})
+    return rows
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("tickers", nargs="*")
@@ -122,19 +140,7 @@ def main() -> None:
         sys.exit("Usage: python monitor.py NVDA MU COHR   (or --file holdings.txt)")
 
     src = YFinanceSource()
-    bench_b = src.bundle(BENCH)
-    bench = bench_b["hist"]["Close"] if bench_b else None
-
-    rows = []
-    for s in syms:
-        b = src.bundle(s)
-        if b is None:
-            rows.append({"ticker": s, "action": "NO DATA", "signals": "fetch failed"})
-            continue
-        sigs, m = exit_signals(b, bench)
-        rows.append({"ticker": s, "action": action(sigs, m["severe"]),
-                     "price": m["px"], "stop": m["stop"], "to_stop_%": m["to_stop_%"],
-                     "signals": "; ".join(sigs) if sigs else "clean"})
+    rows = monitor_holdings(src, syms)
 
     try:
         src.assert_healthy()
