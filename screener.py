@@ -379,6 +379,24 @@ def main() -> None:
     else:
         print("  (no strong picks reporting in this window)")
 
+    # COILED WATCH: volatility-squeeze setups (the PRIMED* bullseye is rare,
+    # so surface anything contracting before it gets there)
+    cw = df[df["squeeze"].notna() & (df["squeeze"] >= 0.5)].sort_values("squeeze", ascending=False)
+    stars = df[df["verdict"] == "PRIMED *"]
+    print("\n" + "#" * 72)
+    print("# COILED WATCH — volatility contracting (squeeze>=0.5); PRIMED* = bullseye")
+    print("#" * 72)
+    if len(cw):
+        cwc = ["ticker", "theme", "verdict", "score", "squeeze", "near_high", "eps_rev", "earn_in"]
+        print(cw[cwc].to_string(index=False))
+        if len(stars):
+            print(f"\n*** {len(stars)} PRIMED* (coiled + strong fundamentals near high): "
+                  f"{', '.join(stars['ticker'])} ***")
+        else:
+            print("\nNo PRIMED* yet — these are coiling but not all three conditions align.")
+    else:
+        print("  (nothing coiling — volatility expanding across the board, momentum tape)")
+
     core = df[df["_mcap"] >= LARGE_CAP_FLOOR]
     early = df[(df["_mcap"] > 0) & (df["_mcap"] < LARGE_CAP_FLOOR)]
     unknown = df[df["_mcap"] <= 0]

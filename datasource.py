@@ -180,17 +180,19 @@ class YFinanceSource(DataSource):
             self.stale += 1
 
     def assert_healthy(self) -> None:
-        n = self.attempts
-        if n == 0:
-            print(f"Data health: all {self.cache_hits} from cache.")
+        # measure failures against the WHOLE universe (cached successes count),
+        # not just fresh fetches — else one failed fetch on a warm cache aborts.
+        total = self.attempts + self.cache_hits
+        if total == 0:
+            print("Data health: nothing processed.")
             return
-        fail_rate = self.failures / n
-        stale_rate = self.stale / max(1, n + self.cache_hits)
-        print(f"Data health: {n} fetched ({self.cache_hits} cached), "
+        fail_rate = self.failures / total
+        stale_rate = self.stale / total
+        print(f"Data health: {total} names ({self.cache_hits} cached, {self.attempts} fetched), "
               f"{self.failures} failed ({fail_rate:.0%}), {self.stale} stale ({stale_rate:.0%}).")
         if fail_rate > MAX_FAIL_RATE:
             raise DataError(
-                f"ABORT: {fail_rate:.0%} of fetches failed (>{MAX_FAIL_RATE:.0%}). "
+                f"ABORT: {fail_rate:.0%} of the universe failed to load (>{MAX_FAIL_RATE:.0%}). "
                 f"Data source is degraded — refusing to print rankings built on "
                 f"unreliable data. Try again later or switch providers.")
         if stale_rate > MAX_STALE_RATE:
