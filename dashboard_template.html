@@ -27,6 +27,8 @@ tailwind.config = { theme: { extend: {
   .bar > i { display:block; height:100%; background:linear-gradient(90deg,#82AAFF,#7DF4FF); }
   ::-webkit-scrollbar{height:8px;width:8px} ::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:9px}
   .navitem.active { background:rgba(130,170,255,0.12); border-color:rgba(130,170,255,0.35); color:#E5E2E1; }
+  summary::-webkit-details-marker { display:none; }
+  .chip { font-family:"Space Grotesk"; text-transform:uppercase; letter-spacing:0.1em; font-size:9px; padding:2px 8px; border-radius:4px; border:1px solid; white-space:nowrap; }
 </style>
 </head>
 <body class="font-sans antialiased">
@@ -87,6 +89,58 @@ tailwind.config = { theme: { extend: {
         <div class="flex items-center gap-2 mb-4"><span class="material-symbols-outlined text-primary text-lg">monitoring</span><h2 class="label text-xs text-ink/80">Market Regime</h2></div>
         <div id="regime" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
       </section>
+
+      <details class="glass rounded-md p-5 mb-6 group">
+        <summary class="flex items-center gap-2 cursor-pointer select-none">
+          <span class="material-symbols-outlined text-muted text-lg">help</span>
+          <h2 class="label text-xs text-ink/80">Legend · what the labels mean</h2>
+          <span class="material-symbols-outlined text-muted ml-auto group-open:rotate-180 transition">expand_more</span>
+        </summary>
+        <div class="mt-5 grid md:grid-cols-2 gap-x-10 gap-y-6 text-sm">
+          <div>
+            <div class="label text-[10px] text-primary/70 mb-3">Verdict</div>
+            <div class="space-y-2">
+              <div class="flex gap-3"><span class="chip text-cyan border-cyan/40 bg-cyan/10">PRIMED *</span><span class="text-muted text-xs">Bullseye: strong fundamentals, coiled near the high (volatility squeezing).</span></div>
+              <div class="flex gap-3"><span class="chip text-primary border-primary/40 bg-primary/10">primed</span><span class="text-muted text-xs">Strong fundamentals near the high, trend intact. Ready, just no squeeze.</span></div>
+              <div class="flex gap-3"><span class="chip text-good border-good/30 bg-good/10">early (fundies)</span><span class="text-muted text-xs">Fundamentals leading, still base-building below the high.</span></div>
+              <div class="flex gap-3"><span class="chip text-warn border-warn/30 bg-warn/10">extended</span><span class="text-muted text-xs">Move already underway. A confirm, not a pre-break entry.</span></div>
+              <div class="flex gap-3"><span class="chip text-muted border-white/10 bg-white/5">watch</span><span class="text-muted text-xs">Mixed: something missing (e.g. no estimate upgrades).</span></div>
+              <div class="flex gap-3"><span class="chip text-bad border-bad/30 bg-bad/10">broken trend</span><span class="text-muted text-xs">Below the 200-day average. Avoid.</span></div>
+            </div>
+          </div>
+          <div class="space-y-6">
+            <div>
+              <div class="label text-[10px] text-primary/70 mb-3">Exit action</div>
+              <div class="space-y-2">
+                <div class="flex gap-3"><span class="chip text-bad border-bad/40 bg-bad/10">EXIT</span><span class="text-muted text-xs">Severe signal (trend broken / below stop / earnings gap) or 3+ signals.</span></div>
+                <div class="flex gap-3"><span class="chip text-warn border-warn/40 bg-warn/10">TRIM</span><span class="text-muted text-xs">1–2 exit signals firing. Lighten, watch closely.</span></div>
+                <div class="flex gap-3"><span class="chip text-good border-good/30 bg-good/10">HOLD</span><span class="text-muted text-xs">Clean, no exit signals.</span></div>
+              </div>
+            </div>
+            <div>
+              <div class="label text-[10px] text-primary/70 mb-3">Regime</div>
+              <div class="flex flex-wrap gap-4 text-xs text-muted">
+                <span class="flex items-center gap-2"><span class="dot" style="background:#5BD89B;box-shadow:0 0 8px #5BD89B"></span>risk-on</span>
+                <span class="flex items-center gap-2"><span class="dot" style="background:#F2C14E;box-shadow:0 0 8px #F2C14E"></span>neutral</span>
+                <span class="flex items-center gap-2"><span class="dot" style="background:#F2756B;box-shadow:0 0 8px #F2756B"></span>risk-off</span>
+                <span>· score = net of 6 gauges (±6). Context, not a timing call.</span>
+              </div>
+            </div>
+          </div>
+          <div class="md:col-span-2">
+            <div class="label text-[10px] text-primary/70 mb-3">Columns (0–1 unless noted; higher = better)</div>
+            <div class="grid sm:grid-cols-2 gap-x-10 gap-y-1.5 text-xs text-muted font-mono">
+              <div><span class="text-ink">Score</span> — 0–100 composite of all signals below</div>
+              <div><span class="text-ink">52w</span> — proximity to 52-week high (1.0 = at the high)</div>
+              <div><span class="text-ink">Mom</span> — 12-month momentum, skip last month (&gt;0.5 = positive)</div>
+              <div><span class="text-ink">Est↑</span> — forward-EPS revision momentum (1.0 = analysts raising)</div>
+              <div><span class="text-ink">sqz</span> — volatility squeeze / coiling (1.0 = tightly contracted)</div>
+              <div><span class="text-ink">Earns / →Stop</span> — days to next earnings / % above trailing stop</div>
+            </div>
+            <div class="text-[11px] text-muted/70 mt-3 italic">Leading signals (Est↑, fundamentals) say <em>what</em>; technical signals (52w, Mom, sqz) say <em>when</em>. The technical edge tested weak on its own — treat scores as a research queue.</div>
+          </div>
+        </div>
+      </details>
 
       <footer class="text-muted text-xs font-mono mt-10 pt-6 border-t border-white/5">
         <span id="health"></span><br/>
