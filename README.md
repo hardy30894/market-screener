@@ -6,7 +6,7 @@ A discovery-first, earnings-aware stock screener for the AI / memory / semicondu
 
 It scans the whole US tech-hardware market live, ranks coiled pre-breakout setups, flags strong names reporting soon, and watches your holdings for exit signals. It runs itself daily in the cloud and writes one report.
 
-> **It is a decision-support tool.** The backtest below shows the technical edge is weak (roughly market-beta). It surfaces a researched, ranked queue of candidates to investigate. It does not promise returns, and it will not tell you the future. Read [What this is NOT](#what-this-is-not) before trusting a single score.
+> **It is a decision-support tool.** It scans the market, ranks pre-breakout setups, flags strong names reporting soon, and watches your holdings for exits. For an honest read of what it can and cannot do, see [What this is NOT](#what-this-is-not) and the [backtest](#does-it-actually-work-backtest).
 
 ---
 
