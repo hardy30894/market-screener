@@ -58,4 +58,5 @@ OUT="results/$DATE.md"
   fi
 } > "$OUT" 2>&1
 
+cp "$OUT" results/latest.md   # stable path for the email step
 echo "Wrote $OUT"
