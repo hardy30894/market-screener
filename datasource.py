@@ -123,6 +123,28 @@ class YFinanceSource(DataSource):
         print(f"Discovered {len(out)} names (universe total: {total}).")
         return out
 
+    def discover_market(self, cap_min, vol_min, max_pull=2500) -> list[dict]:
+        """Market-wide discovery (no sector filter) — for the cross-sector PRIMED* hunt."""
+        EQ = self.EQ
+        q = EQ("and", [EQ("eq", ["region", "us"]), EQ("gt", ["intradaymarketcap", cap_min]),
+                       EQ("gt", ["dayvolume", vol_min])])
+        out, seen = [], set()
+        for off in range(0, max_pull, 100):
+            try:
+                r = _retry(lambda off=off: self.yf.screen(
+                    q, size=100, offset=off, sortField="intradaymarketcap", sortAsc=False))
+            except Exception:
+                break
+            quotes = r.get("quotes", [])
+            for x in quotes:
+                s = x.get("symbol")
+                if s and s not in seen:
+                    seen.add(s)
+                    out.append({"symbol": s, "mcap": x.get("marketCap") or 0, "theme": "mkt"})
+            if len(quotes) < 100:
+                break
+        return out
+
     _BUNDLE_V = "v2"  # bump when the bundle schema changes -> auto-invalidates cache
 
     def bundle(self, symbol: str, period: str = "15mo") -> dict | None:

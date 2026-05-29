@@ -69,6 +69,16 @@ tailwind.config = { theme: { extend: {
         <div class="overflow-x-auto"><table id="setups" class="w-full text-sm"></table></div>
       </section>
 
+      <section class="glass glow rounded-md p-5 mb-6">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="material-symbols-outlined text-cyan text-lg">public</span>
+          <h2 class="label text-xs text-ink/80">Market-wide PRIMED ★ · all sectors</h2>
+          <span id="mkt-count" class="label text-[10px] text-muted ml-auto"></span>
+        </div>
+        <div class="overflow-x-auto"><table id="market" class="w-full text-sm"></table></div>
+        <div class="label text-[9px] text-muted/70 mt-3">Coiled near highs with rising estimates, scanned across the whole US market. A setup, not a buy.</div>
+      </section>
+
       <section class="grid md:grid-cols-2 gap-6 mb-6">
         <div class="glass rounded-md p-5">
           <div class="flex items-center gap-2 mb-4"><span class="material-symbols-outlined text-cyan text-lg">calendar_month</span><h2 class="label text-xs text-ink/80">Earnings Watch · ≤14d</h2></div>
@@ -126,6 +136,16 @@ tailwind.config = { theme: { extend: {
                 <span>· score = net of 6 gauges (±6). Context, not a timing call.</span>
               </div>
             </div>
+            <div>
+              <div class="label text-[10px] text-primary/70 mb-3">Cap band</div>
+              <div class="flex flex-wrap gap-x-2 gap-y-1 items-center text-xs text-muted">
+                <span class="chip text-cyan border-cyan/30 bg-white/5">mega</span> ≥$200B
+                <span class="chip text-primary border-primary/30 bg-white/5">large</span> $10–200B
+                <span class="chip text-good border-good/30 bg-white/5">mid</span> $2–10B
+                <span class="chip text-warn border-warn/30 bg-white/5">small</span> $300M–$2B
+                <span class="chip text-muted border-white/10 bg-white/5">micro</span> &lt;$300M
+              </div>
+            </div>
           </div>
           <div class="md:col-span-2">
             <div class="label text-[10px] text-primary/70 mb-3">Columns (0–1 unless noted; higher = better)</div>
@@ -163,7 +183,10 @@ const ACTION_COLOR = { EXIT:"text-bad bg-bad/10 border-bad/40", TRIM:"text-warn 
 const STATE_DOT = { "risk-on":"#5BD89B", "neutral":"#F2C14E", "risk-off":"#F2756B" };
 const REGIME_COLOR = { "RISK-ON":"good", "NEUTRAL":"warn", "RISK-OFF":"bad", "UNKNOWN":"muted" };
 
+const CAP_COLOR = { mega:"text-cyan border-cyan/30", large:"text-primary border-primary/30",
+  mid:"text-good border-good/30", small:"text-warn border-warn/30", micro:"text-muted border-white/10", "?":"text-muted border-white/10" };
 const chip = (t,c) => `<span class="label text-[9px] px-2 py-0.5 rounded border ${c}">${t}</span>`;
+const capChip = (c) => chip(c||"?", (CAP_COLOR[c]||"text-muted border-white/10")+" bg-white/5");
 const fmt = (v,d=2) => (v===null||v===undefined||v==="")?"–":(typeof v==="number"?v.toFixed(d):v);
 
 function renderSidebar(active) {
@@ -202,7 +225,7 @@ function render(d) {
      <div class="font-mono text-xs text-muted mt-1">${d.regime.composite>=0?'+':''}${d.regime.composite} / ${d.regime.n}</div>`;
 
   const m = [["Top setups",d.tldr.picks.length,"trending_up","primary"],
-    ["PRIMED ★",d.tldr.stars.length,"target","cyan"],
+    ["PRIMED ★",(d.market_primed||[]).length,"target","cyan"],
     ["Exit signals",d.tldr.exits.length,"logout",d.tldr.exits.length?"warn":"good"],
     ["Earnings ≤14d",d.tldr.earnings.length,"calendar_month","cyan"]];
   document.getElementById("metrics").innerHTML = m.map(([k,v,ic,c]) => `
@@ -214,18 +237,37 @@ function render(d) {
   document.getElementById("setups-count").textContent = `${rows.length} shown · ${d.screen.length} scored`;
   document.getElementById("setups").innerHTML = `
     <thead><tr class="label text-[9px] text-muted text-left border-b border-white/10">
-      <th class="py-2 pr-3">Ticker</th><th class="pr-3">Sector</th><th class="pr-3">Verdict</th><th class="pr-3">Score</th>
+      <th class="py-2 pr-3">Ticker</th><th class="pr-3">Sector</th><th class="pr-3">Cap</th><th class="pr-3">Verdict</th><th class="pr-3">Score</th>
       <th class="pr-3 hidden sm:table-cell">52w</th><th class="pr-3 hidden sm:table-cell">Mom</th>
       <th class="pr-3 hidden md:table-cell">Est↑</th><th class="pr-3">Earns</th></tr></thead>
     <tbody>${rows.map(r => `<tr class="border-b border-white/5 hover:bg-primary/5">
       <td class="py-2.5 pr-3 font-mono font-semibold">${r.ticker}</td>
       <td class="pr-3 text-muted text-xs">${r.theme}</td>
+      <td class="pr-3">${capChip(r.cap)}</td>
       <td class="pr-3">${chip(r.verdict, VERDICT_COLOR[r.verdict]||"text-muted border-white/10")}</td>
       <td class="pr-3 w-28"><div class="flex items-center gap-2"><span class="font-mono text-xs w-8">${fmt(r.score,1)}</span><div class="bar flex-1"><i style="width:${r.score}%"></i></div></div></td>
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.near_high)}</td>
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.mom)}</td>
       <td class="pr-3 hidden md:table-cell font-mono text-xs text-muted">${fmt(r.eps_rev)}</td>
       <td class="pr-3 font-mono text-xs ${r.earn_in!==null&&r.earn_in<=14?'text-cyan':'text-muted'}">${r.earn_in===null?'–':r.earn_in+'d'}</td></tr>`).join("")}</tbody>`;
+
+  const mp = d.market_primed || [];
+  document.getElementById("mkt-count").textContent = mp.length ? `${mp.length} found` : "none today";
+  document.getElementById("market").innerHTML = mp.length ? `
+    <thead><tr class="label text-[9px] text-muted text-left border-b border-white/10">
+      <th class="py-2 pr-3">Ticker</th><th class="pr-3">Cap</th><th class="pr-3">Score</th>
+      <th class="pr-3 hidden sm:table-cell">52w</th><th class="pr-3 hidden sm:table-cell">Mom</th>
+      <th class="pr-3">Est↑</th><th class="pr-3 hidden sm:table-cell">Sqz</th><th class="pr-3">Earns</th></tr></thead>
+    <tbody>${mp.map(r => `<tr class="border-b border-white/5 hover:bg-cyan/5">
+      <td class="py-2.5 pr-3 font-mono font-semibold">${r.ticker}</td>
+      <td class="pr-3">${capChip(r.cap)}</td>
+      <td class="pr-3 w-28"><div class="flex items-center gap-2"><span class="font-mono text-xs w-8">${fmt(r.score,1)}</span><div class="bar flex-1"><i style="width:${r.score}%"></i></div></div></td>
+      <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.near_high)}</td>
+      <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.mom)}</td>
+      <td class="pr-3 font-mono text-xs text-muted">${fmt(r.eps_rev)}</td>
+      <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.squeeze)}</td>
+      <td class="pr-3 font-mono text-xs ${r.earn_in!==null&&r.earn_in<=14?'text-cyan':'text-muted'}">${r.earn_in===null?'–':r.earn_in+'d'}</td></tr>`).join("")}</tbody>`
+    : `<tbody><tr><td class="text-muted text-sm font-mono py-3">No coiled-near-high setups across the market today.</td></tr></tbody>`;
 
   document.getElementById("earnings").innerHTML = d.earnings.length ? d.earnings.map(r => `
     <div class="flex items-center justify-between py-2 border-b border-white/5"><div><span class="font-mono font-semibold">${r.ticker}</span> ${chip(r.verdict,VERDICT_COLOR[r.verdict]||"")}</div>

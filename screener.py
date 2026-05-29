@@ -237,6 +237,20 @@ def earnings_tag(ei: dict, window: int) -> str:
     return ""
 
 
+def cap_band(mcap: float) -> str:
+    if not mcap:
+        return "?"
+    if mcap >= 200e9:
+        return "mega"
+    if mcap >= 10e9:
+        return "large"
+    if mcap >= 2e9:
+        return "mid"
+    if mcap >= 3e8:
+        return "small"
+    return "micro"
+
+
 def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int = 14) -> dict | None:
     b = src.bundle(sym)  # cached; None if fetch failed (tracked for loud-fail health)
     if b is None:
@@ -260,7 +274,7 @@ def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int =
     ei = earnings_info(b)
 
     return {
-        "ticker": sym, "theme": theme[:14], "verdict": verdict(sig),
+        "ticker": sym, "theme": theme[:14], "cap": cap_band(mcap), "verdict": verdict(sig),
         "score": score, "cov": round(avail / sum(WEIGHTS.values()), 2),
         "earn_in": ei.get("days_to_earn"), "next_earn": ei.get("next_earn"),
         "earn_flag": earnings_tag(ei, earn_window),
@@ -315,6 +329,27 @@ def score_universe(src, cands, earn_window=14, min_score=0.0, progress=False) ->
     if progress:
         print(" " * 50, end="\r")
     return pd.DataFrame(rows).sort_values("score", ascending=False) if rows else pd.DataFrame()
+
+
+def find_market_primed(src, per_band=45, vol_min=400_000) -> pd.DataFrame:
+    """Cross-sector hunt for PRIMED* setups (coiled near highs + rising estimates).
+    Scans the whole US market by cap band, returns only the PRIMED* rows."""
+    mkt = src.discover_market(3e8, vol_min, max_pull=2500)
+    bands = [
+        sorted([c for c in mkt if c["mcap"] >= 10e9], key=lambda c: c["mcap"], reverse=True)[:per_band],
+        sorted([c for c in mkt if 2e9 <= c["mcap"] < 10e9], key=lambda c: c["mcap"], reverse=True)[:per_band],
+        sorted([c for c in mkt if 3e8 <= c["mcap"] < 2e9], key=lambda c: c["mcap"], reverse=True)[:per_band],
+    ]
+    seen, cands = set(), []
+    for b in bands:
+        for c in b:
+            if c["symbol"] not in seen:
+                seen.add(c["symbol"])
+                cands.append(c)
+    df = score_universe(src, cands, min_score=0.0)
+    if df.empty:
+        return df
+    return df[df["verdict"] == "PRIMED *"].sort_values("score", ascending=False)
 
 
 def main() -> None:
@@ -373,7 +408,7 @@ def main() -> None:
     if df.empty:
         print("No candidates passed the gates.")
         return
-    cols = ["ticker", "theme", "verdict", "score", "earn_in", "next_earn",
+    cols = ["ticker", "theme", "cap", "verdict", "score", "earn_in", "next_earn",
             "cov", "mcap_$B", "price", "rev_accel", "margin_exp", "eps_rev",
             "surprise", "near_high", "mom", "trend", "rel_str", "squeeze", "vol_dry"]
 

@@ -20,7 +20,7 @@ from pathlib import Path
 import pandas as pd
 
 from datasource import YFinanceSource, DataError
-from screener import (THEME_INDUSTRIES, build_universe, score_universe)
+from screener import (THEME_INDUSTRIES, build_universe, score_universe, find_market_primed)
 from monitor import monitor_holdings
 from regime import compute_regime
 
@@ -29,10 +29,10 @@ EARN_WINDOW = 14
 EARN_WATCH_SCORE = 65.0
 GOOD = {"primed", "PRIMED *", "early (fundies)"}
 
-FULL_COLS = ["ticker", "theme", "verdict", "score", "earn_in", "next_earn", "cov",
+FULL_COLS = ["ticker", "theme", "cap", "verdict", "score", "earn_in", "next_earn", "cov",
              "mcap_$B", "price", "rev_accel", "margin_exp", "eps_rev", "surprise",
              "near_high", "mom", "trend", "rel_str", "squeeze", "vol_dry"]
-CLEAN_COLS = ["ticker", "theme", "verdict", "score", "near_high", "mom", "eps_rev", "earn_in"]
+CLEAN_COLS = ["ticker", "theme", "cap", "verdict", "score", "near_high", "mom", "eps_rev", "earn_in"]
 
 
 def fenced(df: pd.DataFrame, cols: list) -> str:
@@ -71,6 +71,12 @@ def main() -> None:
         holdings = [ln.strip().upper() for ln in hf.read_text().splitlines()
                     if ln.strip() and not ln.startswith("#")]
     mon = monitor_holdings(src, holdings) if holdings else []
+
+    # ---- compute: cross-sector PRIMED* hunt (the rare bullseye, market-wide) ----
+    try:
+        mktp = find_market_primed(src)
+    except Exception:
+        mktp = pd.DataFrame()
 
     # ---- health check (shared screener+monitor) ----
     health_warn = None
@@ -135,6 +141,16 @@ def main() -> None:
         L.append("\n## 🎯 Coiled watch (volatility squeeze; PRIMED\\* = bullseye)")
         L.append(fenced(cw, ["ticker", "theme", "verdict", "score", "squeeze", "near_high", "eps_rev"])
                  if len(cw) else "_Nothing coiling — volatility expanding (momentum tape)._")
+
+    # market-wide PRIMED* (all sectors, the rare bullseye)
+    L.append("\n## 🌐 Market-wide PRIMED★ (all sectors)")
+    if len(mktp):
+        L.append(fenced(round_df(mktp),
+                        ["ticker", "cap", "score", "near_high", "mom", "eps_rev", "squeeze", "earn_in"]))
+        L.append("\n_Coiled near their highs with rising estimates, scanned across the whole US market "
+                 "(not just tech). A setup, not a buy; verify each name._")
+    else:
+        L.append("_No PRIMED★ across the market today._")
 
     if mon:
         flagged = [r for r in mon if r.get("action") in ("EXIT", "TRIM")]
@@ -227,6 +243,13 @@ def main() -> None:
                  "signals": r.get("signals", "")} for r in mon]
     gauges = [{"name": g[0].split(" (")[0], "reading": g[1], "state": g[2], "score": g[3]}
               for g in reg["gauges"]]
+    mkt_rows = []
+    if not mktp.empty:
+        for r in mktp.to_dict("records"):
+            mkt_rows.append({"ticker": r["ticker"], "cap": r.get("cap"), "score": num(r["score"]),
+                             "near_high": num(r.get("near_high")), "mom": num(r.get("mom")),
+                             "eps_rev": num(r.get("eps_rev")), "squeeze": num(r.get("squeeze")),
+                             "earn_in": int(r["earn_in"]) if pd.notna(r.get("earn_in")) else None})
 
     data = {
         "date": date,
@@ -235,6 +258,7 @@ def main() -> None:
                    "n": reg["n"], "gauges": gauges},
         "tldr": {"picks": picks, "stars": stars, "exits": exits, "earnings": earn_soon},
         "screen": screen, "earnings": earn_rows, "coiled": coiled_rows, "monitor": mon_rows,
+        "market_primed": mkt_rows,
         "health": (health_warn or screen_err or "").strip(),
     }
     tmpl = HERE / "dashboard_template.html"
