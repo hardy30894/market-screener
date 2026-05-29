@@ -23,3 +23,9 @@ CRDO
 # other tracked
 NOK
 GDDY
+# enterprise software / SaaS de-rating watch (waiting for trend repair)
+NOW
+ZS
+CRM
+SNOW
+TSLA
