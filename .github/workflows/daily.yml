@@ -25,34 +25,6 @@ jobs:
       - name: Generate daily report
         run: bash daily_report.sh
 
-      - name: Prepare email body
-        id: body
-        run: |
-          echo "subject=Daily Sector Report $(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
-          {
-            echo "content<<__EOF__"
-            cat results/latest.md
-            echo "__EOF__"
-          } >> "$GITHUB_OUTPUT"
-
-      - name: Email report
-        if: ${{ env.MAIL_USERNAME != '' }}
-        env:
-          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          secure: true
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          from: Market Screener <${{ secrets.MAIL_USERNAME }}>
-          to: ${{ secrets.MAIL_TO }}
-          subject: ${{ steps.body.outputs.subject }}
-          convert_markdown: true
-          html_body: ${{ steps.body.outputs.content }}
-          attachments: results/latest.md
-
       - name: Commit report
         run: |
           git config user.name "github-actions[bot]"
