@@ -190,8 +190,7 @@ def main() -> None:
     if thesis.exists():
         L.append("\n---\n")
         L.append("## Macro thesis (full standing reference)")
-        L.append("_Static thesis compiled 2026-05-28; the cloud catalyst monitor tracks "
-                 "whether it still holds._\n")
+        L.append("_Static thesis compiled 2026-05-28; treat as standing context, not live._\n")
         L.append("\n".join(thesis.read_text().splitlines()[1:]))  # skip its H1
 
     out = HERE / "results" / f"{date}.md"

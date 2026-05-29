@@ -1,5 +1,5 @@
 # Daily Sector Report — 2026-05-29
-_Generated 2026-05-29 03:37 UTC. Regime: **RISK-ON** (+4/6). Not investment advice._
+_Generated 2026-05-29 03:40 UTC. Regime: **RISK-ON** (+4/6). Not investment advice._
 
 ## TL;DR
 - **Top setups:** STX, SNDK, WDC, AMD, ALAB
@@ -222,7 +222,7 @@ RISK-OFF = 'environment fragile, size down', NOT 'sell everything'. High false-p
 ---
 
 ## Macro thesis (full standing reference)
-_Static thesis compiled 2026-05-28; the cloud catalyst monitor tracks whether it still holds._
+_Static thesis compiled 2026-05-28; treat as standing context, not live._
 
 
 *Forward-looking research report. Compiled 2026-05-28. 26 sources fetched, 123

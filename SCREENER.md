@@ -278,8 +278,8 @@ breadth (RSP/SPY), credit (HYG/IEF), VIX, yield curve (10y−3mo), semis leaders
 risk environment* for position-sizing ("fragile → tighten up"), and every gauge
 prints its own false-positive caveat. High false-positive rates, long/variable
 lead times. The most actionable early warning for *this* basket is sector-internal
-(memory pricing rollover + capex guide-downs), which the daily catalyst monitor
-already tracks — the macro gauges are secondary context.
+(memory pricing rollover + hyperscaler capex guide-downs); the macro gauges are
+secondary context.
 
 ## C) TradingView (the trigger + alerting)
 
