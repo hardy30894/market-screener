@@ -95,6 +95,7 @@ def main() -> None:
     ap.add_argument("--start", default="2015-01-01")
     ap.add_argument("--horizon", type=int, default=21)
     ap.add_argument("--warmup", type=int, default=24, help="train periods before first OOS test")
+    ap.add_argument("--fundamentals", action="store_true", help="add EDGAR point-in-time fundamental factors")
     args = ap.parse_args()
     h = args.horizon
 
@@ -102,8 +103,6 @@ def main() -> None:
     px, bench = wide_download(args.start)
     c = px["close"]
     factors = build_factors(px, bench)
-    fnames = list(factors)
-    ranked = {k: xs_rank(v) for k, v in factors.items()}
 
     fwd = c.shift(-h) / c - 1
     fwd_xs = fwd.sub(fwd.mean(axis=1), axis=0)   # market-neutral target
@@ -112,6 +111,28 @@ def main() -> None:
     idx = c.index
     rebal = list(idx[252:len(idx) - h:h])
     ppy = 252.0 / h
+
+    # optional: EDGAR point-in-time fundamental factors (free, no look-ahead)
+    if args.fundamentals:
+        from edgar import PIT
+        tickers = list(c.columns)
+        pit = PIT(tickers, quiet=False)
+        fr = pd.DataFrame(index=pd.DatetimeIndex(rebal), columns=tickers, dtype=float)
+        fm = fr.copy()
+        for d in rebal:
+            ds = pd.Timestamp(d).strftime("%Y-%m-%d")
+            for t in tickers:
+                f = pit.factors_asof(t, ds)
+                fr.at[d, t] = f["f_rev_accel"]
+                fm.at[d, t] = f["f_margin"]
+        factors["f_rev_accel"] = fr
+        factors["f_margin"] = fm
+
+    fnames = list(factors)
+    ranked = {k: xs_rank(v) for k, v in factors.items()}
+    for k in ("f_rev_accel", "f_margin"):   # neutral rank for names without SEC data
+        if k in ranked:
+            ranked[k] = ranked[k].fillna(0.5)
 
     # per-date panel: (tickers, X rank-matrix, y market-neutral fwd ret)
     panel = {}
