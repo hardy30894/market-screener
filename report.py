@@ -13,7 +13,7 @@ Writes results/<date>.md and results/latest.md.
 """
 from __future__ import annotations
 
-import os
+import json
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -199,6 +199,49 @@ def main() -> None:
     out.write_text(text)
     (HERE / "results" / "latest.md").write_text(text)
     print(f"Wrote {out}")
+
+    # ---- dashboard: structured data injected into the HTML template ----
+    def num(v):
+        if v is None or (isinstance(v, float) and pd.isna(v)):
+            return None
+        return float(v) if isinstance(v, float) else v
+
+    screen = []
+    if not df.empty:
+        for r in df.to_dict("records"):
+            row = {k: num(v) for k, v in r.items() if not k.startswith("_")}
+            row["earn_in"] = int(r["earn_in"]) if pd.notna(r.get("earn_in")) else None
+            row["next_earn"] = r.get("next_earn") if isinstance(r.get("next_earn"), str) else None
+            screen.append(row)
+    earn_rows, coiled_rows = [], []
+    if not df.empty:
+        es2 = df[(df["earn_in"].notna()) & (df["earn_in"] >= 0)
+                 & (df["earn_in"] <= EARN_WINDOW) & (df["score"] >= EARN_WATCH_SCORE)].sort_values("score", ascending=False)
+        earn_rows = [{"ticker": r.ticker, "verdict": r.verdict, "earn_in": int(r.earn_in),
+                      "next_earn": r.next_earn if isinstance(r.next_earn, str) else None} for r in es2.itertuples()]
+        cw2 = df[df["squeeze"].notna() & (df["squeeze"] >= 0.5)].sort_values("squeeze", ascending=False)
+        coiled_rows = [{"ticker": r.ticker, "verdict": r.verdict, "squeeze": num(r.squeeze),
+                        "near_high": num(r.near_high)} for r in cw2.itertuples()]
+    mon_rows = [{"ticker": r["ticker"], "action": r["action"], "price": num(r.get("price")),
+                 "stop": num(r.get("stop")), "to_stop_pct": num(r.get("to_stop_%")),
+                 "signals": r.get("signals", "")} for r in mon]
+    gauges = [{"name": g[0].split(" (")[0], "reading": g[1], "state": g[2], "score": g[3]}
+              for g in reg["gauges"]]
+
+    data = {
+        "date": date,
+        "generated": f"{datetime.now(timezone.utc):%Y-%m-%d %H:%M}",
+        "regime": {"verdict": reg["verdict"], "composite": reg["composite"],
+                   "n": reg["n"], "gauges": gauges},
+        "tldr": {"picks": picks, "stars": stars, "exits": exits, "earnings": earn_soon},
+        "screen": screen, "earnings": earn_rows, "coiled": coiled_rows, "monitor": mon_rows,
+        "health": (health_warn or screen_err or "").strip(),
+    }
+    tmpl = HERE / "dashboard_template.html"
+    if tmpl.exists():
+        html = tmpl.read_text().replace("__DATA__", json.dumps(data))
+        (HERE / "results" / "dashboard.html").write_text(html)
+        print("Wrote results/dashboard.html")
 
 
 if __name__ == "__main__":

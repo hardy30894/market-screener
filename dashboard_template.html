@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Market Screener — Daily Briefing</title>
+<script src="https://cdn.tailwindcss.com?plugins=container-queries"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: {
+      bg: "#131313", surface: "#1a1a1a", lowest: "#080808",
+      ink: "#E5E2E1", muted: "#9a9794", primary: "#82AAFF", cyan: "#7DF4FF",
+      good: "#5BD89B", warn: "#F2C14E", bad: "#F2756B",
+    },
+    fontFamily: {
+      sans: ["IBM Plex Sans", "sans-serif"],
+      mono: ["IBM Plex Mono", "monospace"],
+      tech: ["Space Grotesk", "sans-serif"],
+    },
+  }},
+};
+</script>
+<style>
+  body { background:#131313; color:#E5E2E1; }
+  .grid-overlay { position:fixed; inset:0; background-image:radial-gradient(rgba(130,170,255,0.10) 1px, transparent 1px); background-size:24px 24px; pointer-events:none; z-index:0; }
+  .glass { background:rgba(53,53,52,0.35); backdrop-filter:blur(20px); border:1px solid rgba(130,170,255,0.10); }
+  .glow { box-shadow:0 0 80px rgba(130,170,255,0.06); }
+  .label { font-family:"Space Grotesk"; text-transform:uppercase; letter-spacing:0.18em; }
+  .dot { width:7px;height:7px;border-radius:99px;display:inline-block; }
+  table { border-collapse:collapse; }
+  .bar { height:4px; border-radius:99px; background:rgba(255,255,255,0.07); overflow:hidden; }
+  .bar > i { display:block; height:100%; background:linear-gradient(90deg,#82AAFF,#7DF4FF); }
+  ::-webkit-scrollbar{height:8px;width:8px} ::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:9px}
+  details > summary { list-style:none; cursor:pointer; } details > summary::-webkit-details-marker{display:none}
+</style>
+</head>
+<body class="font-sans antialiased">
+<div class="grid-overlay"></div>
+<main class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 py-10">
+
+  <!-- header -->
+  <header class="flex flex-wrap items-end justify-between gap-4 mb-10">
+    <div>
+      <div class="label text-[10px] text-primary/70 mb-2">Daily Briefing · Sector Screener</div>
+      <h1 class="font-tech font-bold tracking-tighter text-4xl sm:text-5xl">Market Screener</h1>
+      <div id="subtitle" class="text-muted text-sm mt-2 font-mono"></div>
+    </div>
+    <div id="regime-tag" class="glass rounded px-5 py-4 text-right glow"></div>
+  </header>
+
+  <!-- TL;DR metric cards -->
+  <section id="metrics" class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-10"></section>
+
+  <!-- top setups -->
+  <section class="glass glow rounded-md p-5 mb-6">
+    <div class="flex items-center gap-2 mb-4">
+      <span class="material-symbols-outlined text-primary text-lg">target</span>
+      <h2 class="label text-xs text-ink/80">Top Setups</h2>
+      <span id="setups-count" class="label text-[10px] text-muted ml-auto"></span>
+    </div>
+    <div class="overflow-x-auto"><table id="setups" class="w-full text-sm"></table></div>
+  </section>
+
+  <!-- two-up: earnings + coiled -->
+  <section class="grid md:grid-cols-2 gap-6 mb-6">
+    <div class="glass rounded-md p-5">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="material-symbols-outlined text-cyan text-lg">calendar_month</span>
+        <h2 class="label text-xs text-ink/80">Earnings Watch · ≤14d</h2>
+      </div>
+      <div id="earnings"></div>
+    </div>
+    <div class="glass rounded-md p-5">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="material-symbols-outlined text-cyan text-lg">compress</span>
+        <h2 class="label text-xs text-ink/80">Coiled Watch · Squeeze</h2>
+      </div>
+      <div id="coiled"></div>
+    </div>
+  </section>
+
+  <!-- exit signals -->
+  <section class="glass rounded-md p-5 mb-6">
+    <div class="flex items-center gap-2 mb-4">
+      <span class="material-symbols-outlined text-warn text-lg">logout</span>
+      <h2 class="label text-xs text-ink/80">Exit Signals · Holdings</h2>
+    </div>
+    <div class="overflow-x-auto"><table id="exits" class="w-full text-sm"></table></div>
+  </section>
+
+  <!-- regime gauges -->
+  <section class="glass rounded-md p-5 mb-6">
+    <div class="flex items-center gap-2 mb-4">
+      <span class="material-symbols-outlined text-primary text-lg">monitoring</span>
+      <h2 class="label text-xs text-ink/80">Market Regime</h2>
+    </div>
+    <div id="regime" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+  </section>
+
+  <footer class="text-muted text-xs font-mono mt-10 pt-6 border-t border-white/5">
+    <span id="health"></span><br/>
+    Not investment advice. Forward figures are forecasts. Signals are a research queue, not buy/sell calls.
+  </footer>
+</main>
+
+<script>
+const DATA = __DATA__;
+
+const VERDICT_COLOR = {
+  "PRIMED *":"text-cyan border-cyan/40 bg-cyan/10",
+  "primed":"text-primary border-primary/40 bg-primary/10",
+  "early (fundies)":"text-good border-good/30 bg-good/10",
+  "extended":"text-warn border-warn/30 bg-warn/10",
+  "watch":"text-muted border-white/10 bg-white/5",
+  "broken trend":"text-bad border-bad/30 bg-bad/10",
+};
+const ACTION_COLOR = { EXIT:"text-bad bg-bad/10 border-bad/40", TRIM:"text-warn bg-warn/10 border-warn/40", HOLD:"text-good bg-good/10 border-good/30", "NO DATA":"text-muted bg-white/5 border-white/10" };
+const STATE_DOT = { "risk-on":"#5BD89B", "neutral":"#F2C14E", "risk-off":"#F2756B" };
+const REGIME_COLOR = { "RISK-ON":"good", "NEUTRAL":"warn", "RISK-OFF":"bad", "UNKNOWN":"muted" };
+
+const el = (h) => { const t=document.createElement("template"); t.innerHTML=h.trim(); return t.content.firstChild; };
+const chip = (txt, cls) => `<span class="label text-[9px] px-2 py-0.5 rounded border ${cls}">${txt}</span>`;
+const fmt = (v, d=2) => (v===null||v===undefined||v==="")?"–":(typeof v==="number"?v.toFixed(d):v);
+
+function render() {
+  const d = DATA;
+  document.getElementById("subtitle").textContent = `${d.date}  ·  generated ${d.generated} UTC`;
+
+  // regime tag
+  const rc = REGIME_COLOR[d.regime.verdict] || "muted";
+  document.getElementById("regime-tag").innerHTML =
+    `<div class="label text-[9px] text-muted mb-1">Regime</div>
+     <div class="font-tech font-bold text-2xl text-${rc}">${d.regime.verdict}</div>
+     <div class="font-mono text-xs text-muted mt-1">${d.regime.composite>=0?'+':''}${d.regime.composite} / ${d.regime.n}</div>`;
+
+  // metric cards
+  const m = [
+    ["Top setups", d.tldr.picks.length, "trending_up", "primary"],
+    ["PRIMED ★", d.tldr.stars.length, "target", "cyan"],
+    ["Exit signals", d.tldr.exits.length, "logout", d.tldr.exits.length?"warn":"good"],
+    ["Earnings ≤14d", d.tldr.earnings.length, "calendar_month", "cyan"],
+  ];
+  document.getElementById("metrics").innerHTML = m.map(([k,v,ic,c]) => `
+    <div class="glass rounded-md p-4 glow">
+      <div class="flex items-center justify-between mb-2">
+        <span class="label text-[9px] text-muted">${k}</span>
+        <span class="material-symbols-outlined text-${c} text-base">${ic}</span>
+      </div>
+      <div class="font-tech font-bold text-5xl tracking-tighter text-${c}">${v}</div>
+    </div>`).join("");
+
+  // setups table
+  const rows = d.screen.filter(r => ["PRIMED *","primed","early (fundies)"].includes(r.verdict)).slice(0,14);
+  document.getElementById("setups-count").textContent = `${rows.length} shown · ${d.screen.length} scored`;
+  document.getElementById("setups").innerHTML = `
+    <thead><tr class="label text-[9px] text-muted text-left border-b border-white/10">
+      <th class="py-2 pr-3">Ticker</th><th class="pr-3">Sector</th><th class="pr-3">Verdict</th>
+      <th class="pr-3">Score</th><th class="pr-3 hidden sm:table-cell">52w</th>
+      <th class="pr-3 hidden sm:table-cell">Mom</th><th class="pr-3 hidden md:table-cell">Est↑</th>
+      <th class="pr-3">Earns</th></tr></thead>
+    <tbody>${rows.map(r => `
+      <tr class="border-b border-white/5 hover:bg-primary/5">
+        <td class="py-2.5 pr-3 font-mono font-semibold text-ink">${r.ticker}</td>
+        <td class="pr-3 text-muted text-xs">${r.theme}</td>
+        <td class="pr-3">${chip(r.verdict, VERDICT_COLOR[r.verdict]||"text-muted border-white/10")}</td>
+        <td class="pr-3 w-28"><div class="flex items-center gap-2"><span class="font-mono text-xs w-8">${fmt(r.score,1)}</span><div class="bar flex-1"><i style="width:${r.score}%"></i></div></div></td>
+        <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.near_high)}</td>
+        <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.mom)}</td>
+        <td class="pr-3 hidden md:table-cell font-mono text-xs text-muted">${fmt(r.eps_rev)}</td>
+        <td class="pr-3 font-mono text-xs ${r.earn_in!==null&&r.earn_in<=14?'text-cyan':'text-muted'}">${r.earn_in===null?'–':r.earn_in+'d'}</td>
+      </tr>`).join("")}</tbody>`;
+
+  // earnings
+  document.getElementById("earnings").innerHTML = d.earnings.length ? d.earnings.map(r => `
+    <div class="flex items-center justify-between py-2 border-b border-white/5">
+      <div><span class="font-mono font-semibold">${r.ticker}</span> ${chip(r.verdict, VERDICT_COLOR[r.verdict]||"")}</div>
+      <div class="text-right"><span class="font-mono text-cyan text-sm">${r.earn_in}d</span><div class="label text-[9px] text-muted">${r.next_earn||""}</div></div>
+    </div>`).join("") : `<div class="text-muted text-sm font-mono">No strong names reporting in window.</div>`;
+
+  // coiled
+  document.getElementById("coiled").innerHTML = d.coiled.length ? d.coiled.map(r => `
+    <div class="flex items-center justify-between py-2 border-b border-white/5">
+      <div><span class="font-mono font-semibold">${r.ticker}</span> ${chip(r.verdict, VERDICT_COLOR[r.verdict]||"")}</div>
+      <div class="text-right"><span class="font-mono text-sm">sqz ${fmt(r.squeeze)}</span><div class="label text-[9px] text-muted">52w ${fmt(r.near_high)}</div></div>
+    </div>`).join("") : `<div class="text-muted text-sm font-mono">Nothing coiling — volatility expanding (momentum tape).</div>`;
+
+  // exits
+  const ex = d.monitor.filter(r => r.action!=="HOLD");
+  document.getElementById("exits").innerHTML = ex.length ? `
+    <thead><tr class="label text-[9px] text-muted text-left border-b border-white/10">
+      <th class="py-2 pr-3">Ticker</th><th class="pr-3">Action</th><th class="pr-3 hidden sm:table-cell">Price</th>
+      <th class="pr-3 hidden sm:table-cell">→Stop</th><th class="pr-3">Signals</th></tr></thead>
+    <tbody>${ex.map(r => `
+      <tr class="border-b border-white/5 hover:bg-warn/5">
+        <td class="py-2.5 pr-3 font-mono font-semibold">${r.ticker}</td>
+        <td class="pr-3">${chip(r.action, ACTION_COLOR[r.action]||"")}</td>
+        <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.price)}</td>
+        <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${r.to_stop_pct===null?'–':fmt(r.to_stop_pct,1)+'%'}</td>
+        <td class="pr-3 text-xs text-muted">${r.signals}</td>
+      </tr>`).join("")}</tbody>`
+    : `<div class="text-good text-sm font-mono">All monitored holdings clean (HOLD).</div>`;
+
+  // regime gauges
+  document.getElementById("regime").innerHTML = d.regime.gauges.map(g => `
+    <div class="rounded border border-white/5 bg-lowest/40 p-3">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="dot" style="background:${STATE_DOT[g.state]||'#888'};box-shadow:0 0 8px ${STATE_DOT[g.state]||'#888'}"></span>
+        <span class="label text-[9px] text-muted">${g.name}</span>
+      </div>
+      <div class="font-mono text-sm">${g.reading}</div>
+    </div>`).join("");
+
+  document.getElementById("health").textContent = d.health || "";
+}
+render();
+</script>
+</body>
+</html>
