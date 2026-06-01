@@ -319,7 +319,8 @@ def main() -> None:
     mkt_rows = []
     if not mktp.empty:
         for r in mktp.to_dict("records"):
-            mkt_rows.append({"ticker": r["ticker"], "cap": r.get("cap"), "score": num(r["score"]),
+            mkt_rows.append({"ticker": r["ticker"], "cap": r.get("cap"), "signal": "BUY",
+                             "score": num(r["score"]),
                              "near_high": num(r.get("near_high")), "mom": num(r.get("mom")),
                              "eps_rev": num(r.get("eps_rev")), "squeeze": num(r.get("squeeze")),
                              "earn_in": int(r["earn_in"]) if pd.notna(r.get("earn_in")) else None})
