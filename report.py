@@ -327,10 +327,19 @@ def main() -> None:
     etf_rows = []
     if not edf.empty:
         for r in edf.to_dict("records"):
+            r1m = r1y = None
+            b = src.bundle(r["ticker"])               # cached from the scan
+            if b is not None:
+                cl = b["hist"]["Close"]
+                if len(cl) >= 21:
+                    r1m = round((cl.iloc[-1] / cl.iloc[-21] - 1) * 100, 1)
+                if len(cl) >= 252:
+                    r1y = round((cl.iloc[-1] / cl.iloc[-252] - 1) * 100, 1)
             etf_rows.append({"ticker": r["ticker"], "name": ETFS.get(r["ticker"], ""),
                              "verdict": r["verdict"], "trend": num(r.get("trend")),
                              "near_high": num(r.get("near_high")), "mom": num(r.get("mom")),
-                             "st_mom": num(r.get("st_mom")), "setup": r.get("setup", "")})
+                             "st_mom": num(r.get("st_mom")), "setup": r.get("setup", ""),
+                             "ret_1m": r1m, "ret_1y": r1y})
 
     data = {
         "date": date,

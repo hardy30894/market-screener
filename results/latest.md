@@ -1,5 +1,5 @@
 # Daily Sector Report — 2026-06-01
-_Generated 2026-06-01 06:10 UTC. Regime: **RISK-ON** (+4/6). Not investment advice._
+_Generated 2026-06-01 06:13 UTC. Regime: **RISK-ON** (+4/6). Not investment advice._
 
 ## TL;DR
 - **Top setups:** SNDK, STX, WDC, MU, AMD

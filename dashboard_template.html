@@ -373,7 +373,8 @@ function render(d) {
       <div class="flex items-center justify-between mb-1"><span class="font-mono font-semibold text-sm">${r.ticker}</span>
         <span class="dot" style="background:${SCOL[c]};box-shadow:0 0 8px ${SCOL[c]}"></span></div>
       <div class="label text-[8px] text-muted mb-1">${r.name||""}</div>
-      <div class="text-xs text-${c}">${s}</div></div>`;
+      <div class="text-xs text-${c} mb-1">${s}</div>
+      <div class="font-mono text-[10px] text-muted">1M <span class="${r.ret_1m>=0?'text-good':'text-bad'}">${r.ret_1m==null?'–':(r.ret_1m>=0?'+':'')+r.ret_1m+'%'}</span> · 1Y <span class="${r.ret_1y>=0?'text-good':'text-bad'}">${r.ret_1y==null?'–':(r.ret_1y>=0?'+':'')+r.ret_1y+'%'}</span></div></div>`;
   }).join("") : `<div class="text-muted text-sm font-mono">ETF data unavailable.</div>`;
 
   document.getElementById("regime").innerHTML = d.regime.gauges.map(g => `
