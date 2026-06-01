@@ -1,42 +1,42 @@
 # Daily Sector Report — 2026-06-01
-_Generated 2026-06-01 06:37 UTC. Regime: **RISK-ON** (+4/6). Not investment advice._
+_Generated 2026-06-01 15:10 UTC. Regime: **RISK-ON** (+4/6). Not investment advice._
 
 ## TL;DR
 - **Top setups:** STX, SNDK, WDC, MU, AMD
-- 🎯 **PRIMED\*** (coiled near highs): none today
-- ⚠ **Exit signals:** NVDA (TRIM), LITE (TRIM), GDDY (TRIM), ZS (EXIT), TSLA (TRIM), MRAM (TRIM)
+- 🎯 **PRIMED\*** (coiled near highs): VISN
+- ⚠ **Exit signals:** GDDY (TRIM), ZS (EXIT), TSLA (TRIM), MRAM (TRIM)
 - 📅 **Earnings ≤14d (strong names):** none
 
 ## Top setups (large-cap)
 ```
 ticker signal     theme   cap verdict    setup  score  near_high  mom  eps_rev earn_in
-   STX  WATCH  hardware large  primed            95.3       0.99  1.0     1.00       -
+   STX  WATCH  hardware  mega  primed            95.3       1.00  1.0     1.00       -
   SNDK  WATCH  hardware  mega  primed            95.3       1.00  1.0     1.00       -
    WDC  WATCH  hardware large  primed            94.2       1.00  1.0     0.94       -
     MU  WATCH     semis  mega  primed            93.3       1.00  1.0     1.00       -
-   AMD  WATCH     semis  mega  primed            93.1       0.97  1.0     0.98       -
-  ALAB  WATCH     semis large  primed            91.7       0.88  1.0     1.00       -
-   TSM  WATCH     semis  mega  primed            88.6       0.90  1.0     1.00       -
+   AMD  WATCH     semis  mega  primed            92.0       0.89  1.0     0.98       -
+   TSM  WATCH     semis  mega  primed            90.0       1.00  1.0     1.00       -
   DELL    BUY  hardware  mega  primed BREAKOUT   88.4       1.00  1.0     1.00       -
-  MRVL  WATCH     semis large  primed            85.7       0.90  1.0     0.86       -
-  LRCX  WATCH equipment  mega  primed            85.5       0.91  1.0     1.00       -
+  ALAB  WATCH     semis large  primed            88.3       0.62  1.0     1.00       -
+  MRVL  WATCH     semis large  primed            87.0       1.00  1.0     0.86       -
+  LRCX  WATCH equipment  mega  primed            86.3       0.81  1.0     1.00       -
    ARM  WATCH     semis  mega  primed            85.0       1.00  1.0     0.71       -
-  CIEN  WATCH photonics large  primed            84.8       0.75  1.0     1.00       -
+  FLEX  WATCH  hardware large  primed            84.2       0.85  1.0     1.00       -
 ```
 
 ## Top setups (small/mid)
 ```
-ticker signal     theme cap         verdict setup  score  near_high  mom  eps_rev earn_in
-  SIMO  WATCH     semis mid          primed         89.3       0.69  1.0     1.00       -
-   VSH  WATCH     semis mid          primed         88.9       0.98  1.0     1.00       -
-   MXL   PASS     semis mid        extended         85.5       0.39  1.0     1.00       -
-  SLAB    M&A     semis mid      M&A target         83.5       0.96  1.0     0.75       -
-  PLXS  WATCH  hardware mid          primed         83.4       0.89  1.0     1.00       -
-  KLIC  WATCH equipment mid early (fundies)         82.7       0.59  1.0     1.00       -
-  AXTI   PASS equipment mid        extended         82.6       0.00  1.0     1.00       -
-  DIOD   PASS     semis mid        extended         80.2       0.38  1.0     1.00       -
-  ACMR  WATCH equipment mid early (fundies)         78.2       0.55  1.0     1.00       -
-  ONDS  WATCH photonics mid          primed         76.4       0.62  1.0     1.00       -
+ticker signal     theme   cap  verdict    setup  score  near_high  mom  eps_rev earn_in
+  SIMO  WATCH     semis   mid   primed            90.1       0.76 1.00     1.00       -
+   VSH    BUY     semis   mid   primed BREAKOUT   89.2       1.00 1.00     1.00       -
+  KLIC  WATCH equipment   mid   primed            84.9       0.72 1.00     1.00       -
+  EXTR  WATCH photonics   mid   primed            84.9       1.00 0.92     0.83       -
+  VISN    BUY photonics   mid PRIMED *            84.7       0.76 1.00     1.00       -
+   AIP  WATCH     semis small   primed            84.6       0.71 1.00     1.00       -
+   VPG  WATCH photonics small   primed            84.0       0.87 1.00     1.00       -
+  AXTI   PASS equipment   mid extended            82.6       0.00 1.00     1.00       -
+   MXL   PASS     semis   mid extended            82.2       0.13 1.00     1.00       -
+    KN  WATCH  hardware   mid   primed            79.3       0.82 1.00     1.00       -
 ```
 
 ## 📅 Earnings watch
@@ -45,60 +45,47 @@ _No strong names reporting in the window._
 ## 🎯 Coiled watch (volatility squeeze; PRIMED\* = bullseye)
 ```
 ticker     theme      verdict  score  squeeze  near_high  eps_rev
-  SLAB     semis   M&A target   83.5     0.76       0.96     0.75
-   APH  hardware     extended   79.9     0.59       0.31     0.93
-  ANET  hardware     extended   73.1     0.52       0.32     0.89
-   TEL  hardware broken trend   59.5     1.00       0.09     0.94
-   RUN     solar        watch   59.4     1.00       0.00     0.25
-   BDC photonics broken trend   46.7     1.00       0.00     1.00
-   MSI photonics broken trend   43.8     0.69       0.00     0.92
-  IPGP equipment        watch   37.6     1.00       0.00     0.00
-  OSIS  hardware broken trend   33.6     0.98       0.00     0.25
-  ITRI photonics broken trend   30.4     1.00       0.00     0.25
-   VNT photonics broken trend   23.9     1.00       0.00     0.00
-   BMI photonics broken trend   20.7     1.00       0.00     0.50
-  OLED  hardware broken trend   11.6     1.00       0.00     0.00
+   TSM     semis       primed   90.0     0.51       1.00     1.00
+  VISN photonics     PRIMED *   84.7     0.69       0.76     1.00
+   APH  hardware     extended   79.1     0.71       0.20     0.93
+  ANET  hardware       primed   76.9     0.51       0.61     0.89
+  KEYS photonics     extended   70.0     0.54       0.29     0.92
+ KRKNF photonics        watch   59.6     0.68       0.00      NaN
+   RUN     solar   recovering   57.3     1.00       0.00     0.25
+   TEL  hardware broken trend   53.3     1.00       0.06     0.94
+   MSI photonics broken trend   44.2     0.77       0.00     0.92
+   VNT photonics broken trend   23.7     1.00       0.00     0.00
 ```
 
 ## 🌐 Market-wide PRIMED★ (all sectors)
 ```
 ticker   cap  score  near_high  mom  eps_rev  squeeze earn_in
-  FROG   mid   91.4       1.00 0.58     0.90     0.73       -
-  NTST small   87.4       0.77 0.86     1.00     1.00       -
-  UMBF   mid   85.7       0.84 0.73     1.00     1.00       -
-  BPOP   mid   85.5       0.88 0.98     1.00     1.00       -
-    MS  mega   84.1       1.00 1.00     0.95     1.00       -
-  AAPL  mega   80.8       0.99 0.86     0.94     1.00       -
-  ZION   mid   80.4       0.80 0.86     0.90     1.00       -
-  STEL small   79.7       0.63 0.92     1.00     1.00       -
+    MS  mega   86.3       1.00 1.00     0.95     1.00       -
+  AAPL  mega   80.1       0.89 0.90     0.94     1.00       -
    VRE small   79.1       1.00 0.82     1.00     1.00       -
-  MASI   mid   78.6       0.99 0.64     1.00     1.00       -
-    GS  mega   74.9       1.00 1.00     0.60     0.96       -
-    KO  mega   72.3       0.76 0.63     0.85     0.64       -
-   LTC small   71.4       0.61 0.64     1.00     1.00       -
+    GS  mega   75.1       1.00 1.00     0.60     1.00       -
+    KO  mega   71.9       0.75 0.62     0.85     0.62       -
 ```
 
 _Coiled near their highs with rising estimates, scanned across the whole US market (not just tech). A setup, not a buy; verify each name._
 
 ## ⚠ Exit signals (your holdings)
 ```
-ticker action  price   stop  to_stop_%                                                                                  signals
-  NVDA   TRIM 211.14 213.45       -1.1                                                                      below trailing stop
-  LITE   TRIM 854.96 839.97        1.8                                                                below 50d; lagging market
-  GDDY   TRIM  85.83  81.68        4.8                                        below 200d; 12m momentum negative; lagging market
-    ZS   EXIT 139.73 157.81      -12.9 downtrend (below 50d & 200d); 12m momentum negative; lagging market; below trailing stop
-  TSLA   TRIM 435.79 405.75        6.9                                                      estimates being cut; lagging market
-  MRAM   TRIM  26.38  34.67      -31.4                                                 estimates being cut; below trailing stop
+ticker action  price   stop  to_stop_%                                                    signals
+  GDDY   TRIM  91.12  81.19       10.9          below 200d; 12m momentum negative; lagging market
+    ZS   EXIT 154.65 156.15       -1.0 12m momentum negative; lagging market; below trailing stop
+  TSLA   TRIM 420.62 404.28        3.9                        estimates being cut; lagging market
+  MRAM   TRIM  29.16  34.27      -17.5                   estimates being cut; below trailing stop
 ```
 
 ## Market regime
 ```
-  SPX trend                         SPY above 200d (+11.5%)  risk-on
+  SPX trend                         SPY above 200d (+11.3%)  risk-on
   Breadth (RSP-SPY 50d)                      -6.5%  risk-off
-  Credit (HYG/IEF 50d)                       +2.3%  risk-on
-  Volatility (VIX)                            15.3  risk-on
-  Yield curve (10y-3mo)                    +0.87pp  risk-on
-  Semis leadership (SOXX-SPY 63d)           +51.2%  risk-on
+  Credit (HYG/IEF 50d)                       +2.4%  risk-on
+  Volatility (VIX)                            16.2  risk-on
+  Yield curve (10y-3mo)                    +0.91pp  risk-on
+  Semis leadership (SOXX-SPY 63d)           +58.8%  risk-on
 ```
 
 ---
@@ -109,134 +96,132 @@ _Everything below is the complete data behind the summary above._
 ### Full screen — CORE (large-cap)
 ```
 ticker signal     theme   cap         verdict deal    setup  score earn_in next_earn  to_resist  to_support  cov  mcap_$B   price  rev_accel  margin_exp  eps_rev  surprise  near_high  mom  trend  rel_str  squeeze  vol_dry
-   STX  WATCH  hardware large          primed                 95.3       -      None        2.9        61.2 1.00    199.1  879.80        1.0         1.0     1.00      1.00       0.99 1.00    1.0     1.00     0.00      1.0
-  SNDK  WATCH  hardware  mega          primed                 95.3       -      None        0.2        69.5 1.00    251.0 1694.98        1.0         1.0     1.00      1.00       1.00 1.00    1.0     1.00     0.00      1.0
-   WDC  WATCH  hardware large          primed                 94.2       -      None        4.2        55.2 1.00    183.1  531.21        1.0         1.0     0.94      1.00       1.00 1.00    1.0     1.00     0.00      1.0
-    MU  WATCH     semis  mega          primed                 93.3       -      None       -1.5        67.9 1.00   1095.0  971.00        1.0         1.0     1.00      1.00       1.00 1.00    1.0     1.00     0.00      0.4
-   AMD  WATCH     semis  mega          primed                 93.1       -      None        2.2        63.4 1.00    841.6  516.10        1.0         1.0     0.98      0.79       0.97 1.00    1.0     1.00     0.00      1.0
-  ALAB  WATCH     semis large          primed                 91.7       -      None        3.4        71.4 1.00     58.8  342.85        1.0         1.0     1.00      1.00       0.88 1.00    1.0     1.00     0.00      0.4
-   TSM  WATCH     semis  mega          primed                 88.6       -      None        2.9        25.0 1.00   2170.3  418.45        1.0         1.0     1.00      0.73       0.90 1.00    1.0     0.00     0.46      1.0
-  DELL    BUY  hardware  mega          primed      BREAKOUT   88.4       -      None      -22.1        67.4 1.00    273.4  420.91        1.0         0.3     1.00      1.00       1.00 1.00    1.0     1.00     0.00      0.4
-  MRVL  WATCH     semis large          primed                 85.7       -      None        6.5        63.3 1.00    179.3  205.00        1.0         1.0     0.86      0.53       0.90 1.00    1.0     1.00     0.00      0.4
-  LRCX  WATCH equipment  mega          primed                 85.5       -      None        4.8        39.0 1.00    397.9  318.18        1.0         1.0     1.00      0.89       0.91 1.00    1.0     0.00     0.00      0.4
-   ARM  WATCH     semis  mega          primed                 85.0       -      None       -1.1        68.5 1.00    375.9  353.29        1.0         1.0     0.71      0.68       1.00 1.00    1.0     1.00     0.00      0.4
-  CIEN  WATCH photonics large          primed                 84.8       -      None        4.4        52.0 1.00     82.0  580.23        1.0         0.3     1.00      1.00       0.75 1.00    1.0     0.56     0.00      1.0
-   STM  WATCH     semis large          primed                 84.6       -      None        2.5        56.3 1.00     61.6   69.31        1.0         1.0     1.00      0.00       0.87 1.00    1.0     1.00     0.00      0.4
-   ADI  WATCH     semis  mega          primed                 82.5       -      None        5.3        27.4 1.00    201.6  413.85        1.0         1.0     1.00      0.81       0.71 1.00    1.0     0.00     0.00      0.4
-  AVGO  WATCH     semis  mega          primed                 80.8       -      None       -1.0        35.1 1.00   2115.3  446.77        1.0         1.0     0.71      0.57       1.00 1.00    1.0     0.00     0.06      1.0
-  AMAT  WATCH equipment  mega          primed                 80.5       -      None        2.7        29.7 1.00    357.3  450.06        0.5         1.0     1.00      0.82       0.93 1.00    1.0     0.00     0.23      0.4
-   HPE    BUY photonics large          primed      BREAKOUT   80.5       -      None      -10.4        52.4 1.00     57.1   43.04        0.5         1.0     0.67      1.00       1.00 1.00    1.0     1.00     0.00      0.4
-   APH   PASS  hardware large        extended                 79.9       -      None        4.5        20.7 1.00    183.0  148.76        1.0         1.0     0.93      1.00       0.31 1.00    1.0     0.00     0.59      0.4
-   ASX  WATCH     semis large          primed                 79.3       -      None        7.2        46.6 1.00     84.1   38.35        0.5         1.0     1.00      1.00       0.63 1.00    1.0     0.42     0.00      0.4
-   TER   PASS equipment large        extended                 78.5       -      None       12.7        29.8 1.00     58.6  374.31        1.0         1.0     1.00      1.00       0.30 1.00    1.0     0.00     0.00      0.4
-  KEYS  WATCH photonics large early (fundies)                 78.0       -      None        9.4        21.8 1.00     57.8  338.33        1.0         0.3     0.92      1.00       0.48 1.00    1.0     0.00     0.43      0.9
-  INTC   PASS     semis  mega        extended                 77.7       -      None       15.8        64.6 1.00    576.4  114.68        0.5         1.0     1.00      1.00       0.24 1.00    1.0     1.00     0.00      0.4
-   NOK   PASS photonics large        extended                 77.7       -      None       12.1        49.1 1.00     82.8   14.84        0.5         1.0     1.00      0.85       0.34 1.00    1.0     0.95     0.00      0.4
-   TXN  WATCH     semis  mega          primed                 77.3       -      None        8.5        39.8 1.00    278.2  305.68        0.5         1.0     1.00      1.00       0.61 1.00    1.0     0.12     0.00      0.4
-  ASML  WATCH equipment  mega          primed                 76.3       -      None        2.5        22.8 1.00    621.6 1612.76        0.5         0.3     0.96      0.90       0.92 1.00    1.0     0.00     0.00      1.0
-  COHR   PASS photonics large        extended                 76.1       -      None       14.3        40.4 1.00     70.7  361.47        1.0         1.0     0.94      0.56       0.28 1.00    1.0     0.00     0.00      1.0
- MRAAY    BUY  hardware large           watch      BREAKOUT   75.8       -      None      -10.3        66.1 0.72    115.4   31.70        0.5         0.3      NaN       NaN       1.00 1.00    1.0     1.00     0.00      0.4
-  NVDA   PASS     semis  mega        extended                 75.6       -      None       12.0        22.2 1.00   5114.0  211.14        1.0         1.0     0.98      0.78       0.30 0.93    1.0     0.00     0.00      0.4
-  MPWR  WATCH     semis large          primed                 75.5       -      None        9.4        37.0 1.00     76.9 1566.21        1.0         0.3     1.00      0.70       0.61 1.00    1.0     0.00     0.00      0.4
-  CSCO  WATCH photonics  mega          primed                 75.4       -      None        0.3        37.9 1.00    474.6  120.42        0.5         0.3     1.00      0.61       1.00 0.98    1.0     0.27     0.00      0.4
-  NXPI  WATCH     semis large          primed                 73.9       -      None        5.8        42.5 1.00     81.1  321.35        0.5         1.0     0.88      0.61       0.77 1.00    1.0     0.05     0.00      0.4
-  ANET   PASS  hardware  mega        extended                 73.1       -      None       12.7        27.6 1.00    200.8  159.47        1.0         0.3     0.89      0.89       0.32 1.00    1.0     0.00     0.52      0.4
-   GLW   PASS  hardware large        extended                 71.9       -      None       16.7        33.9 1.00    155.9  181.16        1.0         1.0     0.93      0.56       0.14 1.00    1.0     0.00     0.00      0.4
-   UMC  WATCH     semis large          primed                 71.1       -      None        6.8        62.6 1.00     55.7   22.18        0.5         1.0     0.50      0.43       0.85 1.00    1.0     1.00     0.00      0.4
-  KLAC   PASS equipment  mega           watch                 68.7       -      None        7.2        31.3 1.00    251.0 1921.71        0.5         0.3     0.92      0.63       0.70 1.00    1.0     0.00     0.00      0.4
-  LITE   PASS photonics large        extended                 67.5       -      None       27.0        35.9 1.00     66.5  854.96        1.0         1.0     0.95      0.73       0.00 1.00    0.7     0.00     0.00      0.4
- KXIAY  WATCH     semis  mega      recovering                 62.4       -      None        3.2        73.8 0.41    226.6   41.49        NaN         NaN      NaN       NaN       0.85  NaN    0.4     1.00     0.00      0.9
-   TEL   PASS  hardware large    broken trend                 59.5       -      None       17.9        10.8 1.00     62.3  213.41        0.5         1.0     0.94      0.56       0.09 0.82    0.4     0.00     1.00      0.4
-  QCOM   PASS     semis  mega           watch                 54.3       -      None        2.8        51.4 1.00    264.6  251.02        0.0         0.3     0.21      0.68       1.00 0.74    1.0     0.93     0.00      0.4
-  IONQ   PASS   quantum large           watch                 47.0       -      None       -0.8        64.1 1.00     26.9   72.07        1.0         0.3     0.00      1.00       0.19 0.54    0.7     1.00     0.00      0.4
-  QBTS   PASS   quantum large           watch                 46.0       -      None        4.7        57.7 1.00     11.2   30.14        0.0         0.3     0.57      1.00       0.00 0.75    0.7     0.43     0.00      0.9
-   MSI   PASS photonics large    broken trend                 43.8       -      None       18.0         5.5 1.00     66.9  403.28        0.5         0.3     0.92      0.69       0.00 0.56    0.0     0.00     0.69      0.4
+   STX  WATCH  hardware  mega          primed                 95.3       -      None        0.5        62.1 1.00    203.7  900.50        1.0         1.0     1.00      1.00       1.00 1.00    1.0     1.00     0.00      1.0
+  SNDK  WATCH  hardware  mega          primed                 95.3       -      None       -2.3        70.4 1.00    259.0 1749.17        1.0         1.0     1.00      1.00       1.00 1.00    1.0     1.00     0.00      1.0
+   WDC  WATCH  hardware large          primed                 94.2       -      None        0.9        56.6 1.00    189.1  548.59        1.0         1.0     0.94      1.00       1.00 1.00    1.0     1.00     0.00      1.0
+    MU  WATCH     semis  mega          primed                 93.3       -      None       -4.1        69.6 1.00   1153.7 1023.02        1.0         1.0     1.00      1.00       1.00 1.00    1.0     1.00     0.00      0.4
+   AMD  WATCH     semis  mega          primed                 92.0       -      None        3.5        62.9 1.00    830.7  509.43        1.0         1.0     0.98      0.79       0.89 1.00    1.0     1.00     0.00      1.0
+   TSM  WATCH     semis  mega          primed                 90.0       -      None       -1.8        28.4 1.00   2273.4  438.33        1.0         1.0     1.00      0.73       1.00 1.00    1.0     0.00     0.51      1.0
+  DELL    BUY  hardware  mega          primed      BREAKOUT   88.4       -      None       -6.5        70.1 1.00    298.0  458.79        1.0         0.3     1.00      1.00       1.00 1.00    1.0     1.00     0.00      0.4
+  ALAB  WATCH     semis large          primed                 88.3       -      None        7.7        70.3 1.00     56.4  329.08        1.0         1.0     1.00      1.00       0.62 1.00    1.0     1.00     0.00      0.4
+  MRVL  WATCH     semis large          primed                 87.0       -      None        1.6        61.2 1.00    187.9  214.74        1.0         1.0     0.86      0.53       1.00 1.00    1.0     1.00     0.00      0.4
+  LRCX  WATCH equipment  mega          primed                 86.3       -      None        6.3        38.1 1.00    392.0  313.43        1.0         1.0     1.00      0.89       0.81 1.00    1.0     0.00     0.00      1.0
+   ARM  WATCH     semis  mega          primed                 85.0       -      None      -12.2        72.6 1.00    431.8  405.76        1.0         1.0     0.71      0.68       1.00 1.00    1.0     1.00     0.00      0.4
+  FLEX  WATCH  hardware large          primed                 84.2       -      None        4.6        60.3 1.00     54.0  147.46        0.5         1.0     1.00      0.80       0.85 1.00    1.0     1.00     0.00      0.4
+   STM  WATCH     semis large          primed                 83.5       -      None        3.9        55.7 1.00     60.8   68.38        1.0         1.0     1.00      0.00       0.78 1.00    1.0     1.00     0.00      0.4
+   NOK  WATCH photonics large          primed                 82.3       -      None        6.1        51.8 1.00     87.5   15.68        0.5         1.0     1.00      0.85       0.68 1.00    1.0     1.00     0.00      0.4
+  CIEN  WATCH photonics large early (fundies)                 82.0       -      None        7.5        49.0 1.00     79.7  563.57        1.0         0.3     1.00      1.00       0.57 1.00    1.0     0.48     0.00      1.0
+  AMAT  WATCH equipment  mega          primed                 81.2       -      None        2.4        30.0 1.00    358.5  451.58        0.5         1.0     1.00      0.82       0.95 1.00    1.0     0.00     0.31      0.4
+   HPE    BUY photonics large          primed      BREAKOUT   80.5       -      None       -2.0        55.0 1.00     60.4   45.49        0.5         1.0     0.67      1.00       1.00 1.00    1.0     1.00     0.00      0.4
+  AVGO  WATCH     semis  mega          primed                 80.5       -      None       -1.4        36.3 1.00   2156.0  455.38        1.0         1.0     0.71      0.57       1.00 1.00    1.0     0.00     0.00      1.0
+   ADI  WATCH     semis large early (fundies)                 80.4       -      None        8.0        25.5 1.00    196.6  403.58        1.0         1.0     1.00      0.81       0.55 1.00    1.0     0.00     0.00      0.4
+   APH   PASS  hardware large        extended                 79.1       -      None        6.4        19.2 1.00    179.7  146.05        1.0         1.0     0.93      1.00       0.20 1.00    1.0     0.00     0.71      0.4
+  NVDA  WATCH     semis  mega early (fundies)                 79.0       -      None        7.9        25.1 1.00   5310.5  219.25        1.0         1.0     0.98      0.78       0.53 0.97    1.0     0.00     0.00      0.4
+   ASX  WATCH     semis large early (fundies)                 78.8       -      None        8.5        46.0 1.00     83.1   37.87        0.5         1.0     1.00      1.00       0.55 1.00    1.0     0.50     0.00      0.4
+  ANET  WATCH  hardware  mega          primed                 76.9       -      None        7.4        31.1 1.00    210.8  167.42        1.0         0.3     0.89      0.89       0.61 1.00    1.0     0.00     0.51      0.4
+  MCHP   PASS     semis large        extended                 76.6       -      None       15.8        35.2 1.00     49.3   91.01        1.0         1.0     0.94      1.00       0.26 1.00    1.0     0.00     0.00      0.4
+   TER   PASS equipment large        extended                 76.4       -      None       16.3        27.5 1.00     56.8  362.88        1.0         1.0     1.00      1.00       0.12 1.00    1.0     0.00     0.03      0.4
+  ASML  WATCH equipment  mega          primed                 76.0       -      None        2.9        22.5 1.00    619.4 1607.19        0.5         0.3     0.96      0.90       0.90 1.00    1.0     0.00     0.00      1.0
+ MRAAY   PASS  hardware large           watch                 75.8       -      None        0.2        68.1 0.72    122.9   33.75        0.5         0.3      NaN       NaN       1.00 1.00    1.0     1.00     0.00      0.4
+  INTC   PASS     semis  mega        extended                 75.6       -      None       19.0        63.6 1.00    560.7  111.56        0.5         1.0     1.00      1.00       0.08 1.00    1.0     1.00     0.00      0.4
+  COHR   PASS photonics large        extended                 74.5       -      None       16.7        39.1 1.00     69.2  353.88        1.0         1.0     0.94      0.56       0.16 1.00    1.0     0.00     0.00      1.0
+  CSCO  WATCH photonics  mega          primed                 74.5       -      None        0.7        38.0 1.00    475.2  120.56        0.5         0.3     1.00      0.61       1.00 0.99    1.0     0.09     0.00      0.4
+  LITE   PASS photonics large        extended                 73.8       -      None       24.7        37.0 1.00     67.7  870.41        1.0         1.0     0.95      0.73       0.00 1.00    1.0     0.00     0.00      1.0
+   TXN   PASS     semis  mega        extended                 73.0       -      None       13.5        37.0 1.00    265.8  292.04        0.5         1.0     1.00      1.00       0.33 1.00    1.0     0.00     0.00      0.4
+   UMC  WATCH     semis large          primed                 73.0       -      None        4.2        63.6 1.00     57.1   22.75        0.5         1.0     0.50      0.43       1.00 1.00    1.0     1.00     0.00      0.4
+  NXPI  WATCH     semis large early (fundies)                 70.9       -      None        9.3        40.6 1.00     78.5  310.98        0.5         1.0     0.88      0.61       0.57 1.00    1.0     0.00     0.00      0.4
+   GLW   PASS  hardware large        extended                 70.1       -      None       21.0        31.4 1.00    150.4  174.79        1.0         1.0     0.93      0.56       0.00 1.00    1.0     0.00     0.00      0.4
+  KEYS   PASS photonics large        extended                 70.0       -      None       13.0        19.2 1.00     55.9  327.45        1.0         0.3     0.92      1.00       0.29 1.00    0.7     0.00     0.54      0.4
+  KLAC   PASS equipment  mega           watch                 68.0       -      None        8.1        30.8 1.00    248.9 1905.80        0.5         0.3     0.92      0.63       0.65 1.00    1.0     0.00     0.00      0.4
+   TEL   PASS  hardware large    broken trend                 53.3       -      None       18.5        10.3 1.00     62.0  212.26        0.5         1.0     0.94      0.56       0.06 0.80    0.0     0.00     1.00      0.4
+  IONQ   PASS   quantum large           watch                 47.4       -      None        1.3        63.6 1.00     26.6   71.21        1.0         0.3     0.00      1.00       0.12 0.65    0.7     1.00     0.00      0.4
+  QCOM   PASS     semis  mega           watch                 45.9       -      None       11.4        47.7 1.00    245.8  233.25        0.0         0.3     0.21      0.68       0.53 0.75    1.0     0.50     0.00      0.4
+  QBTS   PASS   quantum large           watch                 45.4       -      None        6.7        56.9 1.00     11.0   29.58        0.0         0.3     0.57      1.00       0.00 0.75    0.7     0.31     0.00      0.9
+   MSI   PASS photonics large    broken trend                 44.2       -      None       15.4         7.6 1.00     68.5  412.55        0.5         0.3     0.92      0.69       0.00 0.56    0.0     0.00     0.77      0.4
 ```
 
 ### Full screen — EARLY (small/mid)
 ```
-ticker signal     theme   cap         verdict           deal setup  score earn_in next_earn  to_resist  to_support  cov  mcap_$B  price  rev_accel  margin_exp  eps_rev  surprise  near_high  mom  trend  rel_str  squeeze  vol_dry
-  SIMO  WATCH     semis   mid          primed                        89.3       -      None        6.5        62.2 1.00      9.4 276.87        1.0         1.0     1.00      1.00       0.69 1.00    1.0     1.00     0.00      0.4
-   VSH  WATCH     semis   mid          primed                        88.9       -      None        3.0        70.2 1.00      7.1  52.05        0.5         1.0     1.00      1.00       0.98 1.00    1.0     1.00     0.00      0.9
-   MXL   PASS     semis   mid        extended                        85.5       -      None       14.4        84.2 1.00      8.3  92.93        1.0         1.0     1.00      1.00       0.39 1.00    1.0     1.00     0.00      0.4
-  SLAB    M&A     semis   mid      M&A target TXN $231 H1'27         83.5       -      None        0.7         7.6 1.00      7.2 217.60        1.0         1.0     0.75      0.76       0.96 1.00    1.0     0.00     0.76      0.4
-  PLXS  WATCH  hardware   mid          primed                        83.4       -      None        2.8        32.9 1.00      7.2 268.36        0.5         1.0     1.00      0.94       0.89 1.00    1.0     0.00     0.33      1.0
-  KLIC  WATCH equipment   mid early (fundies)                        82.7       -      None        7.8        42.0 1.00      5.3 101.89        1.0         1.0     1.00      1.00       0.59 1.00    1.0     0.09     0.00      0.4
-  AXTI   PASS equipment   mid        extended                        82.6       -      None       38.8        69.4 1.00      6.7 103.16        1.0         1.0     1.00      1.00       0.00 1.00    1.0     1.00     0.00      1.0
-  DIOD   PASS     semis   mid        extended                        80.2       -      None       11.8        44.6 1.00      4.8 105.32        1.0         1.0     1.00      1.00       0.38 1.00    1.0     0.11     0.00      0.4
-  ACMR  WATCH equipment   mid early (fundies)                        78.2       -      None        8.5        57.1 1.00      6.0  86.56        1.0         0.3     1.00      1.00       0.55 1.00    1.0     0.25     0.00      0.4
-  ONDS  WATCH photonics   mid          primed                        76.4       -      None        4.2        41.1 1.00      6.7  13.22        1.0         1.0     1.00      0.00       0.62 1.00    1.0     0.00     0.15      0.4
-  LASR   PASS     semis   mid        extended                        76.3       -      None       17.3        28.2 1.00      4.2  74.12        1.0         1.0     0.89      1.00       0.15 1.00    1.0     0.00     0.00      1.0
-  POWI  WATCH     semis   mid          primed                        75.8       -      None        4.7        47.2 1.00      4.7  84.00        0.5         0.3     1.00      0.79       0.78 0.96    1.0     0.65     0.00      0.4
-   RAL  WATCH  hardware   mid          primed                        75.6       -      None        1.7        37.1 0.87      6.9  61.87        0.5         1.0     1.00      0.71       0.93  NaN    1.0     0.00     0.00      0.4
-    ST  WATCH photonics   mid          primed                        75.5       -      None        2.8        37.3 1.00      7.2  49.39        0.5         1.0     0.91      0.64       0.85 1.00    1.0     0.00     0.04      0.4
- BELFB   PASS  hardware   mid        extended                        74.6       -      None       12.3        33.2 1.00      3.9 274.52        0.5         1.0     1.00      1.00       0.38 1.00    1.0     0.00     0.19      0.4
-  SEDG   PASS     solar   mid           watch                        74.5       -      None       -0.8        58.7 1.00      4.6  76.35        1.0         1.0     0.44      0.00       1.00 1.00    1.0     1.00     0.00      0.4
-  UCTT  WATCH equipment   mid early (fundies)                        72.9       -      None        7.9        43.1 1.00      3.8  85.57        0.5         0.3     1.00      1.00       0.56 1.00    1.0     0.00     0.37      0.4
-  SYNA  WATCH     semis   mid early (fundies)                        71.9       -      None        8.6        53.0 1.00      5.3 137.28        0.5         1.0     0.67      0.91       0.54 1.00    1.0     0.67     0.00      0.4
-  FORM   PASS equipment   mid        extended                        70.5       -      None       27.7        35.0 1.00      9.7 124.59        1.0         1.0     1.00      1.00       0.00 1.00    0.7     0.00     0.00      0.4
-  ALGM  WATCH     semis   mid early (fundies)                        69.0       -      None        7.9        42.2 1.00      8.9  47.87        1.0         1.0     0.50      0.69       0.55 1.00    1.0     0.00     0.00      0.4
-  NOVT  WATCH photonics   mid          primed                        68.4       -      None        3.9        29.7 1.00      5.7 159.33        0.5         0.3     1.00      0.71       0.84 0.54    1.0     0.00     0.34      0.4
-  HIMX   PASS     semis   mid           watch                        65.7       -      None        9.1        64.9 0.79      3.6  20.57        0.0         0.3      NaN      1.00       0.73 0.97    1.0     1.00     0.00      0.4
-  VECO   PASS equipment   mid           watch                        64.5       -      None       13.5        49.0 1.00      3.5  57.64        0.0         0.3     1.00      0.00       0.48 1.00    1.0     0.87     0.00      1.0
-  CRUS   PASS     semis   mid           watch                        64.4       -      None        6.2        24.8 1.00      8.6 169.95        0.5         0.3     0.50      1.00       0.69 1.00    1.0     0.00     0.00      1.0
-  QRVO  WATCH     semis   mid          primed                        61.7       -      None        5.7        27.7 1.00      9.1 103.56        0.0         1.0     0.67      1.00       0.71 0.73    1.0     0.00     0.00      0.4
-   ESE   PASS photonics   mid        extended                        60.8       -      None       18.6        12.4 1.00      7.6 291.90        1.0         0.3     0.67      0.69       0.07 1.00    0.7     0.00     0.30      1.0
-   RUN   PASS     solar   mid           watch                        59.4       -      None       -4.2        35.5 1.00      4.0  16.72        1.0         1.0     0.25      1.00       0.00 1.00    0.7     0.00     1.00      0.4
-  QMCO   PASS   quantum micro        extended                        53.7       -      None        9.6        56.8 1.00      0.1   9.71        0.5         0.3     1.00      1.00       0.00 0.07    0.7     1.00     0.00      0.4
-  NVTS   PASS     semis   mid           watch                        53.5       -      None       27.1        71.2 1.00      6.3  26.60        0.0         0.3     0.50      1.00       0.00 1.00    1.0     1.00     0.00      0.4
-  RGTI   PASS  hardware   mid           watch                        51.8       -      None        8.8        50.9 1.00      8.5  25.54        1.0         1.0     0.17      0.83       0.00 0.83    0.7     0.07     0.00      0.9
-  CAMT   PASS equipment   mid           watch                        51.8       -      None       25.8        18.1 1.00      7.9 171.66        0.5         0.3     0.75      0.61       0.00 1.00    0.7     0.00     0.00      0.4
-  QUBT  WATCH   quantum   mid      recovering                        51.5       -      None       20.8        48.3 1.00      2.7  11.96        1.0         0.3     1.00      1.00       0.00 0.23    0.4     0.00     0.00      0.4
-  ACLS   PASS equipment   mid           watch                        49.3       -      None       14.1        47.1 1.00      4.6 150.41        0.5         0.3     0.00      0.57       0.20 1.00    1.0     0.80     0.00      1.0
-   BDC   PASS photonics   mid    broken trend                        46.7       -      None       30.1         3.9 1.00      4.1 105.08        0.5         0.3     1.00      0.70       0.00 0.55    0.0     0.00     1.00      0.4
-    PI   PASS     semis   mid    broken trend                        44.1       -      None        8.2        42.1 1.00      4.6 151.00        0.0         0.3     1.00      0.16       0.00 0.75    0.4     0.00     0.27      1.0
-  ENPH   PASS     solar   mid           watch                        42.1       -      None        6.3        56.3 1.00      9.0  68.36        0.0         0.3     0.05      0.77       0.82 0.34    1.0     0.28     0.00      0.9
-  IPGP   PASS equipment   mid           watch                        37.6       -      None       15.7        24.9 1.00      4.9 114.52        0.5         0.3     0.00      0.16       0.00 1.00    0.7     0.00     1.00      0.4
-  OSIS   PASS  hardware   mid    broken trend                        33.6       -      None       43.8         6.1 1.00      3.6 216.75        0.5         0.3     0.25      0.61       0.00 0.80    0.0     0.00     0.98      0.4
-  ITRI   PASS photonics   mid    broken trend                        30.4       -      None       21.8         5.7 1.00      3.7  82.48        0.0         1.0     0.25      1.00       0.00 0.24    0.0     0.00     1.00      1.0
-   VNT   PASS photonics   mid    broken trend                        23.9       -      None       41.7         4.0 1.00      4.0  28.38        0.5         0.3     0.00      0.51       0.00 0.50    0.0     0.00     1.00      0.4
-   BMI   PASS photonics   mid    broken trend                        20.7       -      None       30.7         9.8 1.00      3.6 123.90        0.0         0.3     0.50      0.00       0.00 0.00    0.0     0.00     1.00      1.0
-  ARQQ  WATCH   quantum micro      recovering                        19.4       -      None       15.1        30.2 0.53      0.3  16.51        NaN         NaN      NaN       NaN       0.00 0.13    0.4     0.00     0.00      0.9
-  OLED   PASS  hardware   mid    broken trend                        11.6       -      None       10.3         9.2 1.00      4.3  92.12        0.0         0.3     0.00      0.00       0.00 0.11    0.0     0.00     1.00      1.0
+ticker signal     theme   cap         verdict deal    setup  score earn_in next_earn  to_resist  to_support  cov  mcap_$B  price  rev_accel  margin_exp  eps_rev  surprise  near_high  mom  trend  rel_str  squeeze  vol_dry
+  SIMO  WATCH     semis   mid          primed                 90.1       -      None        5.5        62.5 1.00      9.5 279.68        1.0         1.0     1.00      1.00       0.76 1.00    1.0     1.00     0.00      0.4
+   VSH    BUY     semis   mid          primed      BREAKOUT   89.2       -      None       -2.8        72.7 1.00      7.7  56.86        0.5         1.0     1.00      1.00       1.00 1.00    1.0     1.00     0.00      0.9
+  KLIC  WATCH equipment   mid          primed                 84.9       -      None        5.7        43.1 1.00      5.4 103.93        1.0         1.0     1.00      1.00       0.72 1.00    1.0     0.19     0.00      0.4
+  EXTR  WATCH photonics   mid          primed                 84.9       -      None       -0.7        50.7 1.00      3.6  27.47        0.5         1.0     0.83      0.98       1.00 0.92    1.0     1.00     0.00      1.0
+  VISN    BUY photonics   mid        PRIMED *                 84.7       -      None        7.3        33.3 1.00      2.8  12.32        1.0         0.3     1.00      1.00       0.76 1.00    1.0     0.00     0.69      1.0
+   AIP  WATCH     semis small          primed                 84.6       -      None        6.1        62.2 1.00      1.7  36.25        1.0         0.3     1.00      1.00       0.71 1.00    1.0     1.00     0.00      0.4
+   VPG  WATCH photonics small          primed                 84.0       -      None        6.7        68.3 1.00      1.6 123.41        0.5         1.0     1.00      0.50       0.87 1.00    1.0     1.00     0.00      0.9
+  AXTI   PASS equipment   mid        extended                 82.6       -      None       35.5        70.1 1.00      6.9 105.68        1.0         1.0     1.00      1.00       0.00 1.00    1.0     1.00     0.00      1.0
+   MXL   PASS     semis   mid        extended                 82.2       -      None       19.4        83.5 1.00      8.0  89.00        1.0         1.0     1.00      1.00       0.13 1.00    1.0     1.00     0.00      0.4
+    KN  WATCH  hardware   mid          primed                 79.3       -      None        3.7        36.1 1.00      3.2  37.19        0.5         1.0     1.00      1.00       0.82 1.00    1.0     0.00     0.00      0.4
+  ONDS  WATCH photonics   mid          primed                 78.2       -      None        2.3        42.2 1.00      6.8  13.47        1.0         1.0     1.00      0.00       0.74 1.00    1.0     0.00     0.23      0.4
+  SKYT   PASS     semis small           watch                 78.1       -      None        1.3        33.5 1.00      1.9  38.79        1.0         0.3     1.00      0.00       0.97 1.00    1.0     0.00     0.17      1.0
+  SHLS  WATCH     solar   mid          primed                 77.5       -      None        8.2        55.4 1.00      2.0  12.19        1.0         0.3     0.67      1.00       0.86 1.00    0.7     1.00     0.46      0.4
+  COHU   PASS equipment   mid           watch                 76.0       -      None        4.8        49.4 0.79      2.5  52.66        1.0         1.0      NaN      0.00       0.72 1.00    1.0     0.71     0.00      0.4
+  LASR   PASS     semis   mid        extended                 75.3       -      None       23.9        24.1 1.00      4.0  70.19        1.0         1.0     0.89      1.00       0.00 1.00    1.0     0.00     0.19      1.0
+    ST  WATCH photonics   mid          primed                 74.9       -      None        4.3        36.3 1.00      7.1  48.67        0.5         1.0     0.91      0.64       0.76 1.00    1.0     0.00     0.17      0.4
+  HLIT   PASS photonics small        extended                 73.9       -      None       14.2        45.3 1.00      1.7  15.48        1.0         0.3     1.00      1.00       0.36 0.80    1.0     0.04     0.00      0.9
+  POWI  WATCH     semis   mid          primed                 73.8       -      None        8.3        46.0 1.00      4.6  82.15        0.5         0.3     1.00      0.79       0.64 1.00    1.0     0.54     0.00      0.4
+  ACMR   PASS equipment   mid        extended                 72.8       -      None       16.2        54.2 1.00      5.6  81.11        1.0         0.3     1.00      1.00       0.16 1.00    1.0     0.19     0.00      0.4
+  FORM   PASS equipment   mid        extended                 72.6       -      None       35.7        30.9 1.00      9.1 117.22        1.0         1.0     1.00      1.00       0.00 1.00    0.7     0.00     0.00      1.0
+  UCTT  WATCH equipment   mid early (fundies)                 71.1       -      None        9.5        42.2 1.00      3.8  84.31        0.5         0.3     1.00      1.00       0.47 1.00    1.0     0.00     0.24      0.4
+  SEDG   PASS     solar   mid           watch                 71.1       -      None       10.9        57.0 1.00      4.5  73.28        1.0         1.0     0.44      0.00       0.73 1.00    1.0     1.00     0.00      0.4
+  HIMX   PASS     semis   mid           watch                 70.6       -      None       -2.5        68.7 0.79      4.0  23.01        0.0         0.3      NaN      1.00       1.00 1.00    1.0     1.00     0.00      0.4
+  ALGM  WATCH     semis   mid early (fundies)                 67.3       -      None       12.7        41.0 1.00      8.7  46.85        1.0         1.0     0.50      0.69       0.41 1.00    1.0     0.00     0.00      0.4
+  AEHR   PASS equipment   mid           watch                 66.0       -      None       25.3        67.4 1.00      2.8  89.40        0.0         0.3     1.00      1.00       0.00 1.00    1.0     1.00     0.00      1.0
+  OUST   PASS  hardware   mid           watch                 65.2       -      None        5.1        63.6 1.00      2.9  45.03        1.0         1.0     0.00      0.00       0.85 1.00    1.0     1.00     0.00      0.9
+ KRKNF   PASS photonics small           watch                 59.6       -      None       43.9        17.5 0.72      1.7   5.65        1.0         0.3      NaN       NaN       0.00 1.00    0.7     0.00     0.68      1.0
+  QUBT   PASS  hardware   mid        extended                 58.2       -      None       16.9        50.0 1.00      2.8  12.36        1.0         0.3     1.00      1.00       0.00 0.31    0.7     0.25     0.00      0.4
+   RUN  WATCH     solar   mid      recovering                 57.3       -      None        5.1        32.4 1.00      3.8  15.95        1.0         1.0     0.25      1.00       0.00 1.00    0.4     0.00     1.00      1.0
+  AMBA   PASS equipment   mid        extended                 57.0       -      None       28.6        35.6 1.00      3.3  74.96        1.0         0.3     0.67      0.77       0.00 0.86    0.7     0.00     0.00      0.9
+  QMCO   PASS   quantum micro        extended                 54.5       -      None        1.0        60.2 1.00      0.2  10.53        0.5         0.3     1.00      1.00       0.00 0.13    0.7     1.00     0.00      0.4
+  NVTS   PASS     semis   mid           watch                 53.5       -      None       37.9        68.8 1.00      5.8  24.52        0.0         0.3     0.50      1.00       0.00 1.00    1.0     1.00     0.00      0.4
+  RGTI   PASS  hardware   mid           watch                 53.1       -      None        8.4        51.1 1.00      8.5  25.62        1.0         1.0     0.17      0.83       0.00 0.95    0.7     0.03     0.00      0.9
+  VSAT   PASS photonics   mid           watch                 53.0       -      None       25.1        41.9 0.79      9.7  71.75        0.5         1.0      NaN      0.00       0.00 1.00    1.0     0.17     0.00      0.4
+  CAMT   PASS equipment   mid           watch                 52.2       -      None       30.9        14.7 1.00      7.6 164.96        0.5         0.3     0.75      0.61       0.00 1.00    0.7     0.00     0.08      0.4
+  POET   PASS     semis   mid           watch                 49.0       -      None       48.0        65.4 0.93      2.4  14.06        1.0         NaN     0.00      0.00       0.00 1.00    1.0     1.00     0.00      0.4
+  PLAB   PASS equipment small    broken trend                 44.8       -      None       74.5         2.0 1.00      1.9  32.09        0.5         0.3     1.00      0.00       0.00 1.00    0.0     0.00     0.00      0.9
+  ENPH   PASS     solar   mid           watch                 33.0       -      None       15.3        53.2 1.00      8.4  63.94        0.0         0.3     0.05      0.77       0.40 0.32    1.0     0.00     0.00      0.4
+  WOLF  WATCH     semis   mid      recovering                 27.1       -      None       51.7        72.6 0.87      2.6  53.28        0.0         0.3     0.00      1.00       0.00  NaN    0.4     1.00     0.00      0.9
+   VNT   PASS photonics   mid    broken trend                 23.7       -      None       39.3         2.5 1.00      3.9  27.95        0.5         0.3     0.00      0.51       0.00 0.49    0.0     0.00     1.00      0.4
+  ARQQ  WATCH   quantum micro      recovering                 20.5       -      None       12.7        31.7 0.53      0.3  16.86        NaN         NaN      NaN       NaN       0.00 0.17    0.4     0.00     0.00      0.9
 ```
 
 ### Full position monitor
 ```
-ticker action  price   stop  to_stop_%                                                                                  signals
-    MU   HOLD 971.00 801.24       17.5                                                                                    clean
-   WDC   HOLD 531.21 457.73       13.8                                                                                    clean
-   STX   HOLD 879.80 756.88       14.0                                                                                    clean
-  RMBS   HOLD 145.46 132.51        8.9                                                                                    clean
-  NVDA   TRIM 211.14 213.45       -1.1                                                                      below trailing stop
-   AMD   HOLD 516.10 441.35       14.5                                                                                    clean
-  AVGO   HOLD 446.77 400.74       10.3                                                                                    clean
-  MRVL   HOLD 205.00 181.18       11.6                                                                                    clean
-  COHR   HOLD 361.47 332.19        8.1                                                                                    clean
-  LITE   TRIM 854.96 839.97        1.8                                                                below 50d; lagging market
-  CIEN   HOLD 580.23 499.18       14.0                                                                                    clean
-  ALAB   HOLD 342.85 287.77       16.1                                                                                    clean
-  CRDO   HOLD 236.03 188.89       20.0                                                                      estimates being cut
-   NOK   HOLD  14.84  13.77        7.2                                                                                    clean
-  GDDY   TRIM  85.83  81.68        4.8                                        below 200d; 12m momentum negative; lagging market
-   NOW   HOLD 124.37 107.15       13.8                                                                    12m momentum negative
-    ZS   EXIT 139.73 157.81      -12.9 downtrend (below 50d & 200d); 12m momentum negative; lagging market; below trailing stop
-   CRM   HOLD 191.10 170.59       10.7                                                    12m momentum negative; lagging market
-  SNOW   HOLD 255.55 222.25       13.0                                                                      estimates being cut
-  TSLA   TRIM 435.79 405.75        6.9                                                      estimates being cut; lagging market
-  MRAM   TRIM  26.38  34.67      -31.4                                                 estimates being cut; below trailing stop
-  AMPX   HOLD  20.28  16.84       17.0                                                                      estimates being cut
-  ALMU   HOLD  21.58  20.40        5.5                                                                      estimates being cut
+ticker action   price   stop  to_stop_%                                                    signals
+    MU   HOLD 1023.02 853.92       16.5                                                      clean
+   WDC   HOLD  548.59 465.54       15.1                                                      clean
+   STX   HOLD  900.50 780.03       13.4                                                      clean
+  RMBS   HOLD  144.89 132.77        8.4                                                      clean
+  NVDA   HOLD  219.25 212.70        3.0                                                      clean
+   AMD   HOLD  509.43 440.27       13.6                                                      clean
+  AVGO   HOLD  455.38 410.96        9.8                                                      clean
+  MRVL   HOLD  214.74 179.28       16.5                                                      clean
+  COHR   HOLD  353.88 331.38        6.4                                                      clean
+  LITE   HOLD  870.41 842.23        3.2                                                      clean
+  CIEN   HOLD  563.57 497.36       11.7                                                      clean
+  ALAB   HOLD  329.08 286.17       13.0                                                      clean
+  CRDO   HOLD  232.05 190.10       18.1                                        estimates being cut
+   NOK   HOLD   15.68  13.83       11.7                                                      clean
+  GDDY   TRIM   91.12  81.19       10.9          below 200d; 12m momentum negative; lagging market
+   NOW   HOLD  135.74 120.05       11.6                                      12m momentum negative
+    ZS   EXIT  154.65 156.15       -1.0 12m momentum negative; lagging market; below trailing stop
+   CRM   HOLD  210.05 184.75       12.0                      12m momentum negative; lagging market
+  SNOW   HOLD  278.23 243.80       12.4                                        estimates being cut
+  TSLA   TRIM  420.62 404.28        3.9                        estimates being cut; lagging market
+  MRAM   TRIM   29.16  34.27      -17.5                   estimates being cut; below trailing stop
+  AMPX   HOLD   22.07  16.66       24.5                                        estimates being cut
+  ALMU   HOLD   24.56  20.11       18.1                                        estimates being cut
 ```
 
 ### Regime detail
 ```
-  SPX trend                         SPY above 200d (+11.5%)    risk-on  (+1)
+  SPX trend                         SPY above 200d (+11.3%)    risk-on  (+1)
   Breadth (RSP-SPY 50d)                      -6.5%   risk-off  (-1)
-  Credit (HYG/IEF 50d)                       +2.3%    risk-on  (+1)
-  Volatility (VIX)                            15.3    risk-on  (+1)
-  Yield curve (10y-3mo)                    +0.87pp    risk-on  (+1)
-  Semis leadership (SOXX-SPY 63d)           +51.2%    risk-on  (+1)
+  Credit (HYG/IEF 50d)                       +2.4%    risk-on  (+1)
+  Volatility (VIX)                            16.2    risk-on  (+1)
+  Yield curve (10y-3mo)                    +0.91pp    risk-on  (+1)
+  Semis leadership (SOXX-SPY 63d)           +58.8%    risk-on  (+1)
 
   caveats:
    - SPX trend: below 200d historically precedes most drawdowns, but whipsaws
