@@ -49,12 +49,12 @@ BENCHMARK = "SOXX"
 THEME_INDUSTRIES = {
     "semis": ["Semiconductors"],                         # incl AVGO, INTC, MU, NOK-adjacent, LAES
     "equipment": ["Semiconductor Equipment & Materials"],
-    "photonics": ["Communication Equipment", "Scientific & Technical Instruments"],
+    "comms/optical": ["Communication Equipment", "Scientific & Technical Instruments"],  # networking + optical/photonics
     "hardware": ["Computer Hardware", "Electronic Components"],  # incl quantum (Computer Hardware)
     "solar": ["Solar"],
 }
 # The AI/memory/semis/photonics complex (the report's scope) is the default.
-DEFAULT_THEMES = ["semis", "equipment", "photonics", "hardware"]
+DEFAULT_THEMES = ["semis", "equipment", "comms/optical", "hardware"]
 
 # Quantum pure-plays have no clean industry tag (split across Computer Hardware /
 # Software / Semiconductors) and are often pre-revenue, so seed them explicitly.
