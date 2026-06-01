@@ -60,6 +60,14 @@ DEFAULT_THEMES = ["semis", "equipment", "photonics", "hardware"]
 # Software / Semiconductors) and are often pre-revenue, so seed them explicitly.
 QUANTUM_SEEDS = ["IONQ", "RGTI", "QBTS", "QUBT", "ARQQ", "INFQ", "LAES", "QMCO"]
 
+# Announced acquisition targets — these masquerade as PRIMED* (coiled near the
+# takeout price, dead-flat volatility) but are merger-arb, NOT breakouts: upside
+# capped at the deal price, big downside if the deal breaks. Tagged so they never
+# show as a BUY. Maintain by hand (free data can't reliably detect M&A).
+MERGER_TARGETS = {
+    "SLAB": {"acquirer": "TXN", "price": 231.00, "close": "H1'27"},
+}
+
 # Top ETFs to track the tape/regime (technical-only — ETFs have no fundamentals).
 ETFS = {
     "SPY": "S&P 500", "QQQ": "Nasdaq 100", "SMH": "Semis", "SOXX": "Semis",
@@ -337,10 +345,16 @@ def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int =
     ei = earnings_info(b)
     vd = verdict(sig)
     stp = pivot_state(sig)
+    sig_action = buy_signal(vd, stp)
+    deal = ""
+    if sym in MERGER_TARGETS:                 # M&A target: override the false-positive setup
+        m = MERGER_TARGETS[sym]
+        vd, stp, sig_action = "M&A target", "", "M&A"
+        deal = f"{m['acquirer']} ${m['price']:.0f} {m['close']}"
 
     return {
         "ticker": sym, "theme": theme[:14], "cap": cap_band(mcap), "verdict": vd,
-        "signal": buy_signal(vd, stp), "setup": stp,
+        "signal": sig_action, "setup": stp, "deal": deal,
         "to_resist": round(sig["dist_resist"] * 100, 1) if "dist_resist" in sig else None,
         "to_support": round(sig["dist_support"] * 100, 1) if "dist_support" in sig else None,
         "score": score, "cov": round(avail / sum(WEIGHTS.values()), 2),

@@ -152,6 +152,7 @@ tailwind.config = { theme: { extend: {
                 <div class="flex gap-3"><span class="chip text-good border-good/50 bg-good/15">BUY</span><span class="text-muted text-xs">Trigger firing — a breakout, or a PRIMED★ bullseye.</span></div>
                 <div class="flex gap-3"><span class="chip text-primary border-primary/40 bg-primary/10">WATCH</span><span class="text-muted text-xs">Setup forming (primed / pivot / recovering) — await confirmation.</span></div>
                 <div class="flex gap-3"><span class="chip text-muted border-white/10 bg-white/5">PASS</span><span class="text-muted text-xs">No actionable setup (extended / watch / broken).</span></div>
+                <div class="flex gap-3"><span class="chip text-warn border-warn/30 bg-warn/10">M&amp;A</span><span class="text-muted text-xs">Announced acquisition target — capped at the deal price, not a breakout. Merger-arb, not a setup.</span></div>
               </div>
             </div>
             <div>
@@ -213,7 +214,7 @@ const cache = { [DATA.date]: DATA };
 const VERDICT_COLOR = {
   "PRIMED *":"text-cyan border-cyan/40 bg-cyan/10","primed":"text-primary border-primary/40 bg-primary/10",
   "early (fundies)":"text-good border-good/30 bg-good/10","extended":"text-warn border-warn/30 bg-warn/10",
-  "recovering":"text-good border-good/40 bg-good/10",
+  "recovering":"text-good border-good/40 bg-good/10", "M&A target":"text-warn border-warn/30 bg-warn/10",
   "watch":"text-muted border-white/10 bg-white/5","broken trend":"text-bad border-bad/30 bg-bad/10" };
 const ACTION_COLOR = { EXIT:"text-bad bg-bad/10 border-bad/40", TRIM:"text-warn bg-warn/10 border-warn/40", HOLD:"text-good bg-good/10 border-good/30", "NO DATA":"text-muted bg-white/5 border-white/10" };
 const STATE_DOT = { "risk-on":"#5BD89B", "neutral":"#F2C14E", "risk-off":"#F2756B" };
@@ -222,7 +223,7 @@ const REGIME_COLOR = { "RISK-ON":"good", "NEUTRAL":"warn", "RISK-OFF":"bad", "UN
 const CAP_COLOR = { mega:"text-cyan border-cyan/30", large:"text-primary border-primary/30",
   mid:"text-good border-good/30", small:"text-warn border-warn/30", micro:"text-muted border-white/10", "?":"text-muted border-white/10" };
 const SETUP_COLOR = { "BREAKOUT":"text-cyan border-cyan/50 bg-cyan/15", "pivot":"text-primary border-primary/40 bg-primary/10" };
-const SIGNAL_COLOR = { "BUY":"text-good border-good/50 bg-good/15", "WATCH":"text-primary border-primary/40 bg-primary/10", "PASS":"text-muted border-white/10 bg-white/5" };
+const SIGNAL_COLOR = { "BUY":"text-good border-good/50 bg-good/15", "WATCH":"text-primary border-primary/40 bg-primary/10", "PASS":"text-muted border-white/10 bg-white/5", "M&A":"text-warn border-warn/30 bg-warn/10" };
 const chip = (t,c) => `<span class="label text-[9px] px-2 py-0.5 rounded border ${c}">${t}</span>`;
 const capChip = (c) => chip(c||"?", (CAP_COLOR[c]||"text-muted border-white/10")+" bg-white/5");
 const fmt = (v,d=2) => (v===null||v===undefined||v==="")?"–":(typeof v==="number"?v.toFixed(d):v);
