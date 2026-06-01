@@ -29,8 +29,9 @@ import numpy as np
 import pandas as pd
 
 from datasource import YFinanceSource, DataError
+from screener import technical_signals, fundamental_signals, verdict
 
-BENCH = "SOXX"
+BENCH = "SPY"   # holdings are cross-sector, so benchmark relative strength vs the broad market
 
 
 def atr(hist: pd.DataFrame, n: int = 22) -> pd.Series:
@@ -48,10 +49,16 @@ def exit_signals(b: dict, bench: pd.Series) -> tuple[list, dict]:
 
     ma50 = c.rolling(50).mean().iloc[-1]
     ma200 = c.rolling(200).mean().iloc[-1]
-    if pd.notna(ma200) and ma50 < ma200:
-        sigs.append("trend broken (50<200)")
+    below50 = px < ma50
+    below200 = bool(pd.notna(ma200) and px < ma200)
+    st = (px / float(c.iloc[-21]) - 1) if len(c) >= 22 else 0.0
+    recovering = (not below50) and below200 and st > 0.07   # reclaimed 50d, below 200d, strong 1mo
+    if below50 and below200:
+        sigs.append("downtrend (below 50d & 200d)")
         severe = True
-    elif px < ma50:
+    elif below200 and not recovering:
+        sigs.append("below 200d")
+    elif below50:
         sigs.append("below 50d")
 
     if len(c) >= 252:
@@ -72,13 +79,14 @@ def exit_signals(b: dict, bench: pd.Series) -> tuple[list, dict]:
     if bench is not None and len(bench) > 70:
         rs = (px / float(c.iloc[-63]) - 1) - (float(bench.iloc[-1]) / float(bench.iloc[-63]) - 1)
         if rs < 0:
-            sigs.append("lagging SOX")
+            sigs.append("lagging market")
 
     a = atr(hist).iloc[-1]
     stop = float(hist["High"].tail(22).max() - 3 * a) if pd.notna(a) else np.nan
     if pd.notna(stop) and px < stop:
         sigs.append("below trailing stop")
-        severe = True
+        if below200:                 # stop breach + broken trend = exit; in an uptrend = trim
+            severe = True
 
     # post-earnings drop: reported within ~5d and last week was sharply down
     ed = b.get("earn_dates")
@@ -96,14 +104,18 @@ def exit_signals(b: dict, bench: pd.Series) -> tuple[list, dict]:
 
     return sigs, {"px": round(px, 2), "stop": round(stop, 2) if pd.notna(stop) else np.nan,
                   "to_stop_%": round(100 * (px - stop) / px, 1) if pd.notna(stop) else np.nan,
-                  "severe": severe}
+                  "severe": severe, "recovering": recovering}
 
 
-def action(sigs: list, severe: bool) -> str:
-    if severe or len(sigs) >= 3:
-        return "EXIT"
-    if len(sigs) >= 1:
-        return "TRIM"
+def action(sigs: list, severe: bool, recovering: bool = False) -> str:
+    if severe:
+        return "EXIT"            # downtrend / stop-breach-in-downtrend / earnings gap
+    if recovering:
+        return "HOLD"            # improving — don't trim a recovery on soft signals
+    if "below trailing stop" in sigs:
+        return "TRIM"            # stop breach in an intact uptrend -> trim/tighten, not full exit
+    if len(sigs) >= 2:
+        return "TRIM"            # 2+ soft signals
     return "HOLD"
 
 
@@ -116,10 +128,17 @@ def monitor_holdings(src, syms, bench=None) -> list[dict]:
     for s in syms:
         b = src.bundle(s)
         if b is None:
-            rows.append({"ticker": s, "action": "NO DATA", "signals": "fetch failed"})
+            rows.append({"ticker": s, "verdict": "?", "action": "NO DATA", "signals": "fetch failed"})
             continue
         sigs, m = exit_signals(b, bench)
-        rows.append({"ticker": s, "action": action(sigs, m["severe"]),
+        sig = {}
+        try:
+            sig.update(technical_signals(b["hist"], bench))
+            sig.update(fundamental_signals(b))
+        except Exception:
+            pass
+        rows.append({"ticker": s, "verdict": verdict(sig) if sig else "?",
+                     "action": action(sigs, m["severe"], m["recovering"]),
                      "price": m["px"], "stop": m["stop"], "to_stop_%": m["to_stop_%"],
                      "signals": "; ".join(sigs) if sigs else "clean"})
     return rows
@@ -155,9 +174,9 @@ def main() -> None:
     print("POSITION MONITOR — exit signals on your holdings")
     print("=" * 72)
     print(df.to_string(index=False))
-    print("\nEXIT = severe signal (trend fully broken / below stop / earnings gap)")
-    print("or >=3 signals. TRIM = 1-2 signals. HOLD = clean. 'to_stop_%' = how far")
-    print("price is above the trailing stop (negative = already below it).")
+    print("\nEXIT = downtrend (below 50d & 200d), stop-breach in a downtrend, or an")
+    print("earnings gap-down. TRIM = stop-breach in an intact uptrend, or 2+ soft")
+    print("signals. HOLD = clean or recovering. 'to_stop_%' = distance above stop.")
     print("\nExits are risk-management rules, NOT backtested predictions. Not advice.")
 
 

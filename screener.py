@@ -139,6 +139,19 @@ def technical_signals(hist: pd.DataFrame, bench: pd.Series) -> dict:
     if len(v) > 60:
         ratio = v.tail(10).mean() / v.tail(60).mean()
         out["vol_dryup"] = 1.0 if ratio < 0.9 else (0.9 if ratio > 1.6 else 0.4)
+
+    # support / resistance + pre-breakout (pivot) detection
+    if len(hist) > 60:
+        hh, ll = hist["High"], hist["Low"]
+        resist = float(hh.iloc[-60:-1].max())          # ~3mo prior high = level to break
+        support = float(ll.iloc[-60:].min())            # ~3mo low = support
+        out["dist_resist"] = (resist - px) / px         # raw % to resistance (display)
+        out["dist_support"] = (px - support) / px       # raw % above support (risk)
+        out["near_resist"] = float(np.clip(1 - max(0.0, (resist - px) / px) / 0.08, 0, 1))
+        rng = (float(hh.tail(20).max()) - float(ll.tail(20).min())) / px
+        out["base_tight"] = float(np.clip(1 - rng / 0.15, 0, 1))  # tight 20d base -> 1.0
+        vexp = float(v.tail(3).mean() / v.tail(50).mean()) if len(v) > 50 else 0.0
+        out["breakout"] = 1.0 if (px >= resist * 0.999 and vexp >= 1.3) else 0.0
     return out
 
 
@@ -251,6 +264,23 @@ def earnings_tag(ei: dict, window: int) -> str:
     return ""
 
 
+def pivot_state(sig: dict) -> str:
+    """Pre-breakout / breakout detection from support-resistance + base tightness.
+    'pivot' = coiled just under resistance with a tight base (catch BEFORE the move).
+    'BREAKOUT' = clearing resistance on volume expansion (the trigger, happening now)."""
+    nr = sig.get("near_resist", 0)
+    bt = sig.get("base_tight", 0)
+    bo = sig.get("breakout", 0)
+    trend = sig.get("trend", 1)
+    if trend < 0.4:                       # truly broken trends don't get pivot/breakout tags
+        return ""
+    if bo:
+        return "BREAKOUT"                 # above resistance + volume expansion
+    if nr >= 0.6 and bt >= 0.5:
+        return "pivot"                    # within ~3% of resistance, tight base
+    return ""
+
+
 def cap_band(mcap: float) -> str:
     if not mcap:
         return "?"
@@ -289,6 +319,9 @@ def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int =
 
     return {
         "ticker": sym, "theme": theme[:14], "cap": cap_band(mcap), "verdict": verdict(sig),
+        "setup": pivot_state(sig),
+        "to_resist": round(sig["dist_resist"] * 100, 1) if "dist_resist" in sig else None,
+        "to_support": round(sig["dist_support"] * 100, 1) if "dist_support" in sig else None,
         "score": score, "cov": round(avail / sum(WEIGHTS.values()), 2),
         "earn_in": ei.get("days_to_earn"), "next_earn": ei.get("next_earn"),
         "earn_flag": earnings_tag(ei, earn_window),
@@ -422,9 +455,9 @@ def main() -> None:
     if df.empty:
         print("No candidates passed the gates.")
         return
-    cols = ["ticker", "theme", "cap", "verdict", "score", "earn_in", "next_earn",
-            "cov", "mcap_$B", "price", "rev_accel", "margin_exp", "eps_rev",
-            "surprise", "near_high", "mom", "trend", "rel_str", "squeeze", "vol_dry"]
+    cols = ["ticker", "theme", "cap", "verdict", "setup", "score", "earn_in",
+            "to_resist", "to_support", "cov", "mcap_$B", "price", "rev_accel", "margin_exp",
+            "eps_rev", "surprise", "near_high", "mom", "trend", "rel_str", "squeeze", "vol_dry"]
 
     # EARNINGS WATCH: strong picks reporting within the window — surfaced FIRST
     pd.set_option("display.max_rows", None, "display.width", 240)

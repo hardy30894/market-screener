@@ -29,10 +29,10 @@ EARN_WINDOW = 14
 EARN_WATCH_SCORE = 65.0
 GOOD = {"primed", "PRIMED *", "early (fundies)"}
 
-FULL_COLS = ["ticker", "theme", "cap", "verdict", "score", "earn_in", "next_earn", "cov",
-             "mcap_$B", "price", "rev_accel", "margin_exp", "eps_rev", "surprise",
-             "near_high", "mom", "trend", "rel_str", "squeeze", "vol_dry"]
-CLEAN_COLS = ["ticker", "theme", "cap", "verdict", "score", "near_high", "mom", "eps_rev", "earn_in"]
+FULL_COLS = ["ticker", "theme", "cap", "verdict", "setup", "score", "earn_in", "next_earn",
+             "to_resist", "to_support", "cov", "mcap_$B", "price", "rev_accel", "margin_exp",
+             "eps_rev", "surprise", "near_high", "mom", "trend", "rel_str", "squeeze", "vol_dry"]
+CLEAN_COLS = ["ticker", "theme", "cap", "verdict", "setup", "score", "near_high", "mom", "eps_rev", "earn_in"]
 
 
 def fenced(df: pd.DataFrame, cols: list) -> str:
@@ -305,9 +305,9 @@ def main() -> None:
         cw2 = df[df["squeeze"].notna() & (df["squeeze"] >= 0.5)].sort_values("squeeze", ascending=False)
         coiled_rows = [{"ticker": r.ticker, "verdict": r.verdict, "squeeze": num(r.squeeze),
                         "near_high": num(r.near_high)} for r in cw2.itertuples()]
-    mon_rows = [{"ticker": r["ticker"], "action": r["action"], "price": num(r.get("price")),
-                 "stop": num(r.get("stop")), "to_stop_pct": num(r.get("to_stop_%")),
-                 "signals": r.get("signals", "")} for r in mon]
+    mon_rows = [{"ticker": r["ticker"], "verdict": r.get("verdict", "?"), "action": r["action"],
+                 "price": num(r.get("price")), "stop": num(r.get("stop")),
+                 "to_stop_pct": num(r.get("to_stop_%")), "signals": r.get("signals", "")} for r in mon]
     gauges = [{"name": g[0].split(" (")[0], "reading": g[1], "state": g[2], "score": g[3]}
               for g in reg["gauges"]]
     mkt_rows = []
