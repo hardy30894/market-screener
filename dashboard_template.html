@@ -123,7 +123,8 @@ tailwind.config = { theme: { extend: {
               <div class="flex gap-3"><span class="chip text-good border-good/30 bg-good/10">early (fundies)</span><span class="text-muted text-xs">Fundamentals leading, still base-building below the high.</span></div>
               <div class="flex gap-3"><span class="chip text-warn border-warn/30 bg-warn/10">extended</span><span class="text-muted text-xs">Move already underway. A confirm, not a pre-break entry.</span></div>
               <div class="flex gap-3"><span class="chip text-muted border-white/10 bg-white/5">watch</span><span class="text-muted text-xs">Mixed: something missing (e.g. no estimate upgrades).</span></div>
-              <div class="flex gap-3"><span class="chip text-bad border-bad/30 bg-bad/10">broken trend</span><span class="text-muted text-xs">Below the 200-day average. Avoid.</span></div>
+              <div class="flex gap-3"><span class="chip text-good border-good/40 bg-good/10">recovering</span><span class="text-muted text-xs">Below the 200-day but reclaimed the 50-day with a strong 1-month move — turnaround in progress.</span></div>
+              <div class="flex gap-3"><span class="chip text-bad border-bad/30 bg-bad/10">broken trend</span><span class="text-muted text-xs">Below the 200-day and falling. Avoid.</span></div>
             </div>
           </div>
           <div class="space-y-6">
@@ -186,6 +187,7 @@ const cache = { [DATA.date]: DATA };
 const VERDICT_COLOR = {
   "PRIMED *":"text-cyan border-cyan/40 bg-cyan/10","primed":"text-primary border-primary/40 bg-primary/10",
   "early (fundies)":"text-good border-good/30 bg-good/10","extended":"text-warn border-warn/30 bg-warn/10",
+  "recovering":"text-good border-good/40 bg-good/10",
   "watch":"text-muted border-white/10 bg-white/5","broken trend":"text-bad border-bad/30 bg-bad/10" };
 const ACTION_COLOR = { EXIT:"text-bad bg-bad/10 border-bad/40", TRIM:"text-warn bg-warn/10 border-warn/40", HOLD:"text-good bg-good/10 border-good/30", "NO DATA":"text-muted bg-white/5 border-white/10" };
 const STATE_DOT = { "risk-on":"#5BD89B", "neutral":"#F2C14E", "risk-off":"#F2756B" };

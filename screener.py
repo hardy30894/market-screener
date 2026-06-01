@@ -111,7 +111,18 @@ def technical_signals(hist: pd.DataFrame, bench: pd.Series) -> dict:
         out["mom"] = float(np.clip(0.5 + m, 0, 1))
 
     ma50, ma200 = c.rolling(50).mean().iloc[-1], c.rolling(200).mean().iloc[-1]
-    out["trend"] = 1.0 if (px > ma50 and ma50 > ma200) else (0.5 if px > ma200 else 0.0)
+    if px > ma50 and ma50 > ma200:
+        out["trend"] = 1.0          # confirmed uptrend
+    elif px > ma200:
+        out["trend"] = 0.7          # above 200d, 50<200 (choppy / early)
+    elif px > ma50:
+        out["trend"] = 0.4          # below 200d but reclaimed 50d -> recovering zone
+    else:
+        out["trend"] = 0.0          # below both -> truly broken
+
+    if len(c) >= 22:                # short-term (1-month) momentum, for V-reversal detection
+        st = float(px / c.iloc[-21] - 1)
+        out["st_mom"] = float(np.clip(0.5 + st * 3, 0, 1))  # +17%/mo -> 1.0
 
     if bench is not None and len(bench) > 70:
         r_t = px / float(c.iloc[-63]) - 1
@@ -184,7 +195,10 @@ def verdict(sig: dict) -> str:
     near = sig.get("near_high", 0)
     coiled = sig.get("vol_squeeze", 0) >= 0.6
     trend = sig.get("trend", 1)
-    if trend < 0.5:
+    st = sig.get("st_mom", 0.5)
+    if trend < 0.6:                          # below the 200-day = not a confirmed uptrend
+        if trend >= 0.4 and st >= 0.7:       # reclaimed the 50d AND strong 1-month move
+            return "recovering"
         return "broken trend"
     if fund_strong and near >= 0.6 and coiled:
         return "PRIMED *"
@@ -267,8 +281,8 @@ def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int =
     if not sig:
         return None
 
-    avail = sum(WEIGHTS[k] for k in sig)
-    got = sum(WEIGHTS[k] * v for k, v in sig.items())
+    avail = sum(WEIGHTS[k] for k in sig if k in WEIGHTS)
+    got = sum(WEIGHTS[k] * v for k, v in sig.items() if k in WEIGHTS)
     score = round(100 * got / avail, 1) if avail else 0.0
 
     ei = earnings_info(b)
@@ -468,7 +482,8 @@ def main() -> None:
     print("\nverdict: PRIMED* = fundies + coiled near high | primed = ready, no")
     print("squeeze | early(fundies) = fundamentals leading, base-building |")
     print("extended = move already underway | coiling(no fund) = technical only |")
-    print("watch = mixed | broken trend = below 200d, avoid.")
+    print("watch = mixed | recovering = below 200d but reclaimed 50d on strong 1mo |")
+    print("broken trend = below 200d & falling, avoid.")
     print("\nSignal cols are 0-1 (higher=better). 'cov' = fraction of signals with")
     print("data; treat low-cov scores as low-confidence. Leading signals")
     print("(rev_accel, eps_rev) matter most for 'before it breaks'.")

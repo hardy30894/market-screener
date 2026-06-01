@@ -1,5 +1,5 @@
 # Daily Sector Report — 2026-06-01
-_Generated 2026-06-01 05:31 UTC. Regime: **RISK-ON** (+4/6). Not investment advice._
+_Generated 2026-06-01 05:45 UTC. Regime: **RISK-ON** (+4/6). Not investment advice._
 
 ## TL;DR
 - **Top setups:** SNDK, STX, WDC, MU, AMD
@@ -53,11 +53,11 @@ ticker     theme      verdict  score  squeeze  near_high  eps_rev
   SLAB     semis     PRIMED *   83.5     0.76       0.96     0.75
    APH  hardware     extended   79.9     0.59       0.31     0.93
   ANET  hardware     extended   73.1     0.52       0.32     0.89
-   RUN     solar        watch   56.6     1.00       0.00     0.25
-   TEL  hardware broken trend   53.9     1.00       0.09     0.94
+   TEL  hardware broken trend   59.5     1.00       0.09     0.94
+   RUN     solar        watch   59.4     1.00       0.00     0.25
    BDC photonics broken trend   46.7     1.00       0.00     1.00
    MSI photonics broken trend   43.8     0.69       0.00     0.92
-  IPGP equipment        watch   34.8     1.00       0.00     0.00
+  IPGP equipment        watch   37.6     1.00       0.00     0.00
   OSIS  hardware broken trend   33.6     0.98       0.00     0.25
   ITRI photonics broken trend   30.4     1.00       0.00     0.25
    VNT photonics broken trend   23.9     1.00       0.00     0.00
@@ -80,7 +80,7 @@ ticker   cap  score  near_high  mom  eps_rev  squeeze earn_in
   MASI   mid   78.6       0.99 0.64     1.00     1.00     64d
     GS  mega   74.9       1.00 1.00     0.60     0.96     43d
     KO  mega   72.3       0.76 0.63     0.85     0.64     50d
-   LTC small   68.6       0.61 0.64     1.00     1.00     63d
+   LTC small   71.4       0.61 0.64     1.00     1.00     63d
 ```
 
 _Coiled near their highs with rising estimates, scanned across the whole US market (not just tech). A setup, not a buy; verify each name._
@@ -155,13 +155,13 @@ ticker     theme   cap         verdict  score earn_in  next_earn  cov  mcap_$B  
    GLW  hardware large        extended   71.9     57d 2026-07-28 1.00    155.9  181.16        1.0         1.0     0.93      0.56       0.14 1.00    1.0     0.00     0.00      0.4
    UMC     semis large          primed   71.1     58d 2026-07-29 1.00     55.7   22.18        0.5         1.0     0.50      0.43       0.85 1.00    1.0     1.00     0.00      0.4
   KLAC equipment  mega           watch   68.7     59d 2026-07-30 1.00    251.0 1921.71        0.5         0.3     0.92      0.63       0.70 1.00    1.0     0.00     0.00      0.4
-  LITE photonics large        extended   64.7     72d 2026-08-12 1.00     66.5  854.96        1.0         1.0     0.95      0.73       0.00 1.00    0.5     0.00     0.00      0.4
+  LITE photonics large        extended   67.5     72d 2026-08-12 1.00     66.5  854.96        1.0         1.0     0.95      0.73       0.00 1.00    0.7     0.00     0.00      0.4
+ KXIAY     semis  mega      recovering   62.4       -       None 0.41    226.6   41.49        NaN         NaN      NaN       NaN       0.85  NaN    0.4     1.00     0.00      0.9
+   TEL  hardware large    broken trend   59.5     51d 2026-07-22 1.00     62.3  213.41        0.5         1.0     0.94      0.56       0.09 0.82    0.4     0.00     1.00      0.4
   QCOM     semis  mega           watch   54.3     58d 2026-07-29 1.00    264.6  251.02        0.0         0.3     0.21      0.68       1.00 0.74    1.0     0.93     0.00      0.4
-   TEL  hardware large    broken trend   53.9     51d 2026-07-22 1.00     62.3  213.41        0.5         1.0     0.94      0.56       0.09 0.82    0.0     0.00     1.00      0.4
- KXIAY     semis  mega    broken trend   48.7       -       None 0.41    226.6   41.49        NaN         NaN      NaN       NaN       0.85  NaN    0.0     1.00     0.00      0.9
-  IONQ   quantum large           watch   44.2     65d 2026-08-05 1.00     26.9   72.07        1.0         0.3     0.00      1.00       0.19 0.54    0.5     1.00     0.00      0.4
+  IONQ   quantum large           watch   47.0     65d 2026-08-05 1.00     26.9   72.07        1.0         0.3     0.00      1.00       0.19 0.54    0.7     1.00     0.00      0.4
+  QBTS   quantum large           watch   46.0     66d 2026-08-06 1.00     11.2   30.14        0.0         0.3     0.57      1.00       0.00 0.75    0.7     0.43     0.00      0.9
    MSI photonics large    broken trend   43.8     59d 2026-07-30 1.00     66.9  403.28        0.5         0.3     0.92      0.69       0.00 0.56    0.0     0.00     0.69      0.4
-  QBTS   quantum large           watch   43.2     66d 2026-08-06 1.00     11.2   30.14        0.0         0.3     0.57      1.00       0.00 0.75    0.5     0.43     0.00      0.9
 ```
 
 ### Full screen — EARLY (small/mid)
@@ -185,31 +185,31 @@ ticker     theme   cap         verdict  score earn_in  next_earn  cov  mcap_$B  
   SEDG     solar   mid           watch   74.5     65d 2026-08-05 1.00      4.6  76.35        1.0         1.0     0.44      0.00       1.00 1.00    1.0     1.00     0.00      0.4
   UCTT equipment   mid early (fundies)   72.9     56d 2026-07-27 1.00      3.8  85.57        0.5         0.3     1.00      1.00       0.56 1.00    1.0     0.00     0.37      0.4
   SYNA     semis   mid early (fundies)   71.9     66d 2026-08-06 1.00      5.3 137.28        0.5         1.0     0.67      0.91       0.54 1.00    1.0     0.67     0.00      0.4
+  FORM equipment   mid        extended   70.5     58d 2026-07-29 1.00      9.7 124.59        1.0         1.0     1.00      1.00       0.00 1.00    0.7     0.00     0.00      0.4
   ALGM     semis   mid early (fundies)   69.0     59d 2026-07-30 1.00      8.9  47.87        1.0         1.0     0.50      0.69       0.55 1.00    1.0     0.00     0.00      0.4
   NOVT photonics   mid          primed   68.4     64d 2026-08-04 1.00      5.7 159.33        0.5         0.3     1.00      0.71       0.84 0.54    1.0     0.00     0.34      0.4
-  FORM equipment   mid        extended   67.7     58d 2026-07-29 1.00      9.7 124.59        1.0         1.0     1.00      1.00       0.00 1.00    0.5     0.00     0.00      0.4
   HIMX     semis   mid           watch   65.7     66d 2026-08-06 0.79      3.6  20.57        0.0         0.3      NaN      1.00       0.73 0.97    1.0     1.00     0.00      0.4
   VECO equipment   mid           watch   64.5     65d 2026-08-05 1.00      3.5  57.64        0.0         0.3     1.00      0.00       0.48 1.00    1.0     0.87     0.00      1.0
   CRUS     semis   mid           watch   64.4     64d 2026-08-04 1.00      8.6 169.95        0.5         0.3     0.50      1.00       0.69 1.00    1.0     0.00     0.00      1.0
   QRVO     semis   mid          primed   61.7     57d 2026-07-28 1.00      9.1 103.56        0.0         1.0     0.67      1.00       0.71 0.73    1.0     0.00     0.00      0.4
-   ESE photonics   mid        extended   58.0     70d 2026-08-10 1.00      7.6 291.90        1.0         0.3     0.67      0.69       0.07 1.00    0.5     0.00     0.30      1.0
-   RUN     solar   mid           watch   56.6     65d 2026-08-05 1.00      4.0  16.72        1.0         1.0     0.25      1.00       0.00 1.00    0.5     0.00     1.00      0.4
+   ESE photonics   mid        extended   60.8     70d 2026-08-10 1.00      7.6 291.90        1.0         0.3     0.67      0.69       0.07 1.00    0.7     0.00     0.30      1.0
+   RUN     solar   mid           watch   59.4     65d 2026-08-05 1.00      4.0  16.72        1.0         1.0     0.25      1.00       0.00 1.00    0.7     0.00     1.00      0.4
+  QMCO   quantum micro        extended   53.7      3d 2026-06-04 1.00      0.1   9.71        0.5         0.3     1.00      1.00       0.00 0.07    0.7     1.00     0.00      0.4
   NVTS     semis   mid           watch   53.5     63d 2026-08-03 1.00      6.3  26.60        0.0         0.3     0.50      1.00       0.00 1.00    1.0     1.00     0.00      0.4
-  QMCO   quantum micro        extended   50.9      3d 2026-06-04 1.00      0.1   9.71        0.5         0.3     1.00      1.00       0.00 0.07    0.5     1.00     0.00      0.4
+  CAMT equipment   mid           watch   51.8     72d 2026-08-12 1.00      7.9 171.66        0.5         0.3     0.75      0.61       0.00 1.00    0.7     0.00     0.00      0.4
+  RGTI  hardware   mid           watch   51.8     72d 2026-08-12 1.00      8.5  25.54        1.0         1.0     0.17      0.83       0.00 0.83    0.7     0.07     0.00      0.9
+  QUBT   quantum   mid      recovering   51.5     70d 2026-08-10 1.00      2.7  11.96        1.0         0.3     1.00      1.00       0.00 0.23    0.4     0.00     0.00      0.4
   ACLS equipment   mid           watch   49.3     64d 2026-08-04 1.00      4.6 150.41        0.5         0.3     0.00      0.57       0.20 1.00    1.0     0.80     0.00      1.0
-  RGTI  hardware   mid           watch   49.0     72d 2026-08-12 1.00      8.5  25.54        1.0         1.0     0.17      0.83       0.00 0.83    0.5     0.07     0.00      0.9
-  CAMT equipment   mid           watch   49.0     72d 2026-08-12 1.00      7.9 171.66        0.5         0.3     0.75      0.61       0.00 1.00    0.5     0.00     0.00      0.4
    BDC photonics   mid    broken trend   46.7     59d 2026-07-30 1.00      4.1 105.08        0.5         0.3     1.00      0.70       0.00 0.55    0.0     0.00     1.00      0.4
-  QUBT   quantum   mid    broken trend   45.9     70d 2026-08-10 1.00      2.7  11.96        1.0         0.3     1.00      1.00       0.00 0.23    0.0     0.00     0.00      0.4
+    PI     semis   mid    broken trend   44.1     58d 2026-07-29 1.00      4.6 151.00        0.0         0.3     1.00      0.16       0.00 0.75    0.4     0.00     0.27      1.0
   ENPH     solar   mid           watch   42.1     57d 2026-07-28 1.00      9.0  68.36        0.0         0.3     0.05      0.77       0.82 0.34    1.0     0.28     0.00      0.9
-    PI     semis   mid    broken trend   38.5     58d 2026-07-29 1.00      4.6 151.00        0.0         0.3     1.00      0.16       0.00 0.75    0.0     0.00     0.27      1.0
-  IPGP equipment   mid           watch   34.8     64d 2026-08-04 1.00      4.9 114.52        0.5         0.3     0.00      0.16       0.00 1.00    0.5     0.00     1.00      0.4
+  IPGP equipment   mid           watch   37.6     64d 2026-08-04 1.00      4.9 114.52        0.5         0.3     0.00      0.16       0.00 1.00    0.7     0.00     1.00      0.4
   OSIS  hardware   mid    broken trend   33.6     80d 2026-08-20 1.00      3.6 216.75        0.5         0.3     0.25      0.61       0.00 0.80    0.0     0.00     0.98      0.4
   ITRI photonics   mid    broken trend   30.4     59d 2026-07-30 1.00      3.7  82.48        0.0         1.0     0.25      1.00       0.00 0.24    0.0     0.00     1.00      1.0
    VNT photonics   mid    broken trend   23.9     59d 2026-07-30 1.00      4.0  28.38        0.5         0.3     0.00      0.51       0.00 0.50    0.0     0.00     1.00      0.4
    BMI photonics   mid    broken trend   20.7     51d 2026-07-22 1.00      3.6 123.90        0.0         0.3     0.50      0.00       0.00 0.00    0.0     0.00     1.00      1.0
+  ARQQ   quantum micro      recovering   19.4    191d 2026-12-09 0.53      0.3  16.51        NaN         NaN      NaN       NaN       0.00 0.13    0.4     0.00     0.00      0.9
   OLED  hardware   mid    broken trend   11.6     59d 2026-07-30 1.00      4.3  92.12        0.0         0.3     0.00      0.00       0.00 0.11    0.0     0.00     1.00      1.0
-  ARQQ   quantum micro    broken trend    9.0    191d 2026-12-09 0.53      0.3  16.51        NaN         NaN      NaN       NaN       0.00 0.13    0.0     0.00     0.00      0.9
 ```
 
 ### Full position monitor
