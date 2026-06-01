@@ -141,6 +141,8 @@ def technical_signals(hist: pd.DataFrame, bench: pd.Series) -> dict:
     if len(c) >= 22:                # short-term (1-month) momentum, for V-reversal detection
         st = float(px / c.iloc[-21] - 1)
         out["st_mom"] = float(np.clip(0.5 + st * 3, 0, 1))  # +17%/mo -> 1.0
+    if len(c) >= 6:                 # 5-day surge, for blow-off (climax) detection
+        out["surge5"] = float(px / float(c.iloc[-6]) - 1)
 
     if bench is not None and len(bench) > 70:
         r_t = px / float(c.iloc[-63]) - 1
@@ -169,6 +171,7 @@ def technical_signals(hist: pd.DataFrame, bench: pd.Series) -> dict:
         rng = (float(hh.tail(20).max()) - float(ll.tail(20).min())) / px
         out["base_tight"] = float(np.clip(1 - rng / 0.15, 0, 1))  # tight 20d base -> 1.0
         vexp = float(v.tail(3).mean() / v.tail(50).mean()) if len(v) > 50 else 0.0
+        out["vol_spike"] = vexp                          # recent volume vs 50d avg
         out["breakout"] = 1.0 if (px >= resist * 0.999 and vexp >= 1.3) else 0.0
     return out
 
@@ -303,6 +306,44 @@ def pivot_state(sig: dict) -> str:
     return ""
 
 
+def extreme_flag(sig: dict) -> str:
+    """blue-sky = at new highs, no resistance above. blow-off = gone vertical on
+    heavy volume (climax, exhaustion risk). They can co-occur (e.g. HPE)."""
+    ext = sig.get("ext50", 0.0)
+    nh = sig.get("near_high", 0.0)
+    surge5 = sig.get("surge5", 0.0)
+    vspike = sig.get("vol_spike", 0.0)
+    parts = []
+    if ext > 0.50 and (surge5 > 0.15 or ext > 0.80) and vspike > 1.8:
+        parts.append("blow-off")          # very stretched + sharp surge + volume climax
+    if nh >= 0.99:
+        parts.append("blue-sky")          # at/just under 52w high = no overhead resistance
+    return " · ".join(parts)
+
+
+def blue_sky_targets(sig: dict, px: float, flag: str) -> str:
+    """Projected upside levels for new-high (blue-sky) names — measured move + round
+    numbers. These are ESTIMATES, not resistance. Blow-offs get an honest 'no target'."""
+    if "blue-sky" not in flag:
+        return ""
+    dr, ds = sig.get("dist_resist"), sig.get("dist_support")
+    levels = []
+    if dr is not None and ds is not None:
+        resist, support = px * (1 + dr), px * (1 - ds)
+        mm = resist + (resist - support)            # measured move = breakout + base height
+        if mm > px * 1.01:
+            levels.append((mm, "measured move"))
+    step = 5 if px < 50 else 10 if px < 200 else 50 if px < 1000 else 100
+    r1 = (float(np.floor(px / step)) + 1) * step
+    for r in (r1, r1 + step):
+        if r > px:
+            levels.append((r, "round"))
+    levels = sorted(set(levels))[:3]
+    if not levels:
+        return "extended — no reliable target (parabolic)"
+    return " · ".join(f"${v:.0f} ({lbl})" for v, lbl in levels)
+
+
 def buy_signal(verdict: str, setup: str) -> str:
     """Buy-side action, symmetric with the monitor's HOLD/TRIM/EXIT.
     BUY = trigger firing / bullseye. WATCH = setup forming, await confirmation. PASS = no setup."""
@@ -352,6 +393,7 @@ def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int =
     stp = pivot_state(sig)
     sig_action = buy_signal(vd, stp)
     ext = sig.get("ext50", 0.0)               # extension above 50d
+    _flag = extreme_flag(sig)
     ein = ei.get("days_to_earn")
     # only the genuinely dangerous combo gets downgraded: very stretched INTO imminent earnings
     if sig_action == "BUY" and ext > 0.35 and ein is not None and 0 <= ein <= 5:
@@ -364,7 +406,8 @@ def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int =
 
     return {
         "ticker": sym, "theme": theme[:14], "cap": cap_band(mcap), "verdict": vd,
-        "signal": sig_action, "setup": stp, "deal": deal,
+        "signal": sig_action, "setup": stp, "deal": deal, "flag": _flag,
+        "targets": blue_sky_targets(sig, px, _flag),
         "ext": round(ext * 100, 1),
         "to_resist": round(sig["dist_resist"] * 100, 1) if "dist_resist" in sig else None,
         "to_support": round(sig["dist_support"] * 100, 1) if "dist_support" in sig else None,

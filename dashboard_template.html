@@ -108,6 +108,14 @@ tailwind.config = { theme: { extend: {
         <div class="label text-[9px] text-muted/70 mt-3">BREAKOUT = fresh break, 0–8% above resistance on volume (entry). pivot = tight base just under resistance (pre-break). running = already broke out, extended &gt;8% above (momentum leader, not a fresh entry). →Support = % to the recent 20-day swing low (stop ref). Breakouts fail often — use a stop.</div>
       </section>
 
+      <section id="bluesky-wrap" class="glass rounded-md p-5 mb-6 hidden">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="material-symbols-outlined text-cyan text-lg">travel_explore</span>
+          <h2 class="label text-xs text-ink/80">Blue-sky Targets · projected upside (estimates, NOT resistance)</h2>
+        </div>
+        <div id="bluesky"></div>
+      </section>
+
       <section class="glass rounded-md p-5 mb-6">
         <div class="flex items-center gap-2 mb-4"><span class="material-symbols-outlined text-warn text-lg">inventory</span><h2 class="label text-xs text-ink/80">Holdings Monitor · verdict + exit action</h2></div>
         <div class="overflow-x-auto"><table id="exits" class="w-full text-sm"></table></div>
@@ -193,6 +201,8 @@ tailwind.config = { theme: { extend: {
               <div><span class="text-ink">sqz</span> — volatility squeeze / coiling (1.0 = tightly contracted)</div>
               <div><span class="text-ink">Earns / →Stop</span> — days to next earnings / % above trailing stop</div>
               <div><span class="text-ink">Ext</span> — % above the 50-day (how stretched). High = pullback risk, NOT a sell in a strong trend. ⚠ &gt;35%.</div>
+              <div><span class="text-cyan">BLUE-SKY</span> — at new all-time highs: no resistance above (uncharted, strong but no ceiling reference).</div>
+              <div><span class="text-bad">BLOW-OFF</span> — gone vertical on heavy volume (climax). Exhaustion/reversal risk is highest here — do not chase.</div>
             </div>
             <div class="text-[11px] text-muted/70 mt-3 italic">Leading signals (Est↑, fundamentals) say <em>what</em>; technical signals (52w, Mom, sqz) say <em>when</em>. The technical edge tested weak on its own — treat scores as a research queue.</div>
           </div>
@@ -283,7 +293,7 @@ function render(d) {
       <th class="pr-3 hidden sm:table-cell">52w</th><th class="pr-3 hidden sm:table-cell">Mom</th>
       <th class="pr-3 hidden md:table-cell">Est↑</th><th class="pr-3">Earns</th></tr></thead>
     <tbody>${rows.map(r => `<tr class="border-b border-white/5 hover:bg-primary/5">
-      <td class="py-2.5 pr-3 font-mono font-semibold whitespace-nowrap">${r.ticker}${r.new?' <span class="label text-[8px] px-1 rounded bg-cyan/15 text-cyan border border-cyan/40">NEW</span>':''}</td>
+      <td class="py-2.5 pr-3 font-mono font-semibold whitespace-nowrap">${r.ticker}${r.new?' <span class="label text-[8px] px-1 rounded bg-cyan/15 text-cyan border border-cyan/40">NEW</span>':''}${r.flag&&r.flag.includes('blow-off')?' <span class="label text-[8px] px-1 rounded bg-bad/15 text-bad border border-bad/40">BLOW-OFF</span>':''}${r.flag&&r.flag.includes('blue-sky')?' <span class="label text-[8px] px-1 rounded bg-cyan/10 text-cyan border border-cyan/30">BLUE-SKY</span>':''}</td>
       <td class="pr-3">${chip(r.signal, SIGNAL_COLOR[r.signal]||"text-muted border-white/10")}</td>
       <td class="pr-3 text-muted text-xs">${r.theme}</td>
       <td class="pr-3">${capChip(r.cap)}</td>
@@ -356,6 +366,17 @@ function render(d) {
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${r.to_support==null?'–':'+'+r.to_support+'%'}</td>
       <td class="pr-3 font-mono text-xs ${r.earn_in!==null&&r.earn_in<=14?'text-cyan':'text-muted'}">${r.earn_in===null?'–':r.earn_in+'d'}</td></tr>`).join("")}</tbody>`
     : `<tbody><tr><td class="text-muted text-sm font-mono py-3">No tight-base or breakout setups today — momentum tape, nothing coiling under resistance.</td></tr></tbody>`;
+
+  const bs = d.screen.filter(r => r.targets);
+  const bsw = document.getElementById("bluesky-wrap");
+  if (bs.length) {
+    bsw.classList.remove("hidden");
+    document.getElementById("bluesky").innerHTML = bs.slice(0,12).map(r => `
+      <div class="flex items-center justify-between py-1.5 border-b border-white/5 text-sm">
+        <span class="font-mono font-semibold">${r.ticker}${r.flag&&r.flag.includes('blow-off')?' <span class="label text-[8px] px-1 rounded bg-bad/15 text-bad border border-bad/40">blow-off</span>':''}</span>
+        <span class="font-mono text-xs text-muted text-right">${r.targets}</span></div>`).join("")
+      + `<div class="label text-[9px] text-muted/70 mt-3">At new highs there's no resistance from past prices — these are projected upside <em>estimates</em> (measured move + round numbers), not levels that will hold. Manage with a trailing stop, not a target.</div>`;
+  } else { bsw.classList.add("hidden"); }
 
   const ORD = {EXIT:0, TRIM:1, HOLD:2, "NO DATA":3};
   const ex = (d.monitor||[]).slice().sort((a,b)=>(ORD[a.action]??9)-(ORD[b.action]??9) || (a.ticker>b.ticker?1:-1));
