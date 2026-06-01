@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # full history so rebase-before-push works
 
       - uses: actions/setup-python@v5
         with:
@@ -34,5 +36,12 @@ jobs:
             echo "No new report to commit."
           else
             git commit -m "Daily report $(date -u +%Y-%m-%d)"
-            git push
+            # conflict-safe push: rebase onto any new origin commits (keep our fresh
+            # generation on conflict), retry once. Prevents a silent push rejection.
+            for i in 1 2 3; do
+              git push && break
+              echo "push rejected, rebasing (attempt $i)..."
+              git pull --rebase -X theirs origin main || true
+              sleep 3
+            done
           fi
