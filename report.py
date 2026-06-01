@@ -29,10 +29,10 @@ EARN_WINDOW = 14
 EARN_WATCH_SCORE = 65.0
 GOOD = {"primed", "PRIMED *", "early (fundies)"}
 
-FULL_COLS = ["ticker", "theme", "cap", "verdict", "setup", "score", "earn_in", "next_earn",
+FULL_COLS = ["ticker", "signal", "theme", "cap", "verdict", "setup", "score", "earn_in", "next_earn",
              "to_resist", "to_support", "cov", "mcap_$B", "price", "rev_accel", "margin_exp",
              "eps_rev", "surprise", "near_high", "mom", "trend", "rel_str", "squeeze", "vol_dry"]
-CLEAN_COLS = ["ticker", "theme", "cap", "verdict", "setup", "score", "near_high", "mom", "eps_rev", "earn_in"]
+CLEAN_COLS = ["ticker", "signal", "theme", "cap", "verdict", "setup", "score", "near_high", "mom", "eps_rev", "earn_in"]
 
 
 def fenced(df: pd.DataFrame, cols: list) -> str:

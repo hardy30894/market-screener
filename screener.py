@@ -290,6 +290,16 @@ def pivot_state(sig: dict) -> str:
     return ""
 
 
+def buy_signal(verdict: str, setup: str) -> str:
+    """Buy-side action, symmetric with the monitor's HOLD/TRIM/EXIT.
+    BUY = trigger firing / bullseye. WATCH = setup forming, await confirmation. PASS = no setup."""
+    if setup == "BREAKOUT" or verdict == "PRIMED *":
+        return "BUY"
+    if verdict in ("primed", "early (fundies)", "recovering") or setup == "pivot":
+        return "WATCH"
+    return "PASS"
+
+
 def cap_band(mcap: float) -> str:
     if not mcap:
         return "?"
@@ -325,10 +335,12 @@ def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int =
     score = round(100 * got / avail, 1) if avail else 0.0
 
     ei = earnings_info(b)
+    vd = verdict(sig)
+    stp = pivot_state(sig)
 
     return {
-        "ticker": sym, "theme": theme[:14], "cap": cap_band(mcap), "verdict": verdict(sig),
-        "setup": pivot_state(sig),
+        "ticker": sym, "theme": theme[:14], "cap": cap_band(mcap), "verdict": vd,
+        "signal": buy_signal(vd, stp), "setup": stp,
         "to_resist": round(sig["dist_resist"] * 100, 1) if "dist_resist" in sig else None,
         "to_support": round(sig["dist_support"] * 100, 1) if "dist_support" in sig else None,
         "score": score, "cov": round(avail / sum(WEIGHTS.values()), 2),
@@ -465,7 +477,7 @@ def main() -> None:
     if df.empty:
         print("No candidates passed the gates.")
         return
-    cols = ["ticker", "theme", "cap", "verdict", "setup", "score", "earn_in",
+    cols = ["ticker", "signal", "theme", "cap", "verdict", "setup", "score", "earn_in",
             "to_resist", "to_support", "cov", "mcap_$B", "price", "rev_accel", "margin_exp",
             "eps_rev", "surprise", "near_high", "mom", "trend", "rel_str", "squeeze", "vol_dry"]
 
