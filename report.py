@@ -222,13 +222,80 @@ def main() -> None:
             return None
         return float(v) if isinstance(v, float) else v
 
+    # ---- streaks: how many consecutive days each name has held the setup list ----
+    ddir0 = HERE / "docs" / "data"
+    idxp = ddir0 / "index.json"
+    prior_dates = sorted(json.loads(idxp.read_text())) if idxp.exists() else []
+    prior_good = {}
+    for dt in prior_dates:
+        if dt == date:
+            continue
+        p = ddir0 / f"{dt}.json"
+        if p.exists():
+            try:
+                pd_ = json.loads(p.read_text())
+                prior_good[dt] = {r["ticker"] for r in pd_.get("screen", []) if r.get("verdict") in GOOD}
+            except Exception:
+                pass
+    today_good = set(df[df["verdict"].isin(GOOD)]["ticker"]) if not df.empty else set()
+    order = [d for d in sorted(prior_good) if d < date] + [date]
+
+    def streak_of(tk):
+        s = 0
+        for dt in reversed(order):
+            member = (tk in today_good) if dt == date else (tk in prior_good.get(dt, set()))
+            if member:
+                s += 1
+            else:
+                break
+        return s
+    yest = order[-2] if len(order) >= 2 else None
+
     screen = []
     if not df.empty:
         for r in df.to_dict("records"):
             row = {k: num(v) for k, v in r.items() if not k.startswith("_")}
             row["earn_in"] = int(r["earn_in"]) if pd.notna(r.get("earn_in")) else None
             row["next_earn"] = r.get("next_earn") if isinstance(r.get("next_earn"), str) else None
+            tk = r["ticker"]
+            row["streak"] = streak_of(tk) if row["verdict"] in GOOD else 0
+            row["new"] = bool(yest and row["verdict"] in GOOD and tk not in prior_good.get(yest, set()))
             screen.append(row)
+
+    # ---- track record: how the earliest cohort's picks have done vs SPY ----
+    trackrec = None
+    cohorts = [d for d in sorted(prior_good) if d < date]
+    if cohorts:
+        cdate = cohorts[0]
+        cd = json.loads((ddir0 / f"{cdate}.json").read_text())
+        cps = sorted([r for r in cd.get("screen", []) if r.get("verdict") in GOOD and r.get("price")],
+                     key=lambda r: r.get("score", 0), reverse=True)[:15]
+        cur = {r["ticker"]: r["price"] for r in (df.to_dict("records") if not df.empty else [])}
+        rets = []
+        for r in cps:
+            now = cur.get(r["ticker"])
+            if now is None:
+                b = src.bundle(r["ticker"])
+                now = b["price"] if b else None
+            if now:
+                rets.append(now / r["price"] - 1)
+        bret = None
+        try:
+            sp = src.bundle("SPY")
+            h = sp["hist"]["Close"]
+            then = h[h.index.strftime("%Y-%m-%d") <= cdate]
+            if len(then):
+                bret = float(h.iloc[-1] / then.iloc[-1] - 1)
+        except Exception:
+            pass
+        if rets:
+            avg = sum(rets) / len(rets) * 100
+            days = (datetime.now(timezone.utc).date() - datetime.fromisoformat(cdate + "T00:00:00").date()).days
+            trackrec = {"date": cdate, "days": days, "n": len(rets),
+                        "avg_ret": round(avg, 2),
+                        "win": round(100 * sum(1 for x in rets if x > 0) / len(rets)),
+                        "bench": round(bret * 100, 2) if bret is not None else None,
+                        "spread": round(avg - bret * 100, 2) if bret is not None else None}
     earn_rows, coiled_rows = [], []
     if not df.empty:
         es2 = df[(df["earn_in"].notna()) & (df["earn_in"] >= 0)
@@ -258,7 +325,7 @@ def main() -> None:
                    "n": reg["n"], "gauges": gauges},
         "tldr": {"picks": picks, "stars": stars, "exits": exits, "earnings": earn_soon},
         "screen": screen, "earnings": earn_rows, "coiled": coiled_rows, "monitor": mon_rows,
-        "market_primed": mkt_rows,
+        "market_primed": mkt_rows, "trackrec": trackrec,
         "health": (health_warn or screen_err or "").strip(),
     }
     tmpl = HERE / "dashboard_template.html"

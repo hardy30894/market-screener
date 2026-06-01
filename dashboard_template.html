@@ -58,7 +58,15 @@ tailwind.config = { theme: { extend: {
         <div id="regime-tag" class="glass rounded px-5 py-4 text-right glow"></div>
       </header>
 
-      <section id="metrics" class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-9"></section>
+      <section id="metrics" class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6"></section>
+
+      <section id="trackrec-wrap" class="glass rounded-md p-4 mb-9 hidden">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="material-symbols-outlined text-good text-base">history</span>
+          <h2 class="label text-xs text-ink/80">Track Record</h2>
+        </div>
+        <div id="trackrec" class="font-mono text-sm text-muted"></div>
+      </section>
 
       <section class="glass glow rounded-md p-5 mb-6">
         <div class="flex items-center gap-2 mb-4">
@@ -238,19 +246,36 @@ function render(d) {
   document.getElementById("setups-count").textContent = `${rows.length} of ${good.length} setups · ${d.screen.length} scored`;
   document.getElementById("setups").innerHTML = `
     <thead><tr class="label text-[9px] text-muted text-left border-b border-white/10">
-      <th class="py-2 pr-3">Ticker</th><th class="pr-3">Sector</th><th class="pr-3">Cap</th><th class="pr-3">Verdict</th><th class="pr-3">Score</th>
+      <th class="py-2 pr-3">Ticker</th><th class="pr-3">Sector</th><th class="pr-3">Cap</th><th class="pr-3">Verdict</th>
+      <th class="pr-3">Streak</th><th class="pr-3">Score</th>
       <th class="pr-3 hidden sm:table-cell">52w</th><th class="pr-3 hidden sm:table-cell">Mom</th>
       <th class="pr-3 hidden md:table-cell">Est↑</th><th class="pr-3">Earns</th></tr></thead>
     <tbody>${rows.map(r => `<tr class="border-b border-white/5 hover:bg-primary/5">
-      <td class="py-2.5 pr-3 font-mono font-semibold">${r.ticker}</td>
+      <td class="py-2.5 pr-3 font-mono font-semibold whitespace-nowrap">${r.ticker}${r.new?' <span class="label text-[8px] px-1 rounded bg-cyan/15 text-cyan border border-cyan/40">NEW</span>':''}</td>
       <td class="pr-3 text-muted text-xs">${r.theme}</td>
       <td class="pr-3">${capChip(r.cap)}</td>
       <td class="pr-3">${chip(r.verdict, VERDICT_COLOR[r.verdict]||"text-muted border-white/10")}</td>
+      <td class="pr-3 font-mono text-xs ${r.streak>=3?'text-cyan':'text-muted'}">${r.streak?r.streak+'d'+(r.streak>=5?' 🔥':''):'–'}</td>
       <td class="pr-3 w-28"><div class="flex items-center gap-2"><span class="font-mono text-xs w-8">${fmt(r.score,1)}</span><div class="bar flex-1"><i style="width:${r.score}%"></i></div></div></td>
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.near_high)}</td>
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.mom)}</td>
       <td class="pr-3 hidden md:table-cell font-mono text-xs text-muted">${fmt(r.eps_rev)}</td>
       <td class="pr-3 font-mono text-xs ${r.earn_in!==null&&r.earn_in<=14?'text-cyan':'text-muted'}">${r.earn_in===null?'–':r.earn_in+'d'}</td></tr>`).join("")}</tbody>`;
+
+  const tr = d.trackrec;
+  const trw = document.getElementById("trackrec-wrap");
+  if (tr) {
+    trw.classList.remove("hidden");
+    const spc = tr.spread==null ? "muted" : (tr.spread>=0 ? "good" : "bad");
+    document.getElementById("trackrec").innerHTML =
+      `Picks from <span class="text-ink">${tr.date}</span> (${tr.days}d ago, n=${tr.n}): `
+      + `avg <span class="text-${tr.avg_ret>=0?'good':'bad'}">${tr.avg_ret>=0?'+':''}${tr.avg_ret}%</span>`
+      + (tr.bench!=null ? ` vs SPY ${tr.bench>=0?'+':''}${tr.bench}% &rarr; spread <span class="text-${spc}">${tr.spread>=0?'+':''}${tr.spread}%</span>` : "")
+      + ` &middot; win ${tr.win}%`
+      + (tr.days<14 ? ` <span class="label text-[9px] text-warn">&middot; BUILDING — too few days to mean anything yet</span>` : "");
+  } else {
+    trw.classList.add("hidden");
+  }
 
   const mp = d.market_primed || [];
   document.getElementById("mkt-count").textContent = mp.length ? `${mp.length} found` : "none today";
