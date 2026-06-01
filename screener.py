@@ -60,6 +60,15 @@ DEFAULT_THEMES = ["semis", "equipment", "photonics", "hardware"]
 # Software / Semiconductors) and are often pre-revenue, so seed them explicitly.
 QUANTUM_SEEDS = ["IONQ", "RGTI", "QBTS", "QUBT", "ARQQ", "INFQ", "LAES", "QMCO"]
 
+# Top ETFs to track the tape/regime (technical-only — ETFs have no fundamentals).
+ETFS = {
+    "SPY": "S&P 500", "QQQ": "Nasdaq 100", "SMH": "Semis", "SOXX": "Semis",
+    "XLK": "Tech sector", "IGV": "Software", "DRAM": "Memory", "XLF": "Financials",
+    "AIQ": "AI/thematic", "QTUM": "Quantum", "CIBR": "Cybersecurity",
+    "DTCR": "Data centers", "WCLD": "Cloud SW", "BOTZ": "Robotics/AI", "IPO": "IPOs",
+    # (no dedicated photonics ETF exists; photonics lives inside SMH/SOXX + COHR/LITE)
+}
+
 # Optional convenience list for --watchlist (NOT used for discovery).
 WATCHLIST = {
     "NVDA": "ai-compute", "AMD": "ai-compute", "AVGO": "ai-compute",
@@ -330,6 +339,7 @@ def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int =
         "eps_rev": sig.get("eps_rev"), "surprise": sig.get("surprise"),
         "near_high": round(sig.get("near_high", np.nan), 2) if "near_high" in sig else np.nan,
         "mom": round(sig.get("mom", np.nan), 2) if "mom" in sig else np.nan,
+        "st_mom": round(sig.get("st_mom", np.nan), 2) if "st_mom" in sig else np.nan,
         "trend": sig.get("trend"),
         "rel_str": round(sig.get("rel_strength", np.nan), 2) if "rel_strength" in sig else np.nan,
         "squeeze": round(sig.get("vol_squeeze", np.nan), 2) if "vol_squeeze" in sig else np.nan,

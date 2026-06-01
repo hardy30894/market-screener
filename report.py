@@ -20,7 +20,7 @@ from pathlib import Path
 import pandas as pd
 
 from datasource import YFinanceSource, DataError
-from screener import (THEME_INDUSTRIES, build_universe, score_universe, find_market_primed)
+from screener import (THEME_INDUSTRIES, build_universe, score_universe, find_market_primed, ETFS)
 from monitor import monitor_holdings
 from regime import compute_regime
 
@@ -77,6 +77,12 @@ def main() -> None:
         mktp = find_market_primed(src)
     except Exception:
         mktp = pd.DataFrame()
+
+    # ---- compute: ETF tape (technical-only) ----
+    try:
+        edf = score_universe(src, [{"symbol": e, "mcap": 0, "theme": "etf"} for e in ETFS], min_score=0)
+    except Exception:
+        edf = pd.DataFrame()
 
     # ---- health check (shared screener+monitor) ----
     health_warn = None
@@ -318,6 +324,14 @@ def main() -> None:
                              "eps_rev": num(r.get("eps_rev")), "squeeze": num(r.get("squeeze")),
                              "earn_in": int(r["earn_in"]) if pd.notna(r.get("earn_in")) else None})
 
+    etf_rows = []
+    if not edf.empty:
+        for r in edf.to_dict("records"):
+            etf_rows.append({"ticker": r["ticker"], "name": ETFS.get(r["ticker"], ""),
+                             "verdict": r["verdict"], "trend": num(r.get("trend")),
+                             "near_high": num(r.get("near_high")), "mom": num(r.get("mom")),
+                             "st_mom": num(r.get("st_mom")), "setup": r.get("setup", "")})
+
     data = {
         "date": date,
         "generated": f"{datetime.now(timezone.utc):%Y-%m-%d %H:%M}",
@@ -325,7 +339,7 @@ def main() -> None:
                    "n": reg["n"], "gauges": gauges},
         "tldr": {"picks": picks, "stars": stars, "exits": exits, "earnings": earn_soon},
         "screen": screen, "earnings": earn_rows, "coiled": coiled_rows, "monitor": mon_rows,
-        "market_primed": mkt_rows, "trackrec": trackrec,
+        "market_primed": mkt_rows, "trackrec": trackrec, "etfs": etf_rows,
         "health": (health_warn or screen_err or "").strip(),
     }
     tmpl = HERE / "dashboard_template.html"

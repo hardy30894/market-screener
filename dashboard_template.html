@@ -118,6 +118,14 @@ tailwind.config = { theme: { extend: {
         <div id="regime" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
       </section>
 
+      <section class="glass rounded-md p-5 mb-6">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="material-symbols-outlined text-cyan text-lg">candlestick_chart</span>
+          <h2 class="label text-xs text-ink/80">ETF Watch · sector &amp; regime tape</h2>
+        </div>
+        <div id="etfs" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3"></div>
+      </section>
+
       <details class="glass rounded-md p-5 mb-6 group">
         <summary class="flex items-center gap-2 cursor-pointer select-none">
           <span class="material-symbols-outlined text-muted text-lg">help</span>
@@ -346,6 +354,27 @@ function render(d) {
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${r.to_stop_pct===null||r.to_stop_pct===undefined?'–':fmt(r.to_stop_pct,1)+'%'}</td>
       <td class="pr-3 text-xs text-muted">${r.signals}</td></tr>`).join("")}</tbody>`
     : `<div class="text-muted text-sm font-mono">No holdings configured.</div>`;
+
+  const SCOL = {good:"#5BD89B", warn:"#F2C14E", bad:"#F2756B", cyan:"#7DF4FF"};
+  const etfStatus = (r) => {
+    if (r.setup === "BREAKOUT") return ["breakout", "cyan"];
+    if (r.verdict === "recovering") return ["recovering", "good"];
+    if (r.trend >= 1) return [r.near_high >= 0.7 ? "uptrend · highs" : "uptrend", "good"];
+    if (r.trend >= 0.6) return ["above 200d", "good"];
+    if (r.trend >= 0.4) return ["below 200d", "warn"];
+    return ["downtrend", "bad"];
+  };
+  const etfRank = (r) => r.setup==="BREAKOUT" ? 0 : r.verdict==="recovering" ? 2.5
+    : r.trend>=1 ? (r.near_high>=0.7?1:2) : r.trend>=0.6 ? 3 : r.trend>=0.4 ? 4 : 5;
+  const etfsSorted = (d.etfs||[]).slice().sort((a,b)=> etfRank(a)-etfRank(b) || (b.near_high||0)-(a.near_high||0));
+  document.getElementById("etfs").innerHTML = etfsSorted.length ? etfsSorted.map(r => {
+    const [s, c] = etfStatus(r);
+    return `<div class="rounded border border-white/5 bg-lowest/40 p-3">
+      <div class="flex items-center justify-between mb-1"><span class="font-mono font-semibold text-sm">${r.ticker}</span>
+        <span class="dot" style="background:${SCOL[c]};box-shadow:0 0 8px ${SCOL[c]}"></span></div>
+      <div class="label text-[8px] text-muted mb-1">${r.name||""}</div>
+      <div class="text-xs text-${c}">${s}</div></div>`;
+  }).join("") : `<div class="text-muted text-sm font-mono">ETF data unavailable.</div>`;
 
   document.getElementById("regime").innerHTML = d.regime.gauges.map(g => `
     <div class="rounded border border-white/5 bg-lowest/40 p-3"><div class="flex items-center gap-2 mb-1">
