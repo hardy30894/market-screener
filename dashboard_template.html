@@ -153,6 +153,13 @@ tailwind.config = { theme: { extend: {
               <div class="flex gap-3"><span class="chip text-good border-good/40 bg-good/10">recovering</span><span class="text-muted text-xs">Below the 200-day but reclaimed the 50-day with a strong 1-month move — turnaround in progress.</span></div>
               <div class="flex gap-3"><span class="chip text-bad border-bad/30 bg-bad/10">broken trend</span><span class="text-muted text-xs">Below the 200-day and falling. Avoid.</span></div>
             </div>
+            <div class="mt-6">
+              <div class="label text-[10px] text-primary/70 mb-3">Trend chart (Top Setups)</div>
+              <div class="text-muted text-xs space-y-1.5">
+                <div>Line = last ~3 months of price (<span class="text-good">green</span> up, <span class="text-bad">red</span> down); dot = today.</div>
+                <div><span class="text-cyan">- - -</span> cyan dashed = support (recent floor). <span class="text-bad">- - -</span> red dashed = resistance (the level to clear). Price riding above the red line = broken out / blue-sky.</div>
+              </div>
+            </div>
           </div>
           <div class="space-y-6">
             <div>
@@ -240,13 +247,19 @@ const chip = (t,c) => `<span class="label text-[9px] px-2 py-0.5 rounded border 
 const capChip = (c) => chip(c||"?", (CAP_COLOR[c]||"text-muted border-white/10")+" bg-white/5");
 const fmt = (v,d=2) => (v===null||v===undefined||v==="")?"–":(typeof v==="number"?v.toFixed(d):v);
 
-function sparkline(arr,w=82,h=22){
+function sparkline(arr,levels,w=104,h=26){
   if(!arr||arr.length<2) return '<span class="text-muted">–</span>';
-  const mn=Math.min(...arr), mx=Math.max(...arr), rng=(mx-mn)||1;
-  const pts=arr.map((v,i)=>[(i/(arr.length-1))*w, h-2-((v-mn)/rng)*(h-4)]);
+  const lv=[]; // support/resistance horizontal lines (real flat levels)
+  if(levels){ if(levels.sup!=null&&isFinite(levels.sup)) lv.push(['sup',levels.sup]); if(levels.res!=null&&isFinite(levels.res)) lv.push(['res',levels.res]); }
+  const all=arr.concat(lv.map(x=>x[1]));
+  const mn=Math.min(...all), mx=Math.max(...all), rng=(mx-mn)||1;
+  const y=v=>h-2-((v-mn)/rng)*(h-4);
+  const pts=arr.map((v,i)=>[(i/(arr.length-1))*w, y(v)]);
   const path=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
   const up=arr[arr.length-1]>=arr[0], col=up?'#5BD89B':'#F2756B';
-  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" class="inline-block align-middle"><path d="${path}" fill="none" stroke="${col}" stroke-width="1.3" stroke-linejoin="round"/></svg>`;
+  const lines=lv.map(([k,val])=>`<line x1="0" x2="${w}" y1="${y(val).toFixed(1)}" y2="${y(val).toFixed(1)}" stroke="${k==='res'?'#F2756B':'#7DF4FF'}" stroke-width="0.7" stroke-dasharray="2 2" opacity="0.4"/>`).join('');
+  const last=pts[pts.length-1];
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" class="inline-block align-middle">${lines}<path d="${path}" fill="none" stroke="${col}" stroke-width="1.3" stroke-linejoin="round"/><circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="1.6" fill="${col}"/></svg>`;
 }
 
 let GOOD=[], S_SORT={k:'score',dir:-1}, S_FILTER='';
@@ -268,7 +281,7 @@ function renderSetups(){
       <td class="pr-3 text-muted text-xs">${r.theme}</td>
       <td class="pr-3">${capChip(r.cap)}</td>
       <td class="pr-3">${chip(r.verdict,VERDICT_COLOR[r.verdict]||'text-muted border-white/10')}</td>
-      <td class="pr-3">${sparkline(r.spark)}</td>
+      <td class="pr-3">${sparkline(r.spark, {res: (r.to_resist!=null&&r.price)?r.price*(1+r.to_resist/100):null, sup: (r.to_support!=null&&r.price)?r.price*(1-r.to_support/100):null})}</td>
       <td class="pr-3 font-mono text-xs ${r.streak>=3?'text-cyan':'text-muted'}">${r.streak?r.streak+'d'+(r.streak>=5?' 🔥':''):'–'}</td>
       <td class="pr-3 w-24"><div class="flex items-center gap-2"><span class="font-mono text-xs w-8">${fmt(r.score,1)}</span><div class="bar flex-1"><i style="width:${r.score}%"></i></div></div></td>
       <td class="pr-3 font-mono text-xs ${r.ext>35?'text-warn':'text-muted'}">${r.ext==null?'–':(r.ext>=0?'+':'')+r.ext+'%'}${r.ext>35?' ⚠':''}</td>
