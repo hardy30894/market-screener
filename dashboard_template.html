@@ -212,17 +212,25 @@ tailwind.config = { theme: { extend: {
               <div><span class="text-cyan">BLUE-SKY</span> — at new all-time highs: no resistance above (uncharted, strong but no ceiling reference).</div>
               <div><span class="text-bad">BLOW-OFF</span> — gone vertical on heavy volume (climax). Exhaustion/reversal risk is highest here — do not chase.</div>
             </div>
-            <div class="text-[11px] text-muted/70 mt-3 italic">Leading signals (Est↑, fundamentals) say <em>what</em>; technical signals (52w, Mom, sqz) say <em>when</em>. The technical edge tested weak on its own — treat scores as a research queue.</div>
+            <div class="text-[11px] text-muted/70 mt-3 italic">Leading signals (Est↑, fundamentals) say <em>what</em>; technical signals (Mom, Trend, rel-strength) say <em>when</em>. Scored technical factors are walk-forward calibrated (squeeze + near-high were dropped as no-info/wrong-signed); the edge still tests weak (DSR ≈ 0.33) — treat scores as a research queue, not alpha.</div>
           </div>
         </div>
       </details>
 
       <footer class="text-muted text-xs font-mono mt-10 pt-6 border-t border-white/5">
         <span id="health"></span><br/>
+        <span id="calib" class="text-muted/70"></span><br/>
         Not investment advice. Forward figures are forecasts. Signals are a research queue, not buy/sell calls.
       </footer>
     </div>
   </main>
+</div>
+
+<div id="chartmodal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4 sm:p-8">
+  <div class="glass rounded-2xl border border-white/10 shadow-2xl max-w-2xl w-full" onclick="event.stopPropagation()">
+    <div class="flex justify-end px-3 pt-2"><button onclick="closeChart()" class="text-muted hover:text-ink text-lg leading-none px-2" title="close (Esc)">✕</button></div>
+    <div id="chartmodal-body"></div>
+  </div>
 </div>
 
 <script>
@@ -247,10 +255,13 @@ const chip = (t,c) => `<span class="label text-[9px] px-2 py-0.5 rounded border 
 const capChip = (c) => chip(c||"?", (CAP_COLOR[c]||"text-muted border-white/10")+" bg-white/5");
 const fmt = (v,d=2) => (v===null||v===undefined||v==="")?"–":(typeof v==="number"?v.toFixed(d):v);
 
-function sparkline(arr,levels,w=104,h=26){
-  if(!arr||arr.length<2) return '<span class="text-muted">–</span>';
-  const lv=[]; // support/resistance horizontal lines (real flat levels)
-  if(levels){ if(levels.sup!=null&&isFinite(levels.sup)) lv.push(['sup',levels.sup]); if(levels.res!=null&&isFinite(levels.res)) lv.push(['res',levels.res]); }
+let CHARTS={};
+const chartOf = tk => (tk && CHARTS[tk]) || null;
+
+// inline sparkline (price + S/R lines + last-price dot), clickable to expand
+function sparkSVG(c,w=104,h=26){
+  const arr=c.spark; if(!arr||arr.length<2) return '<span class="text-muted">–</span>';
+  const lv=[]; if(c.sup!=null&&isFinite(c.sup)) lv.push(['sup',c.sup]); if(c.res!=null&&isFinite(c.res)) lv.push(['res',c.res]);
   const all=arr.concat(lv.map(x=>x[1]));
   const mn=Math.min(...all), mx=Math.max(...all), rng=(mx-mn)||1;
   const y=v=>h-2-((v-mn)/rng)*(h-4);
@@ -261,6 +272,10 @@ function sparkline(arr,levels,w=104,h=26){
   const last=pts[pts.length-1];
   return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" class="inline-block align-middle">${lines}<path d="${path}" fill="none" stroke="${col}" stroke-width="1.3" stroke-linejoin="round"/><circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="1.6" fill="${col}"/></svg>`;
 }
+function sparkCell(tk,w=104){
+  const c=chartOf(tk); if(!c) return '<span class="text-muted">–</span>';
+  return `<span class="cursor-pointer inline-block hover:opacity-80" data-chart="${tk}" title="${tk} — click to expand">${sparkSVG(c,w)}</span>`;
+}
 
 function chartLine(arr,w,y,color,width,dash){
   if(!arr||arr.length<2) return '';
@@ -269,38 +284,42 @@ function chartLine(arr,w,y,color,width,dash){
   const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
   return `<path d="${d}" fill="none" stroke="${color}" stroke-width="${width}" stroke-linejoin="round"${dash?` stroke-dasharray="${dash}"`:''}/>`;
 }
-function bigchart(r){
-  const arr=r.spark; if(!arr||arr.length<2) return '<div class="text-muted text-xs p-4">No chart data.</div>';
+// full chart (price + 50/200d MA + S/R), shown in the modal — works for any ticker
+function bigchart(tk){
+  const c=chartOf(tk); if(!c||!c.spark||c.spark.length<2) return '<div class="text-muted text-xs p-6">No chart data for '+tk+'.</div>';
+  const arr=c.spark;
   const W=560,H=160,padR=50,padT=8,padB=6, w=W-padR, h=H-padT-padB;
-  const res=(r.to_resist!=null&&r.price)?r.price*(1+r.to_resist/100):null;
-  const sup=(r.to_support!=null&&r.price)?r.price*(1-r.to_support/100):null;
-  const vals=[].concat(arr, r.spark_ma50||[], r.spark_ma200||[], [res,sup]).filter(v=>v!=null&&isFinite(v));
+  const res=c.res, sup=c.sup;
+  const vals=[].concat(arr, c.ma50||[], c.ma200||[], [res,sup]).filter(v=>v!=null&&isFinite(v));
   const mn=Math.min(...vals), mx=Math.max(...vals), rng=(mx-mn)||1;
   const y=v=>padT+h-((v-mn)/rng)*h;
   const up=arr[arr.length-1]>=arr[0], pc=up?'#5BD89B':'#F2756B';
   let svg='';
   if(sup!=null) svg+=`<line x1="0" x2="${w}" y1="${y(sup).toFixed(1)}" y2="${y(sup).toFixed(1)}" stroke="#7DF4FF" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/><text x="${w+5}" y="${(y(sup)+3).toFixed(1)}" fill="#7DF4FF" font-size="10" opacity="0.85">S ${sup.toFixed(sup<10?1:0)}</text>`;
   if(res!=null) svg+=`<line x1="0" x2="${w}" y1="${y(res).toFixed(1)}" y2="${y(res).toFixed(1)}" stroke="#F2756B" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/><text x="${w+5}" y="${(y(res)+3).toFixed(1)}" fill="#F2756B" font-size="10" opacity="0.85">R ${res.toFixed(res<10?1:0)}</text>`;
-  svg+=chartLine(r.spark_ma200||[],w,y,'#8A8F98',1.2);
-  svg+=chartLine(r.spark_ma50||[],w,y,'#F2C14E',1.2);
+  svg+=chartLine(c.ma200||[],w,y,'#8A8F98',1.2);
+  svg+=chartLine(c.ma50||[],w,y,'#F2C14E',1.2);
   svg+=chartLine(arr,w,y,pc,1.9);
   const last=arr[arr.length-1], ly=y(last);
   svg+=`<circle cx="${w.toFixed(1)}" cy="${ly.toFixed(1)}" r="2.6" fill="${pc}"/><text x="${w+5}" y="${(ly+3).toFixed(1)}" fill="${pc}" font-size="10.5" font-weight="600">${last.toFixed(last<10?2:0)}</text>`;
-  const dot=(c)=>`<span style="width:14px;height:0;border-top:2px solid ${c};display:inline-block"></span>`;
-  const dash=(c)=>`<span style="width:14px;height:0;border-top:2px dashed ${c};display:inline-block"></span>`;
-  const leg=`<div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] text-muted mt-2">
+  const dot=(cl)=>`<span style="width:14px;height:0;border-top:2px solid ${cl};display:inline-block"></span>`;
+  const dash=(cl)=>`<span style="width:14px;height:0;border-top:2px dashed ${cl};display:inline-block"></span>`;
+  const leg=`<div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] text-muted mt-3">
     <span class="flex items-center gap-1.5">${dot(pc)}price</span>
     <span class="flex items-center gap-1.5">${dot('#F2C14E')}50-day</span>
     <span class="flex items-center gap-1.5">${dot('#8A8F98')}200-day</span>
     <span class="flex items-center gap-1.5">${dash('#7DF4FF')}support</span>
     <span class="flex items-center gap-1.5">${dash('#F2756B')}resistance</span>
     <span class="ml-auto text-muted/70">~3-month daily</span></div>`;
-  const sub=`50-day ${r.spark_ma50&&r.spark_ma50.slice(-1)[0]!=null?(last>=r.spark_ma50.slice(-1)[0]?'above':'below'):'–'} · 200-day ${r.spark_ma200&&r.spark_ma200.slice(-1)[0]!=null?(last>=r.spark_ma200.slice(-1)[0]?'above':'below'):'n/a (short history)'}`;
-  return `<div class="p-4"><div class="flex items-baseline gap-3 mb-1"><span class="font-mono font-semibold text-sm">${r.ticker}</span><span class="text-muted text-[11px]">${sub}</span></div>
-    <svg width="100%" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" class="block" style="max-width:640px">${svg}</svg>${leg}</div>`;
+  const m50=c.ma50&&c.ma50.slice(-1)[0], m200=c.ma200&&c.ma200.slice(-1)[0];
+  const sub=`50-day ${m50!=null?(last>=m50?'above':'below'):'–'} · 200-day ${m200!=null?(last>=m200?'above':'below'):'n/a (short history)'}`;
+  return `<div class="p-5"><div class="flex items-baseline gap-3 mb-2"><span class="font-mono font-bold text-base">${tk}</span><span class="text-muted text-xs">${sub}</span></div>
+    <svg width="100%" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" class="block">${svg}</svg>${leg}</div>`;
 }
+function openChart(tk){ if(!chartOf(tk)) return; document.getElementById('chartmodal-body').innerHTML=bigchart(tk); const md=document.getElementById('chartmodal'); md.classList.remove('hidden'); md.classList.add('flex'); }
+function closeChart(){ const md=document.getElementById('chartmodal'); md.classList.add('hidden'); md.classList.remove('flex'); }
 
-let GOOD=[], S_SORT={k:'score',dir:-1}, S_FILTER='', S_OPEN=null;
+let GOOD=[], S_SORT={k:'score',dir:-1}, S_FILTER='';
 function renderSetups(){
   let rows=GOOD.filter(r=>!S_FILTER||r.ticker.toLowerCase().includes(S_FILTER));
   rows=rows.slice().sort((a,b)=>{const k=S_SORT.k;let av=a[k],bv=b[k];
@@ -313,24 +332,22 @@ function renderSetups(){
       ${h('ticker','Ticker')}<th class="pr-3">Signal</th><th class="pr-3">Sector</th><th class="pr-3">Cap</th><th class="pr-3">Verdict</th>
       <th class="pr-3">Trend</th>${h('streak','Streak')}${h('score','Score')}${h('ext','Ext')}
       ${h('near_high','52w','hidden sm:table-cell')}${h('mom','Mom','hidden sm:table-cell')}${h('eps_rev','Est↑','hidden md:table-cell')}${h('earn_in','Earns')}</tr></thead>
-    <tbody>${rows.map(r=>`<tr data-tk="${r.ticker}" class="border-b border-white/5 hover:bg-primary/5 cursor-pointer ${S_OPEN===r.ticker?'bg-primary/5':''}" title="click for chart">
-      <td class="py-2.5 pr-3 font-mono font-semibold whitespace-nowrap"><span class="inline-block text-muted text-[9px] mr-1 transition-transform ${S_OPEN===r.ticker?'rotate-90':''}">▶</span>${r.ticker}${r.new?' <span class="label text-[8px] px-1 rounded bg-cyan/15 text-cyan border border-cyan/40">NEW</span>':''}${r.flag&&r.flag.includes('blow-off')?' <span class="label text-[8px] px-1 rounded bg-bad/15 text-bad border border-bad/40">BLOW-OFF</span>':''}${r.flag&&r.flag.includes('blue-sky')?' <span class="label text-[8px] px-1 rounded bg-cyan/10 text-cyan border border-cyan/30">BLUE-SKY</span>':''}</td>
+    <tbody>${rows.map(r=>`<tr class="border-b border-white/5 hover:bg-primary/5">
+      <td class="py-2.5 pr-3 font-mono font-semibold whitespace-nowrap">${r.ticker}${r.new?' <span class="label text-[8px] px-1 rounded bg-cyan/15 text-cyan border border-cyan/40">NEW</span>':''}${r.flag&&r.flag.includes('blow-off')?' <span class="label text-[8px] px-1 rounded bg-bad/15 text-bad border border-bad/40">BLOW-OFF</span>':''}${r.flag&&r.flag.includes('blue-sky')?' <span class="label text-[8px] px-1 rounded bg-cyan/10 text-cyan border border-cyan/30">BLUE-SKY</span>':''}</td>
       <td class="pr-3">${chip(r.signal,SIGNAL_COLOR[r.signal]||'text-muted border-white/10')}</td>
       <td class="pr-3 text-muted text-xs">${r.theme}</td>
       <td class="pr-3">${capChip(r.cap)}</td>
       <td class="pr-3">${chip(r.verdict,VERDICT_COLOR[r.verdict]||'text-muted border-white/10')}</td>
-      <td class="pr-3">${sparkline(r.spark, {res: (r.to_resist!=null&&r.price)?r.price*(1+r.to_resist/100):null, sup: (r.to_support!=null&&r.price)?r.price*(1-r.to_support/100):null})}</td>
+      <td class="pr-3">${sparkCell(r.ticker)}</td>
       <td class="pr-3 font-mono text-xs ${r.streak>=3?'text-cyan':'text-muted'}">${r.streak?r.streak+'d'+(r.streak>=5?' 🔥':''):'–'}</td>
       <td class="pr-3 w-24"><div class="flex items-center gap-2"><span class="font-mono text-xs w-8">${fmt(r.score,1)}</span><div class="bar flex-1"><i style="width:${r.score}%"></i></div></div></td>
       <td class="pr-3 font-mono text-xs ${r.ext>35?'text-warn':'text-muted'}">${r.ext==null?'–':(r.ext>=0?'+':'')+r.ext+'%'}${r.ext>35?' ⚠':''}</td>
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.near_high)}</td>
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.mom)}</td>
       <td class="pr-3 hidden md:table-cell font-mono text-xs text-muted">${fmt(r.eps_rev)}</td>
-      <td class="pr-3 font-mono text-xs ${r.earn_in!==null&&r.earn_in<=14?'text-cyan':'text-muted'}">${r.earn_in===null?'–':r.earn_in+'d'}</td></tr>${S_OPEN===r.ticker?`<tr class="border-b border-white/10 bg-white/[0.02]"><td colspan="13">${bigchart(r)}</td></tr>`:''}`).join('')}</tbody>`;
+      <td class="pr-3 font-mono text-xs ${r.earn_in!==null&&r.earn_in<=14?'text-cyan':'text-muted'}">${r.earn_in===null?'–':r.earn_in+'d'}</td></tr>`).join('')}</tbody>`;
   document.querySelectorAll('#setups thead th[data-k]').forEach(th=>th.addEventListener('click',()=>{
     const k=th.dataset.k; if(S_SORT.k===k) S_SORT.dir*=-1; else {S_SORT.k=k; S_SORT.dir=(k==='ticker'?1:-1);} renderSetups();}));
-  document.querySelectorAll('#setups tbody tr[data-tk]').forEach(tr=>tr.addEventListener('click',()=>{
-    S_OPEN=(S_OPEN===tr.dataset.tk?null:tr.dataset.tk); renderSetups();}));
 }
 
 function renderSidebar(active) {
@@ -361,6 +378,7 @@ async function load(date) {
 }
 
 function render(d) {
+  CHARTS = d.charts || {};
   document.getElementById("subtitle").textContent = `${d.date}  ·  generated ${d.generated} UTC`;
   const rc = REGIME_COLOR[d.regime.verdict] || "muted";
   document.getElementById("regime-tag").innerHTML =
@@ -402,13 +420,14 @@ function render(d) {
   document.getElementById("mkt-count").textContent = mp.length ? `${mp.length} found` : "none today";
   document.getElementById("market").innerHTML = mp.length ? `
     <thead><tr class="label text-[9px] text-muted text-left border-b border-white/10">
-      <th class="py-2 pr-3">Ticker</th><th class="pr-3">Signal</th><th class="pr-3">Cap</th><th class="pr-3">Score</th>
+      <th class="py-2 pr-3">Ticker</th><th class="pr-3">Signal</th><th class="pr-3">Cap</th><th class="pr-3">Trend</th><th class="pr-3">Score</th>
       <th class="pr-3 hidden sm:table-cell">52w</th><th class="pr-3 hidden sm:table-cell">Mom</th>
       <th class="pr-3">Est↑</th><th class="pr-3 hidden sm:table-cell">Sqz</th><th class="pr-3">Earns</th></tr></thead>
     <tbody>${mp.map(r => `<tr class="border-b border-white/5 hover:bg-cyan/5">
       <td class="py-2.5 pr-3 font-mono font-semibold">${r.ticker}</td>
       <td class="pr-3">${chip(r.signal||"BUY", SIGNAL_COLOR["BUY"])}</td>
       <td class="pr-3">${capChip(r.cap)}</td>
+      <td class="pr-3">${sparkCell(r.ticker,84)}</td>
       <td class="pr-3 w-28"><div class="flex items-center gap-2"><span class="font-mono text-xs w-8">${fmt(r.score,1)}</span><div class="bar flex-1"><i style="width:${r.score}%"></i></div></div></td>
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.near_high)}</td>
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.mom)}</td>
@@ -420,16 +439,19 @@ function render(d) {
   document.getElementById("earnings").innerHTML = d.earnings.length ? d.earnings.map(r => `
     <div class="flex items-center justify-between py-2 border-b border-white/5 gap-2">
       <div class="min-w-0"><span class="font-mono font-semibold">${r.ticker}</span> ${chip(r.signal||"",SIGNAL_COLOR[r.signal]||"text-muted border-white/10")} ${chip(r.verdict,VERDICT_COLOR[r.verdict]||"")}</div>
-      <div class="text-right text-xs font-mono whitespace-nowrap">
-        <div><span class="text-cyan">${r.earn_in}d</span> <span class="text-muted">${r.next_earn||""}</span></div>
-        <div class="text-muted">est↑ ${fmt(r.eps_rev)}${r.ext>35?' · <span class="text-warn">stretched ⚠</span>':''}</div>
-      </div></div>`).join("")
+      <div class="flex items-center gap-3 whitespace-nowrap">
+        <span class="hidden sm:inline-block">${sparkCell(r.ticker,72)}</span>
+        <div class="text-right text-xs font-mono">
+          <div><span class="text-cyan">${r.earn_in}d</span> <span class="text-muted">${r.next_earn||""}</span></div>
+          <div class="text-muted">est↑ ${fmt(r.eps_rev)}${r.ext>35?' · <span class="text-warn">stretched ⚠</span>':''}</div>
+        </div></div></div>`).join("")
     : `<div class="text-muted text-sm font-mono">No strong names reporting in window.</div>`;
   document.getElementById("earnings").insertAdjacentHTML("beforeend", `<div class="label text-[9px] text-muted/70 mt-3">est↑ = analyst estimate-revision momentum into the print (higher = better odds of a beat). stretched = extended into earnings (event risk).</div>`);
 
   document.getElementById("coiled").innerHTML = d.coiled.length ? d.coiled.map(r => `
-    <div class="flex items-center justify-between py-2 border-b border-white/5"><div><span class="font-mono font-semibold">${r.ticker}</span> ${chip(r.verdict,VERDICT_COLOR[r.verdict]||"")}</div>
-      <div class="text-right"><span class="font-mono text-sm">sqz ${fmt(r.squeeze)}</span><div class="label text-[9px] text-muted">52w ${fmt(r.near_high)}</div></div></div>`).join("")
+    <div class="flex items-center justify-between py-2 border-b border-white/5 gap-2"><div><span class="font-mono font-semibold">${r.ticker}</span> ${chip(r.verdict,VERDICT_COLOR[r.verdict]||"")}</div>
+      <div class="flex items-center gap-3"><span class="hidden sm:inline-block">${sparkCell(r.ticker,72)}</span>
+      <div class="text-right"><span class="font-mono text-sm">sqz ${fmt(r.squeeze)}</span><div class="label text-[9px] text-muted">52w ${fmt(r.near_high)}</div></div></div></div>`).join("")
     : `<div class="text-muted text-sm font-mono">Nothing coiling — volatility expanding.</div>`;
 
   const SR = {BREAKOUT:0, pivot:1, running:2};
@@ -437,12 +459,13 @@ function render(d) {
   document.getElementById("pivot-count").textContent = pv.length ? `${pv.length} setups` : "none today";
   document.getElementById("pivot").innerHTML = pv.length ? `
     <thead><tr class="label text-[9px] text-muted text-left border-b border-white/10">
-      <th class="py-2 pr-3">Ticker</th><th class="pr-3">Setup</th><th class="pr-3">Verdict</th><th class="pr-3">Score</th>
+      <th class="py-2 pr-3">Ticker</th><th class="pr-3">Setup</th><th class="pr-3">Verdict</th><th class="pr-3">Trend</th><th class="pr-3">Score</th>
       <th class="pr-3 hidden sm:table-cell">&rarr;Resist</th><th class="pr-3 hidden sm:table-cell">&rarr;Support</th><th class="pr-3">Earns</th></tr></thead>
     <tbody>${pv.map(r => `<tr class="border-b border-white/5 hover:bg-primary/5">
       <td class="py-2.5 pr-3 font-mono font-semibold">${r.ticker}</td>
       <td class="pr-3">${chip(r.setup, SETUP_COLOR[r.setup]||"text-muted border-white/10")}</td>
       <td class="pr-3">${chip(r.verdict, VERDICT_COLOR[r.verdict]||"text-muted border-white/10")}</td>
+      <td class="pr-3">${sparkCell(r.ticker,84)}</td>
       <td class="pr-3 font-mono text-xs">${fmt(r.score,1)}</td>
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${r.to_resist==null?'–':(r.to_resist>0?'+':'')+r.to_resist+'%'}</td>
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${r.to_support==null?'–':'+'+r.to_support+'%'}</td>
@@ -463,12 +486,13 @@ function render(d) {
   const ORD = {EXIT:0, TRIM:1, HOLD:2, "NO DATA":3};
   const ex = (d.monitor||[]).slice().sort((a,b)=>(ORD[a.action]??9)-(ORD[b.action]??9) || (a.ticker>b.ticker?1:-1));
   document.getElementById("exits").innerHTML = ex.length ? `
-    <thead><tr class="label text-[9px] text-muted text-left border-b border-white/10"><th class="py-2 pr-3">Ticker</th><th class="pr-3">Verdict</th><th class="pr-3">Action</th>
+    <thead><tr class="label text-[9px] text-muted text-left border-b border-white/10"><th class="py-2 pr-3">Ticker</th><th class="pr-3">Verdict</th><th class="pr-3">Action</th><th class="pr-3">Trend</th>
       <th class="pr-3 hidden sm:table-cell">→Stop</th><th class="pr-3">Signals</th></tr></thead>
     <tbody>${ex.map(r => `<tr class="border-b border-white/5 ${r.action==='EXIT'?'hover:bg-bad/5':r.action==='TRIM'?'hover:bg-warn/5':'hover:bg-white/5'}">
       <td class="py-2.5 pr-3 font-mono font-semibold">${r.ticker}</td>
       <td class="pr-3">${chip(r.verdict, VERDICT_COLOR[r.verdict]||"text-muted border-white/10")}</td>
       <td class="pr-3">${chip(r.action,ACTION_COLOR[r.action]||"")}</td>
+      <td class="pr-3">${sparkCell(r.ticker,84)}</td>
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${r.to_stop_pct===null||r.to_stop_pct===undefined?'–':fmt(r.to_stop_pct,1)+'%'}</td>
       <td class="pr-3 text-xs text-muted">${r.signals}</td></tr>`).join("")}</tbody>`
     : `<div class="text-muted text-sm font-mono">No holdings configured.</div>`;
@@ -492,6 +516,7 @@ function render(d) {
         <span class="dot" style="background:${SCOL[c]};box-shadow:0 0 8px ${SCOL[c]}"></span></div>
       <div class="label text-[8px] text-muted mb-1">${r.name||""}</div>
       <div class="text-xs text-${c} mb-1">${s}</div>
+      <div class="my-1">${sparkCell(r.ticker,140)}</div>
       <div class="font-mono text-[10px] text-muted">1M <span class="${r.ret_1m>=0?'text-good':'text-bad'}">${r.ret_1m==null?'–':(r.ret_1m>=0?'+':'')+r.ret_1m+'%'}</span> · 1Y <span class="${r.ret_1y>=0?'text-good':'text-bad'}">${r.ret_1y==null?'–':(r.ret_1y>=0?'+':'')+r.ret_1y+'%'}</span></div></div>`;
   }).join("") : `<div class="text-muted text-sm font-mono">ETF data unavailable.</div>`;
 
@@ -501,7 +526,13 @@ function render(d) {
       <span class="label text-[9px] text-muted">${g.name}</span></div><div class="font-mono text-sm">${g.reading}</div></div>`).join("");
 
   document.getElementById("health").textContent = d.health || "";
+  document.getElementById("calib").textContent = d.calib || "";
 }
+
+// one delegated handler: click any sparkline anywhere -> open the chart modal
+document.addEventListener('click', e => { const t = e.target.closest('[data-chart]'); if (t) openChart(t.dataset.chart); });
+document.getElementById('chartmodal').addEventListener('click', closeChart);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeChart(); });
 
 renderSidebar(DATA.date);
 render(DATA);

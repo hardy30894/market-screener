@@ -35,6 +35,50 @@ FULL_COLS = ["ticker", "signal", "theme", "cap", "verdict", "deal", "flag", "set
 CLEAN_COLS = ["ticker", "signal", "theme", "cap", "verdict", "setup", "score", "ext", "near_high", "mom", "eps_rev", "earn_in"]
 
 
+def _chart_from_bundle(src, tk: str) -> dict | None:
+    """Sparkline + 50/200d MA + support/resistance for ANY ticker, from the
+    cached bundle. One source of chart data for every table (same S/R windows
+    the screener uses: 3mo prior high, 20d swing low)."""
+    try:
+        b = src.bundle(tk)
+        if not b:
+            return None
+        h = b["hist"]
+        cl = h["Close"]
+        if len(cl) < 2:
+            return None
+        tail = cl.tail(66)
+        step = max(1, len(tail) // 44)
+        spark = [round(float(x), 2) for x in tail.iloc[::step]]
+        m50 = cl.rolling(50).mean().tail(66)
+        m200 = cl.rolling(200).mean().tail(66)
+        ma50 = [None if x != x else round(float(x), 2) for x in m50.iloc[::step]]
+        ma200 = [None if x != x else round(float(x), 2) for x in m200.iloc[::step]]
+        res = sup = None
+        if len(h) > 60 and "High" in h and "Low" in h:
+            res = round(float(h["High"].iloc[-60:-1].max()), 2)
+            sup = round(float(h["Low"].tail(20).min()), 2)
+        return {"spark": spark, "ma50": ma50, "ma200": ma200,
+                "px": round(float(cl.iloc[-1]), 2), "res": res, "sup": sup}
+    except Exception:
+        return None
+
+
+def _calib_note() -> str:
+    """One-line provenance of the scoring weights for the dashboard footer."""
+    p = HERE / "weights.json"
+    if not p.exists():
+        return ""
+    try:
+        c = json.loads(p.read_text())
+        kept = [k for k in ("mom", "trend", "rel_strength", "near_high", "vol_squeeze") if k in c.get("weights", {})]
+        return (f"Weights calibrated {c.get('generated','?')} (walk-forward OOS, {c.get('horizon_days','?')}d): "
+                f"scored technical factors = {', '.join(kept) or 'none'}; DSR {c.get('dsr','?')} "
+                f"({c.get('edge_verdict','?')}). Fundamentals are a fixed untested overlay.")
+    except Exception:
+        return ""
+
+
 def fenced(df: pd.DataFrame, cols: list) -> str:
     cols = [c for c in cols if c in df.columns]
     return "```\n" + df[cols].to_string(index=False) + "\n```"
@@ -344,6 +388,20 @@ def main() -> None:
                              "st_mom": num(r.get("st_mom")), "setup": r.get("setup", ""),
                              "ret_1m": r1m, "ret_1y": r1y})
 
+    # one chart-data map for every table (sparkline + MA + S/R), keyed by ticker
+    chart_tks = set()
+    chart_tks |= {r["ticker"] for r in screen if r.get("verdict") in GOOD or r.get("setup") or r.get("targets")}
+    for rows in (earn_rows, coiled_rows, mkt_rows, etf_rows, mon_rows):
+        chart_tks |= {r["ticker"] for r in rows}
+    charts = {}
+    for tk in chart_tks:
+        cd = _chart_from_bundle(src, tk)
+        if cd:
+            charts[tk] = cd
+    for r in screen:                       # spark now lives in charts{}, not per-row
+        for k in ("spark", "spark_ma50", "spark_ma200"):
+            r.pop(k, None)
+
     data = {
         "date": date,
         "generated": f"{datetime.now(timezone.utc):%Y-%m-%d %H:%M}",
@@ -353,6 +411,8 @@ def main() -> None:
         "screen": screen, "earnings": earn_rows, "coiled": coiled_rows, "monitor": mon_rows,
         "market_primed": mkt_rows, "trackrec": trackrec, "etfs": etf_rows,
         "health": (health_warn or screen_err or "").strip(),
+        "calib": _calib_note(),
+        "charts": charts,
     }
     tmpl = HERE / "dashboard_template.html"
     if tmpl.exists():

@@ -96,6 +96,18 @@ WEIGHTS = {
     "trend": 12, "near_high": 11, "mom": 11, "rel_strength": 5,        # technical (validated, weak edge)
     "vol_squeeze": 4, "vol_dryup": 3,
 }
+# If calibrate.py has fitted weights (gated, walk-forward OOS), use those for the
+# technical block instead of the hand-set defaults above. Falls back silently.
+_WJSON = __import__("pathlib").Path(__file__).with_name("weights.json")
+if _WJSON.exists():
+    try:
+        _cal = __import__("json").loads(_WJSON.read_text())
+        if isinstance(_cal.get("weights"), dict) and _cal["weights"]:
+            WEIGHTS = {k: float(v) for k, v in _cal["weights"].items() if v}
+            WEIGHTS_META = {"generated": _cal.get("generated"), "dsr": _cal.get("dsr"),
+                            "verdict": _cal.get("edge_verdict")}
+    except Exception:
+        pass
 
 
 def pct_rank(series: pd.Series, value: float) -> float:

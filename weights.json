@@ -1,0 +1,68 @@
+{
+  "generated": "2026-06-01",
+  "method": "walk-forward OOS rank-IC, horizon 63d, effect-size gate IC_IR>=0.1 (drops wrong-signed/no-info factors; keeps weak-positive), weights prop. IC_IR; fundamentals fixed untested overlay. t-stats/DSR recorded \u2014 weak tilt, not proven alpha",
+  "horizon_days": 63,
+  "start": "2015-01-01",
+  "min_t": 0.0,
+  "dsr": 0.329,
+  "edge_verdict": "weak/unproven (price factors ~beta)",
+  "oos_stats": {
+    "mom": {
+      "mean_IC": 0.0205,
+      "t_stat": 0.72,
+      "IC_IR": 0.23,
+      "n": 41,
+      "kept": true,
+      "scored": true
+    },
+    "near_high": {
+      "mean_IC": 0.0034,
+      "t_stat": 0.12,
+      "IC_IR": 0.04,
+      "n": 41,
+      "kept": false,
+      "scored": true
+    },
+    "trend": {
+      "mean_IC": 0.0202,
+      "t_stat": 0.65,
+      "IC_IR": 0.2,
+      "n": 41,
+      "kept": true,
+      "scored": true
+    },
+    "vol_squeeze": {
+      "mean_IC": -0.0112,
+      "t_stat": -0.41,
+      "IC_IR": -0.13,
+      "n": 41,
+      "kept": false,
+      "scored": true
+    },
+    "lowvol": {
+      "mean_IC": -0.0253,
+      "t_stat": -0.75,
+      "IC_IR": -0.23,
+      "n": 41,
+      "kept": false,
+      "scored": false
+    },
+    "rel_strength": {
+      "mean_IC": 0.0153,
+      "t_stat": 0.52,
+      "IC_IR": 0.16,
+      "n": 41,
+      "kept": true,
+      "scored": true
+    }
+  },
+  "weights": {
+    "eps_rev": 18,
+    "rev_accel": 10,
+    "margin_exp": 6,
+    "surprise": 6,
+    "mom": 18,
+    "trend": 16,
+    "rel_strength": 12
+  }
+}
