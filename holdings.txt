@@ -29,3 +29,7 @@ ZS
 CRM
 SNOW
 TSLA
+# speculative small-caps (no analyst coverage; momentum/story names)
+MRAM
+AMPX
+ALMU
