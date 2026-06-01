@@ -262,7 +262,45 @@ function sparkline(arr,levels,w=104,h=26){
   return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" class="inline-block align-middle">${lines}<path d="${path}" fill="none" stroke="${col}" stroke-width="1.3" stroke-linejoin="round"/><circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="1.6" fill="${col}"/></svg>`;
 }
 
-let GOOD=[], S_SORT={k:'score',dir:-1}, S_FILTER='';
+function chartLine(arr,w,y,color,width,dash){
+  if(!arr||arr.length<2) return '';
+  const pts=[]; arr.forEach((v,i)=>{ if(v!=null&&isFinite(v)) pts.push([(i/(arr.length-1))*w, y(v)]); });
+  if(pts.length<2) return '';
+  const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  return `<path d="${d}" fill="none" stroke="${color}" stroke-width="${width}" stroke-linejoin="round"${dash?` stroke-dasharray="${dash}"`:''}/>`;
+}
+function bigchart(r){
+  const arr=r.spark; if(!arr||arr.length<2) return '<div class="text-muted text-xs p-4">No chart data.</div>';
+  const W=560,H=160,padR=50,padT=8,padB=6, w=W-padR, h=H-padT-padB;
+  const res=(r.to_resist!=null&&r.price)?r.price*(1+r.to_resist/100):null;
+  const sup=(r.to_support!=null&&r.price)?r.price*(1-r.to_support/100):null;
+  const vals=[].concat(arr, r.spark_ma50||[], r.spark_ma200||[], [res,sup]).filter(v=>v!=null&&isFinite(v));
+  const mn=Math.min(...vals), mx=Math.max(...vals), rng=(mx-mn)||1;
+  const y=v=>padT+h-((v-mn)/rng)*h;
+  const up=arr[arr.length-1]>=arr[0], pc=up?'#5BD89B':'#F2756B';
+  let svg='';
+  if(sup!=null) svg+=`<line x1="0" x2="${w}" y1="${y(sup).toFixed(1)}" y2="${y(sup).toFixed(1)}" stroke="#7DF4FF" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/><text x="${w+5}" y="${(y(sup)+3).toFixed(1)}" fill="#7DF4FF" font-size="10" opacity="0.85">S ${sup.toFixed(sup<10?1:0)}</text>`;
+  if(res!=null) svg+=`<line x1="0" x2="${w}" y1="${y(res).toFixed(1)}" y2="${y(res).toFixed(1)}" stroke="#F2756B" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.5"/><text x="${w+5}" y="${(y(res)+3).toFixed(1)}" fill="#F2756B" font-size="10" opacity="0.85">R ${res.toFixed(res<10?1:0)}</text>`;
+  svg+=chartLine(r.spark_ma200||[],w,y,'#8A8F98',1.2);
+  svg+=chartLine(r.spark_ma50||[],w,y,'#F2C14E',1.2);
+  svg+=chartLine(arr,w,y,pc,1.9);
+  const last=arr[arr.length-1], ly=y(last);
+  svg+=`<circle cx="${w.toFixed(1)}" cy="${ly.toFixed(1)}" r="2.6" fill="${pc}"/><text x="${w+5}" y="${(ly+3).toFixed(1)}" fill="${pc}" font-size="10.5" font-weight="600">${last.toFixed(last<10?2:0)}</text>`;
+  const dot=(c)=>`<span style="width:14px;height:0;border-top:2px solid ${c};display:inline-block"></span>`;
+  const dash=(c)=>`<span style="width:14px;height:0;border-top:2px dashed ${c};display:inline-block"></span>`;
+  const leg=`<div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] text-muted mt-2">
+    <span class="flex items-center gap-1.5">${dot(pc)}price</span>
+    <span class="flex items-center gap-1.5">${dot('#F2C14E')}50-day</span>
+    <span class="flex items-center gap-1.5">${dot('#8A8F98')}200-day</span>
+    <span class="flex items-center gap-1.5">${dash('#7DF4FF')}support</span>
+    <span class="flex items-center gap-1.5">${dash('#F2756B')}resistance</span>
+    <span class="ml-auto text-muted/70">~3-month daily</span></div>`;
+  const sub=`50-day ${r.spark_ma50&&r.spark_ma50.slice(-1)[0]!=null?(last>=r.spark_ma50.slice(-1)[0]?'above':'below'):'–'} · 200-day ${r.spark_ma200&&r.spark_ma200.slice(-1)[0]!=null?(last>=r.spark_ma200.slice(-1)[0]?'above':'below'):'n/a (short history)'}`;
+  return `<div class="p-4"><div class="flex items-baseline gap-3 mb-1"><span class="font-mono font-semibold text-sm">${r.ticker}</span><span class="text-muted text-[11px]">${sub}</span></div>
+    <svg width="100%" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" class="block" style="max-width:640px">${svg}</svg>${leg}</div>`;
+}
+
+let GOOD=[], S_SORT={k:'score',dir:-1}, S_FILTER='', S_OPEN=null;
 function renderSetups(){
   let rows=GOOD.filter(r=>!S_FILTER||r.ticker.toLowerCase().includes(S_FILTER));
   rows=rows.slice().sort((a,b)=>{const k=S_SORT.k;let av=a[k],bv=b[k];
@@ -275,8 +313,8 @@ function renderSetups(){
       ${h('ticker','Ticker')}<th class="pr-3">Signal</th><th class="pr-3">Sector</th><th class="pr-3">Cap</th><th class="pr-3">Verdict</th>
       <th class="pr-3">Trend</th>${h('streak','Streak')}${h('score','Score')}${h('ext','Ext')}
       ${h('near_high','52w','hidden sm:table-cell')}${h('mom','Mom','hidden sm:table-cell')}${h('eps_rev','Est↑','hidden md:table-cell')}${h('earn_in','Earns')}</tr></thead>
-    <tbody>${rows.map(r=>`<tr class="border-b border-white/5 hover:bg-primary/5">
-      <td class="py-2.5 pr-3 font-mono font-semibold whitespace-nowrap">${r.ticker}${r.new?' <span class="label text-[8px] px-1 rounded bg-cyan/15 text-cyan border border-cyan/40">NEW</span>':''}${r.flag&&r.flag.includes('blow-off')?' <span class="label text-[8px] px-1 rounded bg-bad/15 text-bad border border-bad/40">BLOW-OFF</span>':''}${r.flag&&r.flag.includes('blue-sky')?' <span class="label text-[8px] px-1 rounded bg-cyan/10 text-cyan border border-cyan/30">BLUE-SKY</span>':''}</td>
+    <tbody>${rows.map(r=>`<tr data-tk="${r.ticker}" class="border-b border-white/5 hover:bg-primary/5 cursor-pointer ${S_OPEN===r.ticker?'bg-primary/5':''}" title="click for chart">
+      <td class="py-2.5 pr-3 font-mono font-semibold whitespace-nowrap"><span class="inline-block text-muted text-[9px] mr-1 transition-transform ${S_OPEN===r.ticker?'rotate-90':''}">▶</span>${r.ticker}${r.new?' <span class="label text-[8px] px-1 rounded bg-cyan/15 text-cyan border border-cyan/40">NEW</span>':''}${r.flag&&r.flag.includes('blow-off')?' <span class="label text-[8px] px-1 rounded bg-bad/15 text-bad border border-bad/40">BLOW-OFF</span>':''}${r.flag&&r.flag.includes('blue-sky')?' <span class="label text-[8px] px-1 rounded bg-cyan/10 text-cyan border border-cyan/30">BLUE-SKY</span>':''}</td>
       <td class="pr-3">${chip(r.signal,SIGNAL_COLOR[r.signal]||'text-muted border-white/10')}</td>
       <td class="pr-3 text-muted text-xs">${r.theme}</td>
       <td class="pr-3">${capChip(r.cap)}</td>
@@ -288,9 +326,11 @@ function renderSetups(){
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.near_high)}</td>
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.mom)}</td>
       <td class="pr-3 hidden md:table-cell font-mono text-xs text-muted">${fmt(r.eps_rev)}</td>
-      <td class="pr-3 font-mono text-xs ${r.earn_in!==null&&r.earn_in<=14?'text-cyan':'text-muted'}">${r.earn_in===null?'–':r.earn_in+'d'}</td></tr>`).join('')}</tbody>`;
+      <td class="pr-3 font-mono text-xs ${r.earn_in!==null&&r.earn_in<=14?'text-cyan':'text-muted'}">${r.earn_in===null?'–':r.earn_in+'d'}</td></tr>${S_OPEN===r.ticker?`<tr class="border-b border-white/10 bg-white/[0.02]"><td colspan="13">${bigchart(r)}</td></tr>`:''}`).join('')}</tbody>`;
   document.querySelectorAll('#setups thead th[data-k]').forEach(th=>th.addEventListener('click',()=>{
     const k=th.dataset.k; if(S_SORT.k===k) S_SORT.dir*=-1; else {S_SORT.k=k; S_SORT.dir=(k==='ticker'?1:-1);} renderSetups();}));
+  document.querySelectorAll('#setups tbody tr[data-tk]').forEach(tr=>tr.addEventListener('click',()=>{
+    S_OPEN=(S_OPEN===tr.dataset.tk?null:tr.dataset.tk); renderSetups();}));
 }
 
 function renderSidebar(active) {

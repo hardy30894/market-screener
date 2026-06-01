@@ -394,6 +394,10 @@ def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int =
     cl = hist["Close"].tail(66)               # ~3mo sparkline series, downsampled to ~44 pts
     _step = max(1, len(cl) // 44)
     spark = [round(float(x), 2) for x in cl.iloc[::_step]]
+    _m50 = hist["Close"].rolling(50).mean().tail(66)
+    _m200 = hist["Close"].rolling(200).mean().tail(66)
+    spark_ma50 = [None if x != x else round(float(x), 2) for x in _m50.iloc[::_step]]
+    spark_ma200 = [None if x != x else round(float(x), 2) for x in _m200.iloc[::_step]]
     sig_action = buy_signal(vd, stp)
     ext = sig.get("ext50", 0.0)               # extension above 50d
     _flag = extreme_flag(sig)
@@ -411,6 +415,7 @@ def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int =
         "ticker": sym, "theme": theme[:14], "cap": cap_band(mcap), "verdict": vd,
         "signal": sig_action, "setup": stp, "deal": deal, "flag": _flag,
         "targets": blue_sky_targets(sig, px, _flag), "spark": spark,
+        "spark_ma50": spark_ma50, "spark_ma200": spark_ma200,
         "ext": round(ext * 100, 1),
         "to_resist": round(sig["dist_resist"] * 100, 1) if "dist_resist" in sig else None,
         "to_support": round(sig["dist_support"] * 100, 1) if "dist_support" in sig else None,
