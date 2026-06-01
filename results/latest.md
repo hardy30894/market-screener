@@ -40,7 +40,12 @@ ticker signal     theme cap  verdict    setup  score  near_high  mom  eps_rev ea
 ```
 
 ## 📅 Earnings watch
-_No strong names reporting in the window._
+```
+ticker     theme verdict  score earn_in  next_earn  eps_rev
+  CIEN photonics  primed   83.2      2d 2026-06-04     1.00
+   HPE photonics  primed   80.5      0d 2026-06-01     0.67
+  AVGO     semis  primed   80.5      2d 2026-06-03     0.71
+```
 
 ## 🎯 Coiled watch (volatility squeeze; PRIMED\* = bullseye)
 ```

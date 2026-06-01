@@ -128,6 +128,7 @@ def technical_signals(hist: pd.DataFrame, bench: pd.Series) -> dict:
         out["mom"] = float(np.clip(0.5 + m, 0, 1))
 
     ma50, ma200 = c.rolling(50).mean().iloc[-1], c.rolling(200).mean().iloc[-1]
+    out["ext50"] = float(px / ma50 - 1) if ma50 else 0.0   # extension above 50d = how stretched
     if px > ma50 and ma50 > ma200:
         out["trend"] = 1.0          # confirmed uptrend
     elif px > ma200:
@@ -350,6 +351,11 @@ def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int =
     vd = verdict(sig)
     stp = pivot_state(sig)
     sig_action = buy_signal(vd, stp)
+    ext = sig.get("ext50", 0.0)               # extension above 50d
+    ein = ei.get("days_to_earn")
+    # only the genuinely dangerous combo gets downgraded: very stretched INTO imminent earnings
+    if sig_action == "BUY" and ext > 0.35 and ein is not None and 0 <= ein <= 5:
+        sig_action = "WATCH"
     deal = ""
     if sym in MERGER_TARGETS:                 # M&A target: override the false-positive setup
         m = MERGER_TARGETS[sym]
@@ -359,6 +365,7 @@ def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int =
     return {
         "ticker": sym, "theme": theme[:14], "cap": cap_band(mcap), "verdict": vd,
         "signal": sig_action, "setup": stp, "deal": deal,
+        "ext": round(ext * 100, 1),
         "to_resist": round(sig["dist_resist"] * 100, 1) if "dist_resist" in sig else None,
         "to_support": round(sig["dist_support"] * 100, 1) if "dist_support" in sig else None,
         "score": score, "cov": round(avail / sum(WEIGHTS.values()), 2),
