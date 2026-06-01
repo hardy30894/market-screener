@@ -306,7 +306,9 @@ def main() -> None:
     if not df.empty:
         es2 = df[(df["earn_in"].notna()) & (df["earn_in"] >= 0)
                  & (df["earn_in"] <= EARN_WINDOW) & (df["score"] >= EARN_WATCH_SCORE)].sort_values("score", ascending=False)
-        earn_rows = [{"ticker": r.ticker, "verdict": r.verdict, "earn_in": int(r.earn_in),
+        earn_rows = [{"ticker": r.ticker, "verdict": r.verdict, "signal": getattr(r, "signal", ""),
+                      "eps_rev": num(getattr(r, "eps_rev", None)), "ext": num(getattr(r, "ext", None)),
+                      "earn_in": int(r.earn_in),
                       "next_earn": r.next_earn if isinstance(r.next_earn, str) else None} for r in es2.itertuples()]
         cw2 = df[df["squeeze"].notna() & (df["squeeze"] >= 0.5)].sort_values("squeeze", ascending=False)
         coiled_rows = [{"ticker": r.ticker, "verdict": r.verdict, "squeeze": num(r.squeeze),

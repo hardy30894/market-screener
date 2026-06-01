@@ -73,8 +73,9 @@ tailwind.config = { theme: { extend: {
           <span class="material-symbols-outlined text-primary text-lg">target</span>
           <h2 class="label text-xs text-ink/80">Top Setups</h2>
           <span id="setups-count" class="label text-[10px] text-muted ml-auto"></span>
+          <input id="setups-search" placeholder="filter…" class="ml-2 bg-lowest/60 border border-white/10 rounded px-2 py-1 text-xs font-mono text-ink w-24 focus:outline-none focus:border-primary/50"/>
         </div>
-        <div class="overflow-x-auto max-h-[32rem] overflow-y-auto"><table id="setups" class="w-full text-sm"></table></div>
+        <div class="overflow-x-auto max-h-[36rem] overflow-y-auto"><table id="setups" class="w-full text-sm"></table></div>
       </section>
 
       <section class="glass glow rounded-md p-5 mb-6">
@@ -239,6 +240,46 @@ const chip = (t,c) => `<span class="label text-[9px] px-2 py-0.5 rounded border 
 const capChip = (c) => chip(c||"?", (CAP_COLOR[c]||"text-muted border-white/10")+" bg-white/5");
 const fmt = (v,d=2) => (v===null||v===undefined||v==="")?"–":(typeof v==="number"?v.toFixed(d):v);
 
+function sparkline(arr,w=82,h=22){
+  if(!arr||arr.length<2) return '<span class="text-muted">–</span>';
+  const mn=Math.min(...arr), mx=Math.max(...arr), rng=(mx-mn)||1;
+  const pts=arr.map((v,i)=>[(i/(arr.length-1))*w, h-2-((v-mn)/rng)*(h-4)]);
+  const path=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const up=arr[arr.length-1]>=arr[0], col=up?'#5BD89B':'#F2756B';
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" class="inline-block align-middle"><path d="${path}" fill="none" stroke="${col}" stroke-width="1.3" stroke-linejoin="round"/></svg>`;
+}
+
+let GOOD=[], S_SORT={k:'score',dir:-1}, S_FILTER='';
+function renderSetups(){
+  let rows=GOOD.filter(r=>!S_FILTER||r.ticker.toLowerCase().includes(S_FILTER));
+  rows=rows.slice().sort((a,b)=>{const k=S_SORT.k;let av=a[k],bv=b[k];
+    if(k==='ticker') return S_SORT.dir*((av>bv?1:0)-(av<bv?1:0));
+    av=(av==null?-1e9:av); bv=(bv==null?-1e9:bv); return S_SORT.dir*(av-bv);}).slice(0,40);
+  document.getElementById('setups-count').textContent=`${rows.length} of ${GOOD.length} setups`;
+  const h=(k,l,cls='')=>`<th class="pr-3 cursor-pointer select-none ${cls}" data-k="${k}">${l}${S_SORT.k===k?(S_SORT.dir<0?' ▾':' ▴'):''}</th>`;
+  document.getElementById('setups').innerHTML=`
+    <thead><tr class="label text-[9px] text-muted text-left border-b border-white/10">
+      ${h('ticker','Ticker')}<th class="pr-3">Signal</th><th class="pr-3">Sector</th><th class="pr-3">Cap</th><th class="pr-3">Verdict</th>
+      <th class="pr-3">Trend</th>${h('streak','Streak')}${h('score','Score')}${h('ext','Ext')}
+      ${h('near_high','52w','hidden sm:table-cell')}${h('mom','Mom','hidden sm:table-cell')}${h('eps_rev','Est↑','hidden md:table-cell')}${h('earn_in','Earns')}</tr></thead>
+    <tbody>${rows.map(r=>`<tr class="border-b border-white/5 hover:bg-primary/5">
+      <td class="py-2.5 pr-3 font-mono font-semibold whitespace-nowrap">${r.ticker}${r.new?' <span class="label text-[8px] px-1 rounded bg-cyan/15 text-cyan border border-cyan/40">NEW</span>':''}${r.flag&&r.flag.includes('blow-off')?' <span class="label text-[8px] px-1 rounded bg-bad/15 text-bad border border-bad/40">BLOW-OFF</span>':''}${r.flag&&r.flag.includes('blue-sky')?' <span class="label text-[8px] px-1 rounded bg-cyan/10 text-cyan border border-cyan/30">BLUE-SKY</span>':''}</td>
+      <td class="pr-3">${chip(r.signal,SIGNAL_COLOR[r.signal]||'text-muted border-white/10')}</td>
+      <td class="pr-3 text-muted text-xs">${r.theme}</td>
+      <td class="pr-3">${capChip(r.cap)}</td>
+      <td class="pr-3">${chip(r.verdict,VERDICT_COLOR[r.verdict]||'text-muted border-white/10')}</td>
+      <td class="pr-3">${sparkline(r.spark)}</td>
+      <td class="pr-3 font-mono text-xs ${r.streak>=3?'text-cyan':'text-muted'}">${r.streak?r.streak+'d'+(r.streak>=5?' 🔥':''):'–'}</td>
+      <td class="pr-3 w-24"><div class="flex items-center gap-2"><span class="font-mono text-xs w-8">${fmt(r.score,1)}</span><div class="bar flex-1"><i style="width:${r.score}%"></i></div></div></td>
+      <td class="pr-3 font-mono text-xs ${r.ext>35?'text-warn':'text-muted'}">${r.ext==null?'–':(r.ext>=0?'+':'')+r.ext+'%'}${r.ext>35?' ⚠':''}</td>
+      <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.near_high)}</td>
+      <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.mom)}</td>
+      <td class="pr-3 hidden md:table-cell font-mono text-xs text-muted">${fmt(r.eps_rev)}</td>
+      <td class="pr-3 font-mono text-xs ${r.earn_in!==null&&r.earn_in<=14?'text-cyan':'text-muted'}">${r.earn_in===null?'–':r.earn_in+'d'}</td></tr>`).join('')}</tbody>`;
+  document.querySelectorAll('#setups thead th[data-k]').forEach(th=>th.addEventListener('click',()=>{
+    const k=th.dataset.k; if(S_SORT.k===k) S_SORT.dir*=-1; else {S_SORT.k=k; S_SORT.dir=(k==='ticker'?1:-1);} renderSetups();}));
+}
+
 function renderSidebar(active) {
   document.getElementById("datelist").innerHTML = INDEX.map(dt => `
     <button data-date="${dt}" class="navitem w-full text-left px-3 py-2 rounded border border-transparent
@@ -284,27 +325,10 @@ function render(d) {
       <div class="flex items-center justify-between mb-2"><span class="label text-[9px] text-muted">${k}</span><span class="material-symbols-outlined text-${c} text-base">${ic}</span></div>
       <div class="font-tech font-bold text-5xl tracking-tighter text-${c}">${v}</div></div>`).join("");
 
-  const rows = good.slice(0,40);
-  document.getElementById("setups-count").textContent = `${rows.length} of ${good.length} setups · ${d.screen.length} scored`;
-  document.getElementById("setups").innerHTML = `
-    <thead><tr class="label text-[9px] text-muted text-left border-b border-white/10">
-      <th class="py-2 pr-3">Ticker</th><th class="pr-3">Signal</th><th class="pr-3">Sector</th><th class="pr-3">Cap</th><th class="pr-3">Verdict</th>
-      <th class="pr-3">Streak</th><th class="pr-3">Score</th><th class="pr-3" title="% above 50-day = how stretched">Ext</th>
-      <th class="pr-3 hidden sm:table-cell">52w</th><th class="pr-3 hidden sm:table-cell">Mom</th>
-      <th class="pr-3 hidden md:table-cell">Est↑</th><th class="pr-3">Earns</th></tr></thead>
-    <tbody>${rows.map(r => `<tr class="border-b border-white/5 hover:bg-primary/5">
-      <td class="py-2.5 pr-3 font-mono font-semibold whitespace-nowrap">${r.ticker}${r.new?' <span class="label text-[8px] px-1 rounded bg-cyan/15 text-cyan border border-cyan/40">NEW</span>':''}${r.flag&&r.flag.includes('blow-off')?' <span class="label text-[8px] px-1 rounded bg-bad/15 text-bad border border-bad/40">BLOW-OFF</span>':''}${r.flag&&r.flag.includes('blue-sky')?' <span class="label text-[8px] px-1 rounded bg-cyan/10 text-cyan border border-cyan/30">BLUE-SKY</span>':''}</td>
-      <td class="pr-3">${chip(r.signal, SIGNAL_COLOR[r.signal]||"text-muted border-white/10")}</td>
-      <td class="pr-3 text-muted text-xs">${r.theme}</td>
-      <td class="pr-3">${capChip(r.cap)}</td>
-      <td class="pr-3">${chip(r.verdict, VERDICT_COLOR[r.verdict]||"text-muted border-white/10")}</td>
-      <td class="pr-3 font-mono text-xs ${r.streak>=3?'text-cyan':'text-muted'}">${r.streak?r.streak+'d'+(r.streak>=5?' 🔥':''):'–'}</td>
-      <td class="pr-3 w-28"><div class="flex items-center gap-2"><span class="font-mono text-xs w-8">${fmt(r.score,1)}</span><div class="bar flex-1"><i style="width:${r.score}%"></i></div></div></td>
-      <td class="pr-3 font-mono text-xs ${r.ext>35?'text-warn':'text-muted'}" title="${r.ext>35?'very stretched above 50d — pullback risk':'extension above 50d'}">${r.ext==null?'–':(r.ext>=0?'+':'')+r.ext+'%'}${r.ext>35?' ⚠':''}</td>
-      <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.near_high)}</td>
-      <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.mom)}</td>
-      <td class="pr-3 hidden md:table-cell font-mono text-xs text-muted">${fmt(r.eps_rev)}</td>
-      <td class="pr-3 font-mono text-xs ${r.earn_in!==null&&r.earn_in<=14?'text-cyan':'text-muted'}">${r.earn_in===null?'–':r.earn_in+'d'}</td></tr>`).join("")}</tbody>`;
+  GOOD = good;
+  renderSetups();
+  const si=document.getElementById('setups-search');
+  if(si && !si._wired){ si._wired=true; si.addEventListener('input',e=>{S_FILTER=e.target.value.trim().toLowerCase(); renderSetups();}); }
 
   const tr = d.trackrec;
   const trw = document.getElementById("trackrec-wrap");
@@ -341,9 +365,14 @@ function render(d) {
     : `<tbody><tr><td class="text-muted text-sm font-mono py-3">No coiled-near-high setups across the market today.</td></tr></tbody>`;
 
   document.getElementById("earnings").innerHTML = d.earnings.length ? d.earnings.map(r => `
-    <div class="flex items-center justify-between py-2 border-b border-white/5"><div><span class="font-mono font-semibold">${r.ticker}</span> ${chip(r.verdict,VERDICT_COLOR[r.verdict]||"")}</div>
-      <div class="text-right"><span class="font-mono text-cyan text-sm">${r.earn_in}d</span><div class="label text-[9px] text-muted">${r.next_earn||""}</div></div></div>`).join("")
+    <div class="flex items-center justify-between py-2 border-b border-white/5 gap-2">
+      <div class="min-w-0"><span class="font-mono font-semibold">${r.ticker}</span> ${chip(r.signal||"",SIGNAL_COLOR[r.signal]||"text-muted border-white/10")} ${chip(r.verdict,VERDICT_COLOR[r.verdict]||"")}</div>
+      <div class="text-right text-xs font-mono whitespace-nowrap">
+        <div><span class="text-cyan">${r.earn_in}d</span> <span class="text-muted">${r.next_earn||""}</span></div>
+        <div class="text-muted">est↑ ${fmt(r.eps_rev)}${r.ext>35?' · <span class="text-warn">stretched ⚠</span>':''}</div>
+      </div></div>`).join("")
     : `<div class="text-muted text-sm font-mono">No strong names reporting in window.</div>`;
+  document.getElementById("earnings").insertAdjacentHTML("beforeend", `<div class="label text-[9px] text-muted/70 mt-3">est↑ = analyst estimate-revision momentum into the print (higher = better odds of a beat). stretched = extended into earnings (event risk).</div>`);
 
   document.getElementById("coiled").innerHTML = d.coiled.length ? d.coiled.map(r => `
     <div class="flex items-center justify-between py-2 border-b border-white/5"><div><span class="font-mono font-semibold">${r.ticker}</span> ${chip(r.verdict,VERDICT_COLOR[r.verdict]||"")}</div>
