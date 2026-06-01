@@ -161,9 +161,9 @@ def technical_signals(hist: pd.DataFrame, bench: pd.Series) -> dict:
     if len(hist) > 60:
         hh, ll = hist["High"], hist["Low"]
         resist = float(hh.iloc[-60:-1].max())          # ~3mo prior high = level to break
-        support = float(ll.iloc[-60:].min())            # ~3mo low = support
+        support = float(ll.tail(20).min())              # recent 20d swing low = actionable stop
         out["dist_resist"] = (resist - px) / px         # raw % to resistance (display)
-        out["dist_support"] = (px - support) / px       # raw % above support (risk)
+        out["dist_support"] = (px - support) / px       # % above the recent swing low (stop ref)
         out["near_resist"] = float(np.clip(1 - max(0.0, (resist - px) / px) / 0.08, 0, 1))
         rng = (float(hh.tail(20).max()) - float(ll.tail(20).min())) / px
         out["base_tight"] = float(np.clip(1 - rng / 0.15, 0, 1))  # tight 20d base -> 1.0
@@ -289,12 +289,16 @@ def pivot_state(sig: dict) -> str:
     bt = sig.get("base_tight", 0)
     bo = sig.get("breakout", 0)
     trend = sig.get("trend", 1)
+    dr = sig.get("dist_resist", 0)
+    above = -dr if dr < 0 else 0.0        # fraction price sits ABOVE resistance
     if trend < 0.4:                       # truly broken trends don't get pivot/breakout tags
         return ""
-    if bo:
-        return "BREAKOUT"                 # above resistance + volume expansion
+    if bo and above <= 0.08:
+        return "BREAKOUT"                 # FRESH break: 0-8% above resistance, on volume = entry
+    if above > 0.08:
+        return "running"                  # already broke out and extended (momentum leader, not fresh)
     if nr >= 0.6 and bt >= 0.5:
-        return "pivot"                    # within ~3% of resistance, tight base
+        return "pivot"                    # within ~3% of resistance, tight base (pre-breakout)
     return ""
 
 
