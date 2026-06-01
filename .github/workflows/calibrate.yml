@@ -1,0 +1,47 @@
+name: Weekly weight calibration
+
+# Sundays 11:00 UTC. Re-fits the screener's technical weights from walk-forward
+# out-of-sample rank-IC and commits weights.json. Separate from the daily report
+# so the scoring weights don't churn day-to-day — they update once a week.
+on:
+  schedule:
+    - cron: "0 11 * * 0"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  calibrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install --quiet yfinance pandas numpy
+
+      - name: Re-fit weights
+        run: python calibrate.py
+
+      - name: Commit weights.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add weights.json || true
+          if git diff --cached --quiet; then
+            echo "Weights unchanged this week."
+          else
+            git commit -m "Weekly weight calibration $(date -u +%Y-%m-%d)"
+            for i in 1 2 3; do
+              git push && break
+              echo "push rejected, rebasing (attempt $i)..."
+              git pull --rebase -X theirs origin main || true
+              sleep 3
+            done
+          fi
