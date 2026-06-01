@@ -372,9 +372,9 @@ function render(d) {
   if (bs.length) {
     bsw.classList.remove("hidden");
     document.getElementById("bluesky").innerHTML = bs.slice(0,12).map(r => `
-      <div class="flex items-center justify-between py-1.5 border-b border-white/5 text-sm">
-        <span class="font-mono font-semibold">${r.ticker}${r.flag&&r.flag.includes('blow-off')?' <span class="label text-[8px] px-1 rounded bg-bad/15 text-bad border border-bad/40">blow-off</span>':''}</span>
-        <span class="font-mono text-xs text-muted text-right">${r.targets}</span></div>`).join("")
+      <div class="flex items-center justify-between py-1.5 border-b border-white/5 text-sm gap-3">
+        <span class="font-mono font-semibold whitespace-nowrap">${r.ticker} <span class="text-cyan text-xs">$${fmt(r.price)}</span>${r.flag&&r.flag.includes('blow-off')?' <span class="label text-[8px] px-1 rounded bg-bad/15 text-bad border border-bad/40">blow-off</span>':''}</span>
+        <span class="font-mono text-xs text-muted text-right">→ ${r.targets}</span></div>`).join("")
       + `<div class="label text-[9px] text-muted/70 mt-3">At new highs there's no resistance from past prices — these are projected upside <em>estimates</em> (measured move + round numbers), not levels that will hold. Manage with a trailing stop, not a target.</div>`;
   } else { bsw.classList.add("hidden"); }
 
