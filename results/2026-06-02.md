@@ -1,5 +1,5 @@
 # Daily Sector Report — 2026-06-02
-_Generated 2026-06-02 22:23 UTC. Regime: **RISK-ON** (+4/6). Not investment advice._
+_Generated 2026-06-02 22:51 UTC. Regime: **RISK-ON** (+4/6). Not investment advice._
 
 ## TL;DR
 - **Top setups:** ALAB, MU, STX, SNDK, WDC

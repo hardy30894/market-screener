@@ -68,6 +68,16 @@ tailwind.config = { theme: { extend: {
         <div id="trackrec" class="font-mono text-sm text-muted"></div>
       </section>
 
+      <section id="news-wrap" class="glass glow rounded-md p-5 mb-6 hidden">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="material-symbols-outlined text-cyan text-base">newspaper</span>
+          <h2 class="label text-xs text-ink/80">Catalyst News</h2>
+          <span id="news-verdict" class="ml-2"></span>
+          <span id="news-date" class="label text-[9px] text-muted ml-auto"></span>
+        </div>
+        <div id="news-body" class="text-sm text-muted leading-relaxed mt-3"></div>
+      </section>
+
       <section class="glass glow rounded-md p-5 mb-6">
         <div class="flex items-center gap-2 mb-4">
           <span class="material-symbols-outlined text-primary text-lg">target</span>
@@ -531,6 +541,35 @@ function render(d) {
   document.getElementById("calib").textContent = d.calib || "";
 }
 
+// ---- Catalyst News (published daily by the cloud routine to news.json) ----
+function mdLite(s){
+  if(!s) return '';
+  const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const inline=t=>esc(t).replace(/\*\*(.+?)\*\*/g,'<strong class="text-ink">$1</strong>')
+    .replace(/\[(.+?)\]\((https?:[^)]+)\)/g,'<a href="$2" target="_blank" class="text-primary hover:underline">$1</a>');
+  const out=[]; let list=false;
+  for(let raw of s.split('\n')){
+    const line=raw.trim();
+    if(!line){ if(list){out.push('</ul>');list=false;} continue; }
+    if(/^#{1,6}\s/.test(line)){ if(list){out.push('</ul>');list=false;} out.push(`<div class="label text-[10px] text-primary/70 mt-4 mb-1">${inline(line.replace(/^#{1,6}\s/,''))}</div>`); }
+    else if(/^[-*]\s/.test(line)){ if(!list){out.push('<ul class="space-y-1 ml-1">');list=true;} out.push(`<li class="flex gap-2"><span class="text-muted/50">·</span><span>${inline(line.replace(/^[-*]\s/,''))}</span></li>`); }
+    else { if(list){out.push('</ul>');list=false;} out.push(`<p class="mb-1">${inline(line)}</p>`); }
+  }
+  if(list) out.push('</ul>');
+  return out.join('');
+}
+function renderNews(n){
+  if(!n||!(n.body_md||n.body)) return;
+  const tone={bull:'text-good border-good/40 bg-good/10',bear:'text-bad border-bad/30 bg-bad/10',mixed:'text-warn border-warn/30 bg-warn/10',quiet:'text-muted border-white/10 bg-white/5'}[n.tone]||'text-cyan border-cyan/40 bg-cyan/10';
+  document.getElementById('news-verdict').innerHTML = n.verdict ? chip(n.verdict, tone) : '';
+  document.getElementById('news-date').textContent = n.date ? `as of ${n.date}` : '';
+  document.getElementById('news-body').innerHTML = mdLite(n.body_md||n.body);
+  document.getElementById('news-wrap').classList.remove('hidden');
+}
+function loadNews(){
+  fetch('news.json?'+Date.now()).then(r=>r.ok?r.json():null).then(n=>{ if(n) renderNews(n); }).catch(()=>{});
+}
+
 // one delegated handler: click any sparkline anywhere -> open the chart modal
 document.addEventListener('click', e => { const t = e.target.closest('[data-chart]'); if (t) openChart(t.dataset.chart); });
 document.getElementById('chartmodal').addEventListener('click', closeChart);
@@ -538,6 +577,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeChart()
 
 renderSidebar(DATA.date);
 render(DATA);
+loadNews();
 </script>
 </body>
 </html>
