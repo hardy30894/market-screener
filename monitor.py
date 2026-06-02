@@ -11,6 +11,10 @@ Exit rules (risk management, not prediction — defensible without a backtest):
   - RS BREAKDOWN: stops outperforming SOX (leaders peel off here first).
   - BELOW TRAILING STOP: close under a chandelier stop (22d high - 3*ATR).
   - POST-EARNINGS DROP: just reported and fell hard.
+  - BLOW-OFF: volume-climax spike far above the 50-day. This does NOT trim — you
+    never cut a runner on strength (that's how a 10x becomes a 2x). It TIGHTENS
+    the trailing stop (2*ATR instead of 3*ATR) so a real top banks you near the
+    high, while the position keeps riding as long as it keeps climbing.
 
 Verdict: EXIT if a severe signal fires (trend fully broken / below stop) or >=3
 signals; TRIM if 1-2; HOLD if clean.
@@ -29,7 +33,7 @@ import numpy as np
 import pandas as pd
 
 from datasource import YFinanceSource, DataError
-from screener import technical_signals, fundamental_signals, verdict
+from screener import technical_signals, fundamental_signals, verdict, extreme_flag
 
 BENCH = "SPY"   # holdings are cross-sector, so benchmark relative strength vs the broad market
 
@@ -41,7 +45,7 @@ def atr(hist: pd.DataFrame, n: int = 22) -> pd.Series:
     return tr.rolling(n).mean()
 
 
-def exit_signals(b: dict, bench: pd.Series) -> tuple[list, dict]:
+def exit_signals(b: dict, bench: pd.Series, blowoff: bool = False) -> tuple[list, dict]:
     hist = b["hist"]
     c = hist["Close"]
     px = float(c.iloc[-1])
@@ -82,7 +86,8 @@ def exit_signals(b: dict, bench: pd.Series) -> tuple[list, dict]:
             sigs.append("lagging market")
 
     a = atr(hist).iloc[-1]
-    stop = float(hist["High"].tail(22).max() - 3 * a) if pd.notna(a) else np.nan
+    mult = 2.0 if blowoff else 3.0   # blow-off -> tighter stop, bank the spike if it tops
+    stop = float(hist["High"].tail(22).max() - mult * a) if pd.notna(a) else np.nan
     if pd.notna(stop) and px < stop:
         sigs.append("below trailing stop")
         if below200:                 # stop breach + broken trend = exit; in an uptrend = trim
@@ -104,7 +109,8 @@ def exit_signals(b: dict, bench: pd.Series) -> tuple[list, dict]:
 
     return sigs, {"px": round(px, 2), "stop": round(stop, 2) if pd.notna(stop) else np.nan,
                   "to_stop_%": round(100 * (px - stop) / px, 1) if pd.notna(stop) else np.nan,
-                  "severe": severe, "recovering": recovering}
+                  "severe": severe, "recovering": recovering,
+                  "note": "blow-off — stop tightened" if blowoff else ""}
 
 
 def action(sigs: list, severe: bool, recovering: bool = False) -> str:
@@ -130,17 +136,21 @@ def monitor_holdings(src, syms, bench=None) -> list[dict]:
         if b is None:
             rows.append({"ticker": s, "verdict": "?", "action": "NO DATA", "signals": "fetch failed"})
             continue
-        sigs, m = exit_signals(b, bench)
         sig = {}
         try:
             sig.update(technical_signals(b["hist"], bench))
             sig.update(fundamental_signals(b))
         except Exception:
             pass
+        blowoff = bool(sig and "blow-off" in extreme_flag(sig))   # volume climax
+        sigs, m = exit_signals(b, bench, blowoff=blowoff)
+        # blow-off is a display caution + a tighter stop, NOT an action trigger:
+        # never trim a runner on strength; let the stop do the selling.
+        disp = list(sigs) + ([m["note"]] if m.get("note") else [])
         rows.append({"ticker": s, "verdict": verdict(sig) if sig else "?",
                      "action": action(sigs, m["severe"], m["recovering"]),
                      "price": m["px"], "stop": m["stop"], "to_stop_%": m["to_stop_%"],
-                     "signals": "; ".join(sigs) if sigs else "clean"})
+                     "signals": "; ".join(disp) if disp else "clean"})
     return rows
 
 
