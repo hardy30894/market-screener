@@ -207,7 +207,8 @@ tailwind.config = { theme: { extend: {
               <div><span class="text-ink">Mom</span> — 12-month momentum, skip last month (&gt;0.5 = positive)</div>
               <div><span class="text-ink">Est↑</span> — forward-EPS revision momentum (1.0 = analysts raising)</div>
               <div><span class="text-ink">sqz</span> — volatility squeeze / coiling (1.0 = tightly contracted)</div>
-              <div><span class="text-ink">Earns / →Stop</span> — days to next earnings / % above trailing stop</div>
+              <div><span class="text-ink">Earns</span> — days to next earnings</div>
+              <div><span class="text-ink">Stop / →Stop</span> — trailing-stop price ($) / % above it. Shown <span class="text-warn">amber</span> when a blow-off tightened the stop (2×ATR).</div>
               <div><span class="text-ink">Ext</span> — % above the 50-day (how stretched). High = pullback risk, NOT a sell in a strong trend. ⚠ &gt;35%.</div>
               <div><span class="text-cyan">BLUE-SKY</span> — at new all-time highs: no resistance above (uncharted, strong but no ceiling reference).</div>
               <div><span class="text-bad">BLOW-OFF</span> — gone vertical on heavy volume (climax). Exhaustion/reversal risk is highest here — do not chase.</div>
@@ -487,12 +488,13 @@ function render(d) {
   const ex = (d.monitor||[]).slice().sort((a,b)=>(ORD[a.action]??9)-(ORD[b.action]??9) || (a.ticker>b.ticker?1:-1));
   document.getElementById("exits").innerHTML = ex.length ? `
     <thead><tr class="label text-[9px] text-muted text-left border-b border-white/10"><th class="py-2 pr-3">Ticker</th><th class="pr-3">Verdict</th><th class="pr-3">Action</th><th class="pr-3">Trend</th>
-      <th class="pr-3 hidden sm:table-cell">→Stop</th><th class="pr-3">Signals</th></tr></thead>
+      <th class="pr-3">Stop</th><th class="pr-3 hidden sm:table-cell">→Stop</th><th class="pr-3">Signals</th></tr></thead>
     <tbody>${ex.map(r => `<tr class="border-b border-white/5 ${r.action==='EXIT'?'hover:bg-bad/5':r.action==='TRIM'?'hover:bg-warn/5':'hover:bg-white/5'}">
       <td class="py-2.5 pr-3 font-mono font-semibold">${r.ticker}</td>
       <td class="pr-3">${chip(r.verdict, VERDICT_COLOR[r.verdict]||"text-muted border-white/10")}</td>
       <td class="pr-3">${chip(r.action,ACTION_COLOR[r.action]||"")}</td>
       <td class="pr-3">${sparkCell(r.ticker,84)}</td>
+      <td class="pr-3 font-mono text-xs ${r.signals&&r.signals.includes('stop tightened')?'text-warn':'text-ink'}">${r.stop===null||r.stop===undefined?'–':'$'+fmt(r.stop)}</td>
       <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${r.to_stop_pct===null||r.to_stop_pct===undefined?'–':fmt(r.to_stop_pct,1)+'%'}</td>
       <td class="pr-3 text-xs text-muted">${r.signals}</td></tr>`).join("")}</tbody>`
     : `<div class="text-muted text-sm font-mono">No holdings configured.</div>`;
