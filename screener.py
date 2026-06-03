@@ -85,6 +85,7 @@ WATCHLIST = {
     "COHR": "photonics", "LITE": "photonics", "CIEN": "optical", "ANET": "networking",
     "CRDO": "connectivity", "ALAB": "connectivity", "VRT": "dc-power-cooling",
     "AEHR": "test", "ONTO": "metrology", "CAMT": "metrology", "SITM": "timing",
+    "HIVE": "crypto/ai-hpc",
 }
 
 # Weights: technical block calibrated to measured 63d rank-IC (see backtest.py)
@@ -380,14 +381,16 @@ def cap_band(mcap: float) -> str:
     return "micro"
 
 
-def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int = 14) -> dict | None:
+def score_ticker(src, sym: str, theme: str, bench: pd.Series, earn_window: int = 14,
+                 force: bool = False) -> dict | None:
     b = src.bundle(sym)  # cached; None if fetch failed (tracked for loud-fail health)
     if b is None:
         return None
     hist, px, mcap = b["hist"], b["price"], b["mcap"]
     dollar_vol = px * float(hist["Volume"].tail(30).mean())
 
-    if px < 5 or dollar_vol < 3_000_000:
+    # penny/illiquid guard is for DISCOVERY; force=True (curated watchlist) bypasses it
+    if not force and (px < 5 or dollar_vol < 3_000_000):
         return None
 
     sig = {}
@@ -469,7 +472,11 @@ def build_universe(src, themes, *, growth=None, cap_min=300e6, vol_min=200_000,
     have = {c["symbol"] for c in core_c + early_c}
     seed_c = [{"symbol": s, "mcap": 0, "theme": "quantum" if s in QUANTUM_SEEDS else "seed"}
               for s in dict.fromkeys(seeds) if s not in have]
-    return core_c + early_c + seed_c
+    have |= {c["symbol"] for c in seed_c}
+    # always force-include curated watchlist names (bypass penny/illiquid filter)
+    watch_c = [{"symbol": s, "mcap": 0, "theme": th, "force": True}
+               for s, th in WATCHLIST.items() if s not in have]
+    return core_c + early_c + seed_c + watch_c
 
 
 def score_universe(src, cands, earn_window=14, min_score=0.0, progress=False) -> pd.DataFrame:
@@ -478,7 +485,7 @@ def score_universe(src, cands, earn_window=14, min_score=0.0, progress=False) ->
     bench = bench_b["hist"]["Close"] if bench_b else None
     rows = []
     for i, c in enumerate(cands, 1):
-        r = score_ticker(src, c["symbol"], c["theme"], bench, earn_window)
+        r = score_ticker(src, c["symbol"], c["theme"], bench, earn_window, force=c.get("force", False))
         if progress:
             print(f"  [{i}/{len(cands)}] {c['symbol']:6} {'ok ' if r else 'skip'}", end="\r")
         if r and r["score"] >= min_score:

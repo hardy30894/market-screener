@@ -20,7 +20,7 @@ from pathlib import Path
 import pandas as pd
 
 from datasource import YFinanceSource, DataError
-from screener import (THEME_INDUSTRIES, build_universe, score_universe, find_market_primed, ETFS)
+from screener import (THEME_INDUSTRIES, build_universe, score_universe, find_market_primed, ETFS, WATCHLIST)
 from monitor import monitor_holdings
 from regime import compute_regime
 
@@ -388,10 +388,18 @@ def main() -> None:
                              "st_mom": num(r.get("st_mom")), "setup": r.get("setup", ""),
                              "ret_1m": r1m, "ret_1y": r1y})
 
+    # curated watchlist (always visible regardless of verdict/setup state)
+    watch_rows = [{"ticker": r["ticker"], "theme": r.get("theme", ""), "verdict": r.get("verdict", "?"),
+                   "signal": r.get("signal", ""), "score": num(r.get("score")), "cap": r.get("cap"),
+                   "ext": num(r.get("ext")), "near_high": num(r.get("near_high")), "mom": num(r.get("mom")),
+                   "earn_in": int(r["earn_in"]) if pd.notna(r.get("earn_in")) else None}
+                  for r in (df.to_dict("records") if not df.empty else []) if r["ticker"] in WATCHLIST]
+    watch_rows.sort(key=lambda r: (r["score"] is None, -(r["score"] or 0)))
+
     # one chart-data map for every table (sparkline + MA + S/R), keyed by ticker
     chart_tks = set()
     chart_tks |= {r["ticker"] for r in screen if r.get("verdict") in GOOD or r.get("setup") or r.get("targets")}
-    for rows in (earn_rows, coiled_rows, mkt_rows, etf_rows, mon_rows):
+    for rows in (earn_rows, coiled_rows, mkt_rows, etf_rows, mon_rows, watch_rows):
         chart_tks |= {r["ticker"] for r in rows}
     charts = {}
     for tk in chart_tks:
@@ -409,7 +417,7 @@ def main() -> None:
                    "n": reg["n"], "gauges": gauges},
         "tldr": {"picks": picks, "stars": stars, "exits": exits, "earnings": earn_soon},
         "screen": screen, "earnings": earn_rows, "coiled": coiled_rows, "monitor": mon_rows,
-        "market_primed": mkt_rows, "trackrec": trackrec, "etfs": etf_rows,
+        "market_primed": mkt_rows, "trackrec": trackrec, "etfs": etf_rows, "watchlist": watch_rows,
         "health": (health_warn or screen_err or "").strip(),
         "calib": _calib_note(),
         "charts": charts,

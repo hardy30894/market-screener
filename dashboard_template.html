@@ -98,6 +98,16 @@ tailwind.config = { theme: { extend: {
         <div class="label text-[9px] text-muted/70 mt-3">Coiled near highs with rising estimates, scanned across the whole US market. A setup, not a buy.</div>
       </section>
 
+      <section class="glass glow rounded-md p-5 mb-6">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="material-symbols-outlined text-primary text-lg">visibility</span>
+          <h2 class="label text-xs text-ink/80">Watchlist · curated names, every state</h2>
+          <span id="watch-count" class="label text-[10px] text-muted ml-auto"></span>
+        </div>
+        <div class="overflow-x-auto"><table id="watchlist" class="w-full text-sm"></table></div>
+        <div class="label text-[9px] text-muted/70 mt-3">The names you track regardless of setup state, ranked by score. Click any Trend chart to expand. A monitor, not a buy list.</div>
+      </section>
+
       <section class="grid md:grid-cols-2 gap-6 mb-6">
         <div class="glass rounded-md p-5">
           <div class="flex items-center gap-2 mb-4"><span class="material-symbols-outlined text-cyan text-lg">calendar_month</span><h2 class="label text-xs text-ink/80">Earnings Watch · ≤14d</h2></div>
@@ -531,6 +541,26 @@ function render(d) {
       <div class="my-1">${sparkCell(r.ticker,140)}</div>
       <div class="font-mono text-[10px] text-muted">1M <span class="${r.ret_1m>=0?'text-good':'text-bad'}">${r.ret_1m==null?'–':(r.ret_1m>=0?'+':'')+r.ret_1m+'%'}</span> · 1Y <span class="${r.ret_1y>=0?'text-good':'text-bad'}">${r.ret_1y==null?'–':(r.ret_1y>=0?'+':'')+r.ret_1y+'%'}</span></div></div>`;
   }).join("") : `<div class="text-muted text-sm font-mono">ETF data unavailable.</div>`;
+
+  const wl = d.watchlist || [];
+  document.getElementById("watch-count").textContent = wl.length ? `${wl.length} names` : "";
+  document.getElementById("watchlist").innerHTML = wl.length ? `
+    <thead><tr class="label text-[9px] text-muted text-left border-b border-white/10">
+      <th class="py-2 pr-3">Ticker</th><th class="pr-3">Theme</th><th class="pr-3">Verdict</th><th class="pr-3">Signal</th>
+      <th class="pr-3">Trend</th><th class="pr-3">Score</th><th class="pr-3">Ext</th>
+      <th class="pr-3 hidden sm:table-cell">52w</th><th class="pr-3 hidden sm:table-cell">Mom</th><th class="pr-3">Earns</th></tr></thead>
+    <tbody>${wl.map(r => `<tr class="border-b border-white/5 hover:bg-primary/5">
+      <td class="py-2.5 pr-3 font-mono font-semibold">${r.ticker}</td>
+      <td class="pr-3 text-muted text-xs">${r.theme||""}</td>
+      <td class="pr-3">${chip(r.verdict, VERDICT_COLOR[r.verdict]||"text-muted border-white/10")}</td>
+      <td class="pr-3">${chip(r.signal||"", SIGNAL_COLOR[r.signal]||"text-muted border-white/10")}</td>
+      <td class="pr-3">${sparkCell(r.ticker,84)}</td>
+      <td class="pr-3 w-24"><div class="flex items-center gap-2"><span class="font-mono text-xs w-8">${fmt(r.score,1)}</span><div class="bar flex-1"><i style="width:${r.score||0}%"></i></div></div></td>
+      <td class="pr-3 font-mono text-xs ${r.ext>35?'text-warn':'text-muted'}">${r.ext==null?'–':(r.ext>=0?'+':'')+r.ext+'%'}${r.ext>35?' ⚠':''}</td>
+      <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.near_high)}</td>
+      <td class="pr-3 hidden sm:table-cell font-mono text-xs text-muted">${fmt(r.mom)}</td>
+      <td class="pr-3 font-mono text-xs ${r.earn_in!==null&&r.earn_in<=14?'text-cyan':'text-muted'}">${r.earn_in===null?'–':r.earn_in+'d'}</td></tr>`).join("")}</tbody>`
+    : `<tbody><tr><td class="text-muted text-sm font-mono py-3">Watchlist data unavailable.</td></tr></tbody>`;
 
   document.getElementById("regime").innerHTML = d.regime.gauges.map(g => `
     <div class="rounded border border-white/5 bg-lowest/40 p-3"><div class="flex items-center gap-2 mb-1">
