@@ -189,6 +189,9 @@ def technical_signals(hist: pd.DataFrame, bench: pd.Series) -> dict:
     return out
 
 
+MIN_EPS_REV = 3   # min analyst revisions for eps_rev to be trusted (kills thin-coverage noise)
+
+
 def fundamental_signals(b: dict) -> dict:
     out = {}
     try:
@@ -219,10 +222,11 @@ def fundamental_signals(b: dict) -> dict:
         row = er.loc["+1y"] if "+1y" in er.index else er.iloc[0]
         up = float(row.get("upLast30days", 0) or 0)
         dn = float(row.get("downLast30days", 0) or 0)
-        if up + dn > 0:
+        # need >=MIN_EPS_REV revisions for the up/dn ratio to be signal not noise; below
+        # that (thin analyst coverage, e.g. microcaps) leave eps_rev UNSET = unknown, so it
+        # is excluded from the score rather than read as a false 0/1 off one analyst.
+        if up + dn >= MIN_EPS_REV:
             out["eps_rev"] = float(np.clip((up - dn) / (up + dn) * 0.5 + 0.5, 0, 1))
-        elif up > 0:
-            out["eps_rev"] = 1.0
     except Exception:
         pass
 

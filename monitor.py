@@ -33,7 +33,7 @@ import numpy as np
 import pandas as pd
 
 from datasource import YFinanceSource, DataError
-from screener import technical_signals, fundamental_signals, verdict, extreme_flag
+from screener import technical_signals, fundamental_signals, verdict, extreme_flag, MIN_EPS_REV
 
 BENCH = "SPY"   # holdings are cross-sector, so benchmark relative strength vs the broad market
 
@@ -75,7 +75,7 @@ def exit_signals(b: dict, bench: pd.Series, blowoff: bool = False) -> tuple[list
         row = er.loc["+1y"] if "+1y" in er.index else er.iloc[0]
         up = float(row.get("upLast30days", 0) or 0)
         dn = float(row.get("downLast30days", 0) or 0)
-        if dn > up:
+        if dn > up and (up + dn) >= MIN_EPS_REV:   # ignore 1-2 analyst noise on thin coverage
             sigs.append("estimates being cut")
     except Exception:
         pass
