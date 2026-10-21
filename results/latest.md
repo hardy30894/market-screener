@@ -1,159 +1,168 @@
-# Daily Sector Report — 2026-10-20
-_Generated 2026-10-20 17:48 UTC. Regime: **NEUTRAL** (+1/6). Not investment advice._
+# Daily Sector Report — 2026-10-21
+_Generated 2026-10-21 17:54 UTC. Regime: **NEUTRAL** (+1/6). Not investment advice._
 
 ## TL;DR
-- **Top setups:** none
-- 🎯 **PRIMED\*** (coiled near highs): none today
-- ⚠ **Exit signals:** MU (TRIM), WDC (EXIT), STX (TRIM), RMBS (EXIT), NVDA (TRIM), AMD (TRIM), AVGO (EXIT), MRVL (TRIM), COHR (EXIT), LITE (TRIM), CIEN (EXIT), ALAB (TRIM), CRDO (EXIT), NOK (EXIT), NOW (TRIM), SNOW (TRIM), TSLA (TRIM), MRAM (EXIT), AMPX (EXIT), ALMU (EXIT)
-- 📅 **Earnings ≤14d (strong names):** ASX (8d), TXN (1d), AMD (14d), APH (7d), INTC (9d), SNDK (9d), ALAB (14d), ANET (14d), MXL (2d), UMC (7d), RAL (14d), STX (7d), AXTI (9d), KN (2d), TER (7d), LRCX (1d), ST (7d), FORM (8d), ICHR (13d), STM (8d)
+- **Top setups:** ADI, NVDA, MSI
+- 🎯 **PRIMED\*** (coiled near highs): MSI
+- ⚠ **Exit signals:** MU (TRIM), WDC (EXIT), STX (TRIM), RMBS (EXIT), NVDA (TRIM), AMD (TRIM), AVGO (EXIT), MRVL (TRIM), COHR (EXIT), LITE (TRIM), CIEN (EXIT), ALAB (TRIM), CRDO (TRIM), NOK (EXIT), NOW (TRIM), TSLA (TRIM), MRAM (EXIT), AMPX (EXIT), ALMU (EXIT)
+- 📅 **Earnings ≤14d (strong names):** ASX (7d), TXN (0d), AMD (13d), COHU (7d), TER (6d), APH (6d), MXL (1d), INTC (8d), RAL (13d), SNDK (8d), GRMN (6d), ALAB (13d), MSI (14d), SIMO (7d), UMC (6d), ANET (13d), STX (6d), ARM (14d), AXTI (8d), ST (6d), KN (1d), FORM (7d), LRCX (0d), COHR (14d), ICHR (12d), TEL (6d), CGNX (14d), SITM (14d), VIAV (14d)
 
 ## Top setups (large-cap)
 ```
-ticker signal         theme   cap  verdict setup  score   ext  near_high  mom  eps_rev earn_in
-   ASX   PASS         semis large    watch         96.8   0.3       0.09 1.00      NaN      8d
-   ADI   PASS         semis large extended         95.5   4.1       0.32 1.00     1.00     34d
-   TXN   PASS         semis  mega extended         95.4   2.3       0.00 1.00     1.00      1d
-   HPE   PASS comms/optical large extended         94.4  -5.1       0.00 1.00     1.00     44d
-  DELL   PASS      hardware  mega extended         92.4  -9.6       0.00 1.00     1.00     38d
-   AMD   PASS         semis  mega extended         91.1   0.2       0.00 1.00     0.88     14d
-  MRVL   PASS         semis  mega extended         90.5  -0.0       0.00 1.00     0.96     42d
-     P   PASS      hardware large extended         89.2   8.4       0.00 0.72     1.00     42d
-  KEYS   PASS comms/optical large    watch         89.2  -2.6       0.09 1.00      NaN     35d
-   TSM   PASS         semis  mega extended         88.6  -1.6       0.19 1.00     1.00     85d
-  LITE   PASS comms/optical large    watch         87.0 -11.2       0.00 1.00      NaN     16d
-   APH   PASS      hardware large extended         86.6  -3.7       0.27 0.81     1.00      7d
+ticker signal         theme   cap         verdict setup  score  ext  near_high  mom  eps_rev earn_in
+   ASX   PASS         semis large           watch         99.3  3.6       0.29 1.00      NaN      7d
+  MRVL   PASS         semis  mega        extended         96.1  0.9       0.00 1.00     0.96     41d
+   TXN   PASS         semis  mega        extended         95.4  6.0       0.15 1.00     1.00      0d
+   ADI  WATCH         semis large early (fundies)         95.2  6.1       0.45 1.00     1.00     33d
+   HPE   PASS comms/optical large        extended         94.4 -1.9       0.00 1.00     1.00     43d
+  DELL   PASS      hardware  mega        extended         92.2 -5.7       0.00 1.00     1.00     37d
+   AMD   PASS         semis  mega        extended         91.2  2.3       0.01 1.00     0.88     13d
+  LITE   PASS comms/optical large           watch         90.2 -8.3       0.00 1.00      NaN     15d
+  KEYS   PASS comms/optical large           watch         88.8 -0.1       0.23 1.00      NaN     34d
+   TSM   PASS         semis  mega        extended         87.9 -1.0       0.23 1.00     1.00     84d
+   TER   PASS     equipment large        extended         87.1 -7.7       0.00 1.00     0.94      6d
+   APH   PASS      hardware large        extended         86.6 -2.5       0.34 0.83     1.00      6d
 ```
 
 ## Top setups (small/mid)
 ```
 ticker signal         theme   cap      verdict setup  score   ext  near_high  mom  eps_rev earn_in
-  QMCO   PASS       quantum small        watch         92.9 -24.9       0.00 1.00      NaN     20d
-  SYNA   PASS         semis   mid        watch         79.9  12.9       0.00 0.85      NaN     16d
-   MXL   PASS         semis   mid        watch         78.5  -3.5       0.00 1.00      NaN      2d
-   RAL   PASS      hardware   mid        watch         78.2  -1.2       0.38 1.00      NaN     14d
-  AXTI   PASS     equipment   mid broken trend         74.8 -18.5       0.00 1.00      NaN      9d
-    KN   PASS      hardware   mid     extended         74.7  -4.9       0.00 1.00     0.75      2d
-    ST   PASS comms/optical   mid        watch         70.4  -2.1       0.00 0.84      NaN      7d
-  FORM   PASS     equipment   mid broken trend         69.7  -9.9       0.00 1.00      NaN      8d
-  DIOD   PASS         semis   mid broken trend         68.1  -8.8       0.00 1.00      NaN     16d
-  ICHR   PASS     equipment small broken trend         67.4 -26.0       0.00 1.00     1.00     13d
+  QMCO   PASS       quantum small        watch         92.9 -28.6       0.00 1.00      NaN     19d
+  COHU   PASS     equipment   mid        watch         89.9  -3.7       0.00 1.00      NaN      7d
+   MXL   PASS         semis   mid        watch         86.0  -3.5       0.00 1.00      NaN      1d
+   RAL   PASS      hardware   mid        watch         84.9   2.5       0.61 1.00      NaN     13d
+  SIMO   PASS         semis   mid     extended         82.1 -13.6       0.00 1.00     1.00      7d
+  SYNA   PASS         semis   mid        watch         79.7  12.9       0.00 0.86      NaN     15d
+  AXTI   PASS     equipment   mid broken trend         76.5 -16.7       0.00 1.00      NaN      8d
+    ST   PASS comms/optical   mid        watch         74.8   1.0       0.00 0.80      NaN      6d
+    KN   PASS      hardware   mid     extended         74.3  -3.1       0.00 1.00     0.75      1d
+  FORM   PASS     equipment   mid broken trend         72.3  -6.7       0.00 1.00      NaN      7d
 ```
 
 ## 📅 Earnings watch
 ```
 ticker         theme      verdict  score earn_in  next_earn  eps_rev
-   ASX         semis        watch   96.8      8d 2026-10-29      NaN
-   TXN         semis     extended   95.4      1d 2026-10-21     1.00
-   AMD         semis     extended   91.1     14d 2026-11-03     0.88
-   APH      hardware     extended   86.6      7d 2026-10-28     1.00
-  INTC         semis        watch   84.5      9d 2026-10-29      NaN
-  SNDK      hardware        watch   81.7      9d 2026-10-29      NaN
-  ALAB         semis     extended   81.4     14d 2026-11-03     1.00
-  ANET      hardware        watch   80.1     14d 2026-11-03      NaN
-   MXL         semis        watch   78.5      2d 2026-10-22      NaN
-   UMC         semis        watch   78.2      7d 2026-10-28      NaN
-   RAL      hardware        watch   78.2     14d 2026-11-04      NaN
-   STX      hardware        watch   76.6      7d 2026-10-27      NaN
-  AXTI     equipment broken trend   74.8      9d 2026-10-29      NaN
-    KN      hardware     extended   74.7      2d 2026-10-22     0.75
-   TER     equipment broken trend   72.7      7d 2026-10-27     0.94
-  LRCX     equipment broken trend   70.8      1d 2026-10-21     1.00
-    ST comms/optical        watch   70.4      7d 2026-10-27      NaN
-  FORM     equipment broken trend   69.7      8d 2026-10-28      NaN
-  ICHR     equipment broken trend   67.4     13d 2026-11-02     1.00
-   STM         semis broken trend   65.2      8d 2026-10-29      NaN
+   ASX         semis        watch   99.3      7d 2026-10-29      NaN
+   TXN         semis     extended   95.4      0d 2026-10-21     1.00
+   AMD         semis     extended   91.2     13d 2026-11-03     0.88
+  COHU     equipment        watch   89.9      7d 2026-10-28      NaN
+   TER     equipment     extended   87.1      6d 2026-10-27     0.94
+   APH      hardware     extended   86.6      6d 2026-10-28     1.00
+   MXL         semis        watch   86.0      1d 2026-10-22      NaN
+  INTC         semis        watch   85.5      8d 2026-10-29      NaN
+   RAL      hardware        watch   84.9     13d 2026-11-04      NaN
+  SNDK      hardware        watch   84.0      8d 2026-10-29      NaN
+  GRMN comms/optical        watch   83.7      6d 2026-10-28      NaN
+  ALAB         semis     extended   83.2     13d 2026-11-03     1.00
+   MSI comms/optical     PRIMED *   82.8     14d 2026-11-04     1.00
+  SIMO         semis     extended   82.1      7d 2026-10-28     1.00
+   UMC         semis        watch   78.9      6d 2026-10-28      NaN
+  ANET      hardware        watch   78.9     13d 2026-11-03      NaN
+   STX      hardware        watch   77.7      6d 2026-10-27      NaN
+   ARM         semis     extended   76.9     14d 2026-11-04     0.67
+  AXTI     equipment broken trend   76.5      8d 2026-10-29      NaN
+    ST comms/optical        watch   74.8      6d 2026-10-27      NaN
+    KN      hardware     extended   74.3      1d 2026-10-22     0.75
+  FORM     equipment broken trend   72.3      7d 2026-10-28      NaN
+  LRCX     equipment broken trend   69.9      0d 2026-10-21     1.00
+  COHR comms/optical broken trend   69.0     14d 2026-11-04     1.00
+  ICHR     equipment broken trend   67.4     12d 2026-11-02     1.00
+   TEL      hardware     extended   66.8      6d 2026-10-28     0.80
+  CGNX comms/optical     extended   66.2     14d 2026-11-04     0.67
+  SITM        timing broken trend   65.2     14d 2026-11-04      NaN
+  VIAV comms/optical broken trend   65.0     14d 2026-11-04     0.67
 ```
 
 ## 🎯 Coiled watch (volatility squeeze; PRIMED\* = bullseye)
 ```
-ticker          theme      verdict  score  squeeze  near_high  eps_rev
-   ASX          semis        watch   96.8     0.93       0.09      NaN
-   ADI          semis     extended   95.5     0.67       0.32     1.00
-   TXN          semis     extended   95.4     1.00       0.00     1.00
-  DELL       hardware     extended   92.4     0.58       0.00     1.00
-   AMD          semis     extended   91.1     1.00       0.00     0.88
-   TSM          semis     extended   88.6     0.88       0.19     1.00
-   APH       hardware     extended   86.6     0.67       0.27     1.00
-  NVDA          semis     extended   85.4     0.93       0.39     1.00
-    MU          semis     extended   84.9     1.00       0.00     0.95
-  INTC          semis        watch   84.5     1.00       0.00      NaN
-  ASML      equipment     extended   83.0     1.00       0.00     0.80
-  SNDK       hardware        watch   81.7     1.00       0.00      NaN
-  ALAB          semis     extended   81.4     1.00       0.00     1.00
-  CSCO  comms/optical     extended   80.8     0.77       0.00     1.00
-  ANET       hardware        watch   80.1     0.89       0.00      NaN
-  SYNA          semis        watch   79.9     1.00       0.00      NaN
-   MXL          semis        watch   78.5     0.80       0.00      NaN
-   UMC          semis        watch   78.2     1.00       0.00      NaN
-   STX       hardware        watch   76.6     0.98       0.00      NaN
-  AXTI      equipment broken trend   74.8     0.81       0.00      NaN
-    KN       hardware     extended   74.7     0.85       0.00     0.75
-   TER      equipment broken trend   72.7     0.94       0.00     0.94
-  LRCX      equipment broken trend   70.8     1.00       0.00     1.00
-    ST  comms/optical        watch   70.4     0.69       0.00      NaN
-  FORM      equipment broken trend   69.7     0.78       0.00      NaN
-  MCHP          semis broken trend   68.8     0.99       0.00      NaN
-  DIOD          semis broken trend   68.1     0.75       0.00      NaN
-  COHR  comms/optical broken trend   67.7     0.54       0.00     1.00
-  ICHR      equipment broken trend   67.4     1.00       0.00     1.00
-  SANM       hardware broken trend   65.5     0.57       0.00     0.80
-  NOVT  comms/optical broken trend   65.2     0.65       0.00     1.00
-  AMAT      equipment broken trend   65.2     1.00       0.00     1.00
-   STM          semis broken trend   65.2     1.00       0.00      NaN
-  VIAV  comms/optical broken trend   64.7     0.51       0.00     0.67
-   GLW       hardware broken trend   64.1     1.00       0.00     1.00
-   TEL       hardware broken trend   63.6     1.00       0.07     0.80
-   ARM          semis broken trend   63.0     1.00       0.00     0.67
-  ACMR      equipment broken trend   62.6     1.00       0.00     1.00
-  VICR       hardware broken trend   61.3     0.62       0.00     1.00
-  ONTO      metrology broken trend   61.1     1.00       0.00      NaN
-   NOK  comms/optical broken trend   61.0     1.00       0.00      NaN
-   VRT dc-power-cooli broken trend   59.8     1.00       0.00     0.75
-   WDC       hardware broken trend   59.7     1.00       0.00     0.67
-  UCTT      equipment broken trend   58.8     1.00       0.00      NaN
-  AEHR      equipment broken trend   58.8     1.00       0.00      NaN
-  EXTR  comms/optical        watch   58.3     1.00       0.00      NaN
-  QCOM          semis        watch   56.9     1.00       0.00     0.33
-  ALGM          semis broken trend   55.8     1.00       0.00     0.80
-   VSH          semis broken trend   54.7     1.00       0.00     0.67
-  CRDO   connectivity broken trend   54.6     1.00       0.00     0.94
-  CGNX  comms/optical broken trend   54.4     0.70       0.00     0.67
-  AAOI  comms/optical broken trend   54.2     0.94       0.00     0.60
-  NXPI          semis broken trend   53.5     1.00       0.00      NaN
-  HIMX          semis broken trend   53.2     1.00       0.00      NaN
-  CAMT      equipment broken trend   53.0     0.55       0.00     1.00
-  LASR          semis broken trend   51.8     1.00       0.00      NaN
-  OUST       hardware broken trend   48.2     1.00       0.00      NaN
-  PLAB      equipment broken trend   47.9     1.00       0.00      NaN
-  AVGO          semis broken trend   46.4     1.00       0.00     0.33
-  KLAC      equipment broken trend   44.4     1.00       0.00      NaN
-  POWI          semis broken trend   44.3     1.00       0.00     0.75
- KXIAY          semis broken trend   39.1     1.00       0.00      NaN
-  VSAT  comms/optical broken trend   38.3     0.88       0.00     0.00
-  AMBA      equipment broken trend   36.6     1.00       0.00     0.50
-  INFQ        quantum broken trend   36.2     0.81       0.00      NaN
-  SEDG          solar broken trend   35.9     1.00       0.00     0.36
-  CRUS          semis broken trend   33.6     0.97       0.00     0.20
-  ONDS  comms/optical broken trend   33.1     1.00       0.00      NaN
-   RUN          solar broken trend   33.1     1.00       0.00      NaN
-  QUBT        quantum broken trend   32.1     0.85       0.00      NaN
-  NVTS          semis broken trend   29.7     1.00       0.00     0.57
-  IONQ        quantum broken trend   29.0     0.51       0.00     0.20
-  RGTI       hardware broken trend   27.7     0.95       0.00      NaN
-  ENPH          solar broken trend   22.6     1.00       0.00     0.00
-  HIVE  crypto/ai-hpc broken trend   20.9     1.00       0.00      NaN
-  ARQQ        quantum broken trend   10.2     0.73       0.00      NaN
-  QBTS       hardware broken trend    2.9     1.00       0.00      NaN
+ticker          theme         verdict  score  squeeze  near_high  eps_rev
+   ASX          semis           watch   99.3     0.86       0.29      NaN
+   TXN          semis        extended   95.4     1.00       0.15     1.00
+   ADI          semis early (fundies)   95.2     0.62       0.45     1.00
+   AMD          semis        extended   91.2     0.98       0.01     0.88
+  LITE  comms/optical           watch   90.2     0.51       0.00      NaN
+  COHU      equipment           watch   89.9     0.61       0.00      NaN
+   TSM          semis        extended   87.9     0.75       0.23     1.00
+   TER      equipment        extended   87.1     0.94       0.00     0.94
+   APH       hardware        extended   86.6     0.82       0.34     1.00
+   MXL          semis           watch   86.0     0.94       0.00      NaN
+    MU          semis        extended   85.6     1.00       0.00     0.95
+  INTC          semis           watch   85.5     1.00       0.00      NaN
+  NVDA          semis early (fundies)   84.4     0.95       0.51     1.00
+  SNDK       hardware           watch   84.0     1.00       0.00      NaN
+  ALAB          semis        extended   83.2     1.00       0.00     1.00
+   MSI  comms/optical        PRIMED *   82.8     0.90       0.68     1.00
+  ASML      equipment        extended   82.7     0.99       0.00     0.80
+  SIMO          semis        extended   82.1     1.00       0.00     1.00
+  SYNA          semis           watch   79.7     1.00       0.00      NaN
+   UMC          semis           watch   78.9     1.00       0.00      NaN
+  ANET       hardware           watch   78.9     0.73       0.00      NaN
+  CSCO  comms/optical        extended   78.7     0.78       0.00     1.00
+   STX       hardware           watch   77.7     1.00       0.00      NaN
+   ARM          semis        extended   76.9     1.00       0.00     0.67
+  AXTI      equipment    broken trend   76.5     0.77       0.00      NaN
+    ST  comms/optical           watch   74.8     0.69       0.00      NaN
+    KN       hardware        extended   74.3     0.97       0.00     0.75
+  FORM      equipment    broken trend   72.3     0.72       0.00      NaN
+  CRDO   connectivity        extended   71.7     0.99       0.00     0.94
+  LRCX      equipment    broken trend   69.9     1.00       0.00     1.00
+  COHR  comms/optical    broken trend   69.0     0.75       0.00     1.00
+  ICHR      equipment    broken trend   67.4     1.00       0.00     1.00
+   TEL       hardware        extended   66.8     1.00       0.14     0.80
+  CGNX  comms/optical        extended   66.2     0.63       0.00     0.67
+  VIAV  comms/optical    broken trend   65.0     0.61       0.00     0.67
+  AMAT      equipment    broken trend   65.0     1.00       0.00     1.00
+   GLW       hardware    broken trend   64.7     1.00       0.00     1.00
+  VICR       hardware    broken trend   64.4     0.78       0.00     1.00
+  ACMR      equipment    broken trend   62.6     1.00       0.00     1.00
+  MPWR          semis    broken trend   62.6     0.99       0.00      NaN
+   NOK  comms/optical    broken trend   62.4     1.00       0.00      NaN
+  AEHR      equipment    broken trend   61.8     1.00       0.00      NaN
+  ONTO      metrology    broken trend   60.7     1.00       0.00      NaN
+   WDC       hardware    broken trend   59.7     1.00       0.00     0.67
+   VRT dc-power-cooli    broken trend   59.4     1.00       0.00     0.75
+  UCTT      equipment    broken trend   58.8     1.00       0.00      NaN
+  EXTR  comms/optical           watch   56.4     1.00       0.00      NaN
+  QCOM          semis           watch   55.8     0.88       0.00     0.33
+  ALGM          semis    broken trend   55.1     1.00       0.00     0.80
+   VSH          semis    broken trend   54.7     1.00       0.00     0.67
+  AAOI  comms/optical    broken trend   54.3     1.00       0.00     0.60
+  CAMT      equipment    broken trend   52.7     0.63       0.00     1.00
+  HIMX          semis    broken trend   52.5     1.00       0.00      NaN
+  NXPI          semis    broken trend   52.2     1.00       0.00      NaN
+  LASR          semis    broken trend   51.5     1.00       0.00      NaN
+  OUST       hardware    broken trend   48.5     1.00       0.00      NaN
+  ACLS      equipment    broken trend   48.1     1.00       0.00     0.50
+  PLAB      equipment    broken trend   46.7     1.00       0.00      NaN
+  AVGO          semis    broken trend   45.4     0.98       0.00     0.33
+  POWI          semis    broken trend   44.4     1.00       0.00     0.75
+  KLAC      equipment    broken trend   43.4     1.00       0.00      NaN
+  SEDG          solar    broken trend   42.4     1.00       0.00     0.36
+  INFQ        quantum    broken trend   40.2     0.79       0.00      NaN
+ KXIAY          semis    broken trend   39.5     1.00       0.00      NaN
+  VECO      equipment    broken trend   39.2     0.96       0.00     0.25
+  VSAT  comms/optical    broken trend   38.1     0.85       0.00     0.00
+  AMBA      equipment    broken trend   38.0     1.00       0.00     0.50
+   BMI  comms/optical    broken trend   35.7     1.00       0.00      NaN
+  QUBT        quantum    broken trend   34.2     0.83       0.00      NaN
+  ONDS  comms/optical    broken trend   33.0     1.00       0.00      NaN
+  NVTS          semis    broken trend   32.6     1.00       0.00     0.57
+   RUN          solar    broken trend   32.4     1.00       0.00      NaN
+  CRUS          semis    broken trend   31.9     0.96       0.00     0.20
+  RGTI       hardware    broken trend   28.0     0.93       0.00      NaN
+  ENPH          solar    broken trend   22.0     1.00       0.00     0.00
+  HIVE  crypto/ai-hpc    broken trend   20.3     1.00       0.00      NaN
+  ARQQ        quantum    broken trend   17.3     0.64       0.00      NaN
+  QBTS       hardware    broken trend    3.2     1.00       0.00      NaN
 ```
 
 ## 🌐 Market-wide PRIMED★ (all sectors)
 ```
 ticker  cap  score  near_high  mom  eps_rev  squeeze earn_in
- BRK-B mega   88.5       1.00 0.52     1.00     0.68     18d
-    MA mega   80.6       1.00 0.49     0.94     0.72      8d
-  AAPL mega   79.1       0.94 0.80     0.62     0.89     13d
-    KO mega   78.1       0.93 0.83     0.50     0.82      6d
-    PM mega   77.4       0.83 0.74     0.60     0.72      0d
+ BRK-B mega   86.7       1.00 0.53     1.00     0.73     17d
+    MA mega   80.1       1.00 0.48     0.94     0.67      7d
+  AAPL mega   76.1       1.00 0.79     0.62     0.98     12d
+    KO mega   75.5       0.91 0.77     0.50     0.76      5d
 ```
 
 _Coiled near their highs with rising estimates, scanned across the whole US market (not just tech). A setup, not a buy; verify each name._
@@ -161,36 +170,35 @@ _Coiled near their highs with rising estimates, scanned across the whole US mark
 ## ⚠ Exit signals (your holdings)
 ```
 ticker action  price   stop  to_stop_%                                                                                                       signals
-    MU   TRIM 910.55 968.17       -6.3                                                                below 50d; lagging market; below trailing stop
-   WDC   EXIT 363.72 400.37      -10.1                                             downtrend (below 50d & 200d); lagging market; below trailing stop
-   STX   TRIM 678.67 794.10      -17.0                                                                below 50d; lagging market; below trailing stop
-  RMBS   EXIT  94.16  96.79       -2.8                      downtrend (below 50d & 200d); 12m momentum negative; lagging market; below trailing stop
-  NVDA   TRIM 217.19 226.52       -4.3                                                                below 50d; lagging market; below trailing stop
-   AMD   TRIM 540.91 578.29       -6.9                                                                           lagging market; below trailing stop
-  AVGO   EXIT 335.20 348.54       -4.0 downtrend (below 50d & 200d); 12m momentum negative; estimates being cut; lagging market; below trailing stop
-  MRVL   TRIM 241.97 255.12       -5.4                                                                                below 50d; below trailing stop
-  COHR   EXIT 233.12 279.75      -20.0                                             downtrend (below 50d & 200d); lagging market; below trailing stop
-  LITE   TRIM 826.49 942.10      -14.0                                                                below 50d; lagging market; below trailing stop
-  CIEN   EXIT 341.79 380.87      -11.4                                             downtrend (below 50d & 200d); lagging market; below trailing stop
-  ALAB   TRIM 287.86 329.29      -14.4                                                                below 50d; lagging market; below trailing stop
-  CRDO   EXIT 173.46 187.86       -8.3                                             downtrend (below 50d & 200d); lagging market; below trailing stop
-   NOK   EXIT   9.06   9.71       -7.2                                             downtrend (below 50d & 200d); lagging market; below trailing stop
-   NOW   TRIM 149.69 136.22        9.0                                                                    12m momentum negative; estimates being cut
-  SNOW   TRIM 321.43 324.50       -1.0                                                                                below 50d; below trailing stop
-  TSLA   TRIM 374.53 353.94        5.5                                                        below 200d; 12m momentum negative; estimates being cut
-  MRAM   EXIT  13.33  16.54      -24.0                        downtrend (below 50d & 200d); estimates being cut; lagging market; below trailing stop
-  AMPX   EXIT   7.61   9.47      -24.3                      downtrend (below 50d & 200d); 12m momentum negative; lagging market; below trailing stop
-  ALMU   EXIT   7.88  11.39      -44.5                      downtrend (below 50d & 200d); 12m momentum negative; lagging market; below trailing stop
+    MU   TRIM 917.71 969.49       -5.6                                                                below 50d; lagging market; below trailing stop
+   WDC   EXIT 379.98 400.90       -5.5                                             downtrend (below 50d & 200d); lagging market; below trailing stop
+   STX   TRIM 702.23 796.15      -13.4                                                                below 50d; lagging market; below trailing stop
+  RMBS   EXIT  93.60  97.92       -4.6                      downtrend (below 50d & 200d); 12m momentum negative; lagging market; below trailing stop
+  NVDA   TRIM 221.70 226.69       -2.3                                                                                below 50d; below trailing stop
+   AMD   TRIM 553.44 583.08       -5.4                                                                                           below trailing stop
+  AVGO   EXIT 338.60 349.02       -3.1 downtrend (below 50d & 200d); 12m momentum negative; estimates being cut; lagging market; below trailing stop
+  MRVL   TRIM 244.73 255.64       -4.5                                                                                           below trailing stop
+  COHR   EXIT 237.31 280.35      -18.1                                             downtrend (below 50d & 200d); lagging market; below trailing stop
+  LITE   TRIM 853.96 941.57      -10.3                                                                                below 50d; below trailing stop
+  CIEN   EXIT 360.60 380.74       -5.6                                             downtrend (below 50d & 200d); lagging market; below trailing stop
+  ALAB   TRIM 288.70 332.41      -15.1                                                                below 50d; lagging market; below trailing stop
+  CRDO   TRIM 183.49 187.11       -2.0                                                                below 50d; lagging market; below trailing stop
+   NOK   EXIT   9.27   9.67       -4.4                                             downtrend (below 50d & 200d); lagging market; below trailing stop
+   NOW   TRIM 153.07 136.10       11.1                                                                    12m momentum negative; estimates being cut
+  TSLA   TRIM 387.26 354.08        8.6                                                                    12m momentum negative; estimates being cut
+  MRAM   EXIT  13.57  16.74      -23.3                        downtrend (below 50d & 200d); estimates being cut; lagging market; below trailing stop
+  AMPX   EXIT   8.32   9.42      -13.1                      downtrend (below 50d & 200d); 12m momentum negative; lagging market; below trailing stop
+  ALMU   EXIT   7.78  11.47      -47.5                      downtrend (below 50d & 200d); 12m momentum negative; lagging market; below trailing stop
 ```
 
 ## Market regime
 ```
-  SPX trend                         SPY above 200d (+6.5%)  risk-on
+  SPX trend                         SPY above 200d (+7.0%)  risk-on
   Breadth (RSP-SPY 50d)                      -2.0%  risk-off
-  Credit (HYG/IEF 50d)                       -0.2%  neutral
-  Volatility (VIX)                            17.5  risk-on
-  Yield curve (10y-3mo)                    +1.04pp  risk-on
-  Semis leadership (SOXX-SPY 63d)           -13.1%  risk-off
+  Credit (HYG/IEF 50d)                       -0.1%  neutral
+  Volatility (VIX)                            16.6  risk-on
+  Yield curve (10y-3mo)                    +1.05pp  risk-on
+  Semis leadership (SOXX-SPY 63d)            -8.0%  risk-off
 ```
 
 ---
@@ -200,139 +208,139 @@ _Everything below is the complete data behind the summary above._
 
 ### Full screen — CORE (large-cap)
 ```
-ticker signal          theme   cap      verdict deal flag setup  score   ext earn_in  next_earn  to_resist  to_support  cov  mcap_$B   price  rev_accel  margin_exp  eps_rev  surprise  near_high  mom  trend  rel_str  squeeze  vol_dry
-   ASX   PASS          semis large        watch                   96.8   0.3      8d 2026-10-29       16.5         4.2 0.79     90.4   41.13        1.0         1.0      NaN      1.00       0.09 1.00    1.0     0.82     0.93      0.4
-   ADI   PASS          semis large     extended                   95.5   4.1     34d 2026-11-24        5.9         5.5 1.00    193.5  399.32        1.0         1.0     1.00      0.67       0.32 1.00    1.0     0.85     0.67      0.4
-   TXN   PASS          semis  mega     extended                   95.4   2.3      1d 2026-10-21        7.3         4.2 1.00    254.2  278.36        1.0         1.0     1.00      1.00       0.00 1.00    1.0     0.67     1.00      0.4
-   HPE   PASS  comms/optical large     extended                   94.4  -5.1     44d 2026-12-03       30.5         4.1 1.00     74.8   56.36        1.0         1.0     1.00      1.00       0.00 1.00    0.7     1.00     0.00      0.4
-  DELL   PASS       hardware  mega     extended                   92.4  -9.6     38d 2026-11-27       28.2         5.4 1.00    295.3  464.39        1.0         1.0     1.00      1.00       0.00 1.00    0.7     0.86     0.58      0.4
-   AMD   PASS          semis  mega     extended                   91.1   0.2     14d 2026-11-03       21.7         3.0 1.00    883.0  540.91        1.0         1.0     0.88      0.66       0.00 1.00    1.0     0.72     1.00      1.0
-  MRVL   PASS          semis  mega     extended                   90.5  -0.0     42d 2026-12-01       24.5         6.4 1.00    217.5  241.97        1.0         1.0     0.96      0.55       0.00 1.00    0.7     1.00     0.37      0.4
-     P   PASS       hardware large     extended                   89.2   8.4     42d 2026-12-01       24.3        15.5 1.00     42.2  126.77        1.0         0.3     1.00      1.00       0.00 0.72    1.0     1.00     0.00      1.0
-  KEYS   PASS  comms/optical large        watch                   89.2  -2.6     35d 2026-11-24       16.5         3.5 0.79     57.0  334.79        1.0         1.0      NaN      1.00       0.09 1.00    0.7     0.79     0.34      0.4
-   TSM   PASS          semis  mega     extended                   88.6  -1.6     85d 2027-01-14       14.2         4.6 1.00   2214.1  426.89        1.0         1.0     1.00      0.58       0.19 1.00    0.7     0.79     0.88      0.4
-  LITE   PASS  comms/optical large        watch                   87.0 -11.2     16d 2026-11-05       38.3         5.0 0.79     74.9  826.49        1.0         1.0      NaN      0.94       0.00 1.00    0.7     0.69     0.29      0.4
-   APH   PASS       hardware large     extended                   86.6  -3.7      7d 2026-10-28       13.9         1.4 1.00    194.8   78.98        1.0         1.0     1.00      1.00       0.27 0.81    0.7     0.73     0.67      1.0
-  NVDA   PASS          semis  mega     extended                   85.4  -2.5     28d 2026-11-17       12.1         2.0 1.00   5244.5  217.19        1.0         1.0     1.00      0.81       0.39 0.76    0.7     0.82     0.93      1.0
-    MU   PASS          semis  mega     extended                   84.9  -7.5     64d 2026-12-23       21.7         5.8 1.00   1030.0  910.40        1.0         1.0     0.95      0.75       0.00 1.00    0.7     0.51     1.00      0.4
-  INTC   PASS          semis  mega        watch                   84.5 -10.1      9d 2026-10-29       37.8         4.0 0.79    485.9   92.48        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.52     1.00      0.4
-  ASML   PASS      equipment  mega     extended                   83.0  -5.8     98d 2027-01-27       15.9         2.6 1.00    630.5 1635.89        1.0         1.0     0.80      0.99       0.00 1.00    0.7     0.49     1.00      0.4
-  SNDK   PASS       hardware large        watch                   81.7 -13.5      9d 2026-10-29       38.0         7.8 0.79    200.0 1383.62        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.36     1.00      1.0
-  ALAB   PASS          semis large     extended                   81.4  -8.3     14d 2026-11-03       39.6         4.5 1.00     49.9  287.86        1.0         0.3     1.00      1.00       0.00 1.00    0.7     0.42     1.00      0.4
-  CSCO   PASS  comms/optical  mega     extended                   80.8  -3.8     23d 2026-11-12       16.7         1.7 1.00    419.7  106.45        0.5         1.0     1.00      0.72       0.00 1.00    0.7     0.58     0.77      1.0
-  ANET   PASS       hardware  mega        watch                   80.1  -8.8     14d 2026-11-03       20.3         2.2 0.79    227.9  180.68        1.0         0.3      NaN      1.00       0.00 0.90    0.7     0.77     0.89      0.4
-   UMC   PASS          semis large        watch                   78.2  -8.8      7d 2026-10-28       33.5         2.1 0.79     49.5   19.75        0.5         1.0      NaN      1.00       0.00 1.00    0.7     0.58     1.00      1.0
-   STX   PASS       hardware large        watch                   76.6 -18.8      7d 2026-10-27       49.3         6.2 0.79    154.3  678.67        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.07     0.98      0.4
-   TER   PASS      equipment large broken trend                   72.7 -10.9      7d 2026-10-27       33.8         4.5 1.00     52.8  337.61        1.0         1.0     0.94      1.00       0.00 1.00    0.0     0.47     0.94      0.4
-  CIEN   PASS  comms/optical large broken trend                   71.8  -9.0     50d 2026-12-10       35.4         3.7 1.00     48.5  341.79        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.31     0.31      0.4
-  LRCX   PASS      equipment  mega broken trend                   70.8 -13.8      1d 2026-10-21       33.2         1.7 1.00    331.3  264.76        1.0         1.0     1.00      0.90       0.00 1.00    0.0     0.29     1.00      0.4
-  MCHP   PASS          semis large broken trend                   68.8   1.2     16d 2026-11-05       12.1         8.5 0.79     41.4   76.26        1.0         1.0      NaN      0.93       0.00 0.66    0.4     0.57     0.99      0.4
-  COHR   PASS  comms/optical large broken trend                   67.7 -21.0     15d 2026-11-04       67.9         6.6 1.00     45.9  233.12        1.0         1.0     1.00      0.88       0.00 1.00    0.0     0.08     0.54      0.4
-  AMAT   PASS      equipment  mega broken trend                   65.2 -15.2     23d 2026-11-12       39.1         1.4 1.00    321.3  404.85        1.0         1.0     1.00      0.66       0.00 1.00    0.0     0.01     1.00      0.4
-   STM   PASS          semis large broken trend                   65.2 -10.5      8d 2026-10-29       29.2         3.5 0.79     41.1   45.88        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.36     1.00      0.4
-  SITM   PASS         timing large broken trend                   65.2 -19.1     15d 2026-11-04       54.0         5.3 0.79     14.9  495.33        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.36     0.27      0.4
-   GLW   PASS       hardware large broken trend                   64.1 -13.4      6d 2026-10-27       33.1         3.8 1.00    114.3  132.65        0.5         1.0     1.00      0.67       0.00 1.00    0.0     0.34     1.00      1.0
-   TEL   PASS       hardware large broken trend                   63.6   0.8      7d 2026-10-28        5.5         2.1 1.00     61.3  211.78        0.5         1.0     0.80      0.67       0.07 0.46    0.4     0.89     1.00      0.4
-   ARM   PASS          semis  mega broken trend                   63.0 -16.1     15d 2026-11-04       51.1         2.6 1.00    238.2  223.01        1.0         1.0     0.67      1.00       0.00 1.00    0.0     0.18     1.00      0.4
-  ONTO   PASS      metrology large broken trend                   61.1 -21.1     20d 2026-11-09       58.6         3.8 0.79     10.9  223.10        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.13     1.00      0.4
-   NOK   PASS  comms/optical large broken trend                   61.0 -11.4      1d 2026-10-22       23.3         2.6 0.79     50.7    9.06        0.5         1.0      NaN      1.00       0.00 1.00    0.0     0.54     1.00      1.0
-   VRT   PASS dc-power-cooli large broken trend                   59.8 -19.5      7d 2026-10-28       47.6         2.7 1.00     78.3  203.43        1.0         1.0     0.75      0.82       0.00 0.94    0.0     0.00     1.00      0.4
-   WDC   PASS       hardware large broken trend                   59.7 -17.1      2d 2026-10-22       59.4         8.8 1.00    136.1  363.72        1.0         1.0     0.67      0.89       0.00 1.00    0.0     0.00     1.00      0.4
-  QCOM   PASS          semis large        watch                   56.9   0.3     15d 2026-11-04       17.2         3.9 1.00    187.6  175.69        0.0         0.3     0.33      0.46       0.00 0.71    1.0     0.80     1.00      1.0
-  CRDO   PASS   connectivity large broken trend                   54.6 -14.6     41d 2026-11-30       65.0         7.2 1.00     32.6  173.46        1.0         0.3     0.94      0.63       0.00 0.77    0.0     0.05     1.00      0.4
-  NXPI   PASS          semis large broken trend                   53.5   3.7      7d 2026-10-27       11.3         8.2 0.79     60.1  238.14        0.5         1.0      NaN      0.62       0.00 0.60    0.4     0.37     1.00      0.4
-  AVGO   PASS          semis  mega broken trend                   46.4  -7.3     50d 2026-12-09       28.9         2.0 1.00   1600.1  335.20        1.0         1.0     0.33      0.63       0.00 0.55    0.0     0.35     1.00      1.0
-  KLAC   PASS      equipment  mega broken trend                   44.4 -12.7      8d 2026-10-28       32.4         1.4 0.79    211.5  162.10        0.5         0.3      NaN      0.76       0.00 1.00    0.0     0.07     1.00      0.4
- KXIAY   PASS          semis large broken trend                   39.1 -23.2       -        NaN       57.0         7.2 0.53     45.2    8.49        NaN         NaN      NaN       NaN       0.00 1.00    0.0     0.00     1.00      1.0
-  IONQ   PASS        quantum large broken trend                   29.0 -21.9     15d 2026-11-04       52.5         4.5 1.00     12.7   31.45        1.0         0.3     0.20      0.00       0.00 0.18    0.0     0.52     0.51      0.4
+ticker signal          theme   cap         verdict deal flag setup  score   ext earn_in  next_earn  to_resist  to_support  cov  mcap_$B   price  rev_accel  margin_exp  eps_rev  surprise  near_high  mom  trend  rel_str  squeeze  vol_dry
+   ASX   PASS          semis large           watch                   99.3   3.6      7d 2026-10-29       12.6         7.4 0.79     93.6   42.56        1.0         1.0      NaN      1.00       0.29 1.00    1.0     0.96     0.86      0.4
+  MRVL   PASS          semis  mega        extended                   96.1   0.9     41d 2026-12-01       23.1         7.4 1.00    219.9  244.73        1.0         1.0     0.96      0.55       0.00 1.00    1.0     1.00     0.39      0.4
+   TXN   PASS          semis  mega        extended                   95.4   6.0      0d 2026-10-21        3.5         7.6 1.00    263.6  288.60        1.0         1.0     1.00      1.00       0.15 1.00    1.0     0.67     1.00      0.4
+   ADI  WATCH          semis large early (fundies)                   95.2   6.1     33d 2026-11-24        3.8         7.3 1.00    197.3  407.21        1.0         1.0     1.00      0.67       0.45 1.00    1.0     0.82     0.62      0.4
+   HPE   PASS  comms/optical large        extended                   94.4  -1.9     43d 2026-12-03       26.1         7.3 1.00     77.4   58.34        1.0         1.0     1.00      1.00       0.00 1.00    0.7     1.00     0.00      0.4
+  DELL   PASS       hardware  mega        extended                   92.2  -5.7     37d 2026-11-27       22.8         9.2 1.00    307.8  484.10        1.0         1.0     1.00      1.00       0.00 1.00    0.7     0.84     0.45      0.4
+   AMD   PASS          semis  mega        extended                   91.2   2.3     13d 2026-11-03       19.0         5.2 1.00    903.3  553.31        1.0         1.0     0.88      0.66       0.01 1.00    1.0     0.72     0.98      1.0
+  LITE   PASS  comms/optical large           watch                   90.2  -8.3     15d 2026-11-05       33.8         8.1 0.79     77.4  853.96        1.0         1.0      NaN      0.94       0.00 1.00    0.7     0.87     0.51      0.4
+  KEYS   PASS  comms/optical large           watch                   88.8  -0.1     34d 2026-11-24       13.6         5.9 0.79     58.4  343.31        1.0         1.0      NaN      1.00       0.23 1.00    0.7     0.77     0.32      0.4
+   TSM   PASS          semis  mega        extended                   87.9  -1.0     84d 2027-01-14       13.4         5.2 1.00   2228.5  429.68        1.0         1.0     1.00      0.58       0.23 1.00    0.7     0.74     0.75      0.4
+   TER   PASS      equipment large        extended                   87.1  -7.7      6d 2026-10-27       29.4         7.7 1.00     54.6  349.20        1.0         1.0     0.94      1.00       0.00 1.00    0.7     0.57     0.94      0.4
+   APH   PASS       hardware large        extended                   86.6  -2.5      6d 2026-10-28       12.6         2.5 1.00    197.0   79.88        1.0         1.0     1.00      1.00       0.34 0.83    0.7     0.69     0.82      1.0
+    MU   PASS          semis  mega        extended                   85.6  -6.9     63d 2026-12-23       20.8         6.5 1.00   1038.1  917.53        1.0         1.0     0.95      0.75       0.00 1.00    0.7     0.57     1.00      1.0
+  INTC   PASS          semis  mega           watch                   85.5  -9.9      8d 2026-10-29       37.7         4.1 0.79    486.4   92.56        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.58     1.00      0.4
+  NVDA  WATCH          semis  mega early (fundies)                   84.4  -0.5     27d 2026-11-17        9.8         4.0 1.00   5353.4  221.70        1.0         1.0     1.00      0.81       0.51 0.75    0.7     0.76     0.95      1.0
+  SNDK   PASS       hardware  mega           watch                   84.0 -13.3      8d 2026-10-29       37.5         8.1 0.79    200.7 1388.84        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.49     1.00      1.0
+  GRMN   PASS  comms/optical large           watch                   83.7   2.1      6d 2026-10-28        7.8         9.7 0.79     56.0  290.55        0.5         1.0      NaN      1.00       0.54 0.66    1.0     1.00     0.08      1.0
+  ALAB   PASS          semis large        extended                   83.2  -7.8     13d 2026-11-03       39.2         4.7 1.00     50.1  288.70        1.0         0.3     1.00      1.00       0.00 1.00    0.7     0.55     1.00      1.0
+   MSI    BUY  comms/optical large        PRIMED *                   82.8   0.7     14d 2026-11-04        5.8         5.5 1.00     77.2  466.70        0.5         1.0     1.00      1.00       0.68 0.54    1.0     0.87     0.90      1.0
+  ASML   PASS      equipment  mega        extended                   82.7  -3.3     97d 2027-01-27       13.2         4.8 1.00    645.9 1675.78        1.0         1.0     0.80      0.99       0.00 1.00    0.7     0.46     0.99      0.4
+   UMC   PASS          semis large           watch                   78.9  -8.5      6d 2026-10-28       33.0         2.4 0.79     49.7   19.83        0.5         1.0      NaN      1.00       0.00 1.00    0.7     0.62     1.00      1.0
+  ANET   PASS       hardware  mega           watch                   78.9  -7.2     13d 2026-11-03       18.4         3.7 0.79    231.5  183.57        1.0         0.3      NaN      1.00       0.00 0.89    0.7     0.71     0.73      0.4
+  CSCO   PASS  comms/optical  mega        extended                   78.7  -3.0     22d 2026-11-12       16.0         2.3 1.00    422.4  107.14        0.5         1.0     1.00      0.72       0.00 1.00    0.7     0.43     0.78      1.0
+   STX   PASS       hardware large           watch                   77.7 -15.7      6d 2026-10-27       44.3         9.4 0.79    159.7  702.23        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.14     1.00      0.4
+   ARM   PASS          semis  mega        extended                   76.9 -14.8     14d 2026-11-04       49.3         3.8 1.00    241.1  225.78        1.0         1.0     0.67      1.00       0.00 1.00    0.7     0.24     1.00      0.4
+  CIEN   PASS  comms/optical large    broken trend                   72.7  -3.9     49d 2026-12-10       28.3         8.8 1.00     51.1  360.60        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.38     0.36      0.4
+  CRDO   PASS   connectivity large        extended                   71.7  -9.1     40d 2026-11-30       56.0        12.3 1.00     34.5  183.49        1.0         0.3     0.94      0.63       0.00 0.84    0.7     0.23     0.99      0.4
+  LRCX   PASS      equipment  mega    broken trend                   69.9 -14.4      0d 2026-10-21       34.5         0.7 1.00    328.1  262.19        1.0         1.0     1.00      0.90       0.00 1.00    0.0     0.22     1.00      0.4
+  COHR   PASS  comms/optical large    broken trend                   69.0 -19.1     14d 2026-11-04       64.9         8.2 1.00     46.7  237.31        1.0         1.0     1.00      0.88       0.00 1.00    0.0     0.17     0.75      0.4
+   TEL   PASS       hardware large        extended                   66.8   2.2      6d 2026-10-28        4.1         3.4 1.00     62.1  214.65        0.5         1.0     0.80      0.67       0.14 0.45    0.7     0.73     1.00      0.4
+  SITM   PASS         timing large    broken trend                   65.2 -16.7     14d 2026-11-04       50.2         7.6 0.79     15.3  507.68        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.36     0.38      0.4
+  AMAT   PASS      equipment  mega    broken trend                   65.0 -13.9     22d 2026-11-12       37.8         2.4 1.00    324.4  408.73        1.0         1.0     1.00      0.66       0.00 1.00    0.0     0.00     1.00      0.4
+   GLW   PASS       hardware large    broken trend                   64.7 -11.5      5d 2026-10-27       30.7         5.6 1.00    116.4  135.12        0.5         1.0     1.00      0.67       0.00 1.00    0.0     0.38     1.00      1.0
+  MPWR   PASS          semis large    broken trend                   62.6  -1.4      8d 2026-10-29       22.4         6.6 0.79     62.9 1279.39        1.0         1.0      NaN      1.00       0.00 0.82    0.0     0.48     0.99      0.4
+   NOK   PASS  comms/optical large    broken trend                   62.4  -9.3      0d 2026-10-22       20.5         4.9 0.79     51.9    9.27        0.5         1.0      NaN      1.00       0.00 1.00    0.0     0.62     1.00      0.4
+  ONTO   PASS      metrology large    broken trend                   60.7 -21.0     19d 2026-11-09       59.5         3.3 0.79     10.9  221.90        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.11     1.00      0.4
+   WDC   PASS       hardware large    broken trend                   59.7 -13.2      1d 2026-10-22       52.6        12.7 1.00    142.2  379.98        1.0         1.0     0.67      0.89       0.00 1.00    0.0     0.00     1.00      0.4
+   VRT   PASS dc-power-cooli large    broken trend                   59.4 -14.9      6d 2026-10-28       40.3         7.5 1.00     82.4  213.95        1.0         1.0     0.75      0.82       0.00 0.92    0.0     0.00     1.00      0.4
+  QCOM   PASS          semis large           watch                   55.8   1.3     14d 2026-11-04       15.9         4.9 1.00    189.6  177.60        0.0         0.3     0.33      0.46       0.00 0.69    1.0     0.75     0.88      1.0
+  NXPI   PASS          semis large    broken trend                   52.2   5.4      6d 2026-10-27        5.8         9.7 0.79     61.0  242.07        0.5         1.0      NaN      0.62       0.00 0.58    0.4     0.33     1.00      0.4
+  AVGO   PASS          semis  mega    broken trend                   45.4  -6.0     49d 2026-12-09       27.6         3.0 1.00   1616.4  338.60        1.0         1.0     0.33      0.63       0.00 0.54    0.0     0.29     0.98      1.0
+  KLAC   PASS      equipment  mega    broken trend                   43.4 -11.7      7d 2026-10-28       31.4         2.1 0.79    213.1  163.31        0.5         0.3      NaN      0.76       0.00 1.00    0.0     0.02     1.00      0.4
+ KXIAY   PASS          semis large    broken trend                   39.5 -23.0       -        NaN       57.0         7.2 0.53     45.2    8.49        NaN         NaN      NaN       NaN       0.00 1.00    0.0     0.02     1.00      1.0
+  IONQ   PASS        quantum large    broken trend                   29.8 -19.5     14d 2026-11-04       48.8         6.8 1.00     13.1   32.21        1.0         0.3     0.20      0.00       0.00 0.21    0.0     0.53     0.48      0.4
 ```
 
 ### Full screen — EARLY (small/mid)
 ```
 ticker signal         theme   cap      verdict deal flag setup  score   ext earn_in  next_earn  to_resist  to_support  cov  mcap_$B  price  rev_accel  margin_exp  eps_rev  surprise  near_high  mom  trend  rel_str  squeeze  vol_dry
-  QMCO   PASS       quantum small        watch                   92.9 -24.9     20d 2026-11-09       87.2         8.6 0.79      0.8  19.04        1.0         1.0      NaN      1.00       0.00 1.00    0.7     1.00     0.00      0.4
-  SYNA   PASS         semis   mid        watch                   79.9  12.9     16d 2026-11-05        3.9        19.1 0.79      4.7 117.35        0.5         1.0      NaN      0.60       0.00 0.85    1.0     0.71     1.00      0.4
-   MXL   PASS         semis   mid        watch                   78.5  -3.5      2d 2026-10-22       50.4         6.8 0.79      6.8  75.21        1.0         1.0      NaN      0.81       0.00 1.00    0.7     0.28     0.80      0.4
-   RAL   PASS      hardware   mid        watch                   78.2  -1.2     14d 2026-11-04       12.1         3.2 0.79      7.4  67.07        0.5         1.0      NaN      0.96       0.38 1.00    0.7     0.60     0.48      1.0
-  AXTI   PASS     equipment   mid broken trend                   74.8 -18.5      9d 2026-10-29       71.8        11.1 0.79      3.7  56.92        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.90     0.81      0.4
-    KN   PASS      hardware   mid     extended                   74.7  -4.9      2d 2026-10-22       19.0         4.7 1.00      2.9  34.31        0.5         1.0     0.75      0.91       0.00 1.00    0.7     0.42     0.85      1.0
-    ST   PASS comms/optical   mid        watch                   70.4  -2.1      7d 2026-10-27       22.4         4.3 0.79      6.0  41.57        0.5         1.0      NaN      0.75       0.00 0.84    0.7     0.50     0.69      1.0
-  FORM   PASS     equipment   mid broken trend                   69.7  -9.9      8d 2026-10-28       39.6         4.1 0.79      8.5 108.33        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.62     0.78      1.0
-  DIOD   PASS         semis   mid broken trend                   68.1  -8.8     16d 2026-11-05       29.4         5.9 0.79      3.9  85.64        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.52     0.75      1.0
-  ICHR   PASS     equipment small broken trend                   67.4 -26.0     13d 2026-11-02       95.8         3.5 1.00      1.6  42.48        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.00     1.00      0.4
-  SANM   PASS      hardware   mid broken trend                   65.5 -16.7     20d 2026-11-09       36.8         1.1 1.00      9.1 169.92        1.0         1.0     0.80      1.00       0.00 1.00    0.0     0.16     0.57      0.4
-  NOVT   PASS comms/optical   mid broken trend                   65.2  -6.3     20d 2026-11-09       30.0         5.3 1.00      5.1 135.71        0.5         1.0     1.00      0.86       0.00 0.83    0.0     0.58     0.65      0.4
-  VIAV   PASS comms/optical   mid broken trend                   64.7 -10.7     15d 2026-11-04       38.6         4.7 1.00      8.6  34.93        1.0         1.0     0.67      1.00       0.00 1.00    0.0     0.30     0.51      1.0
-  ACMR   PASS     equipment   mid broken trend                   62.6 -24.7     15d 2026-11-05       67.5         4.2 1.00      3.8  55.25        1.0         0.3     1.00      1.00       0.00 1.00    0.0     0.00     1.00      0.4
-  VICR   PASS      hardware   mid broken trend                   61.3 -11.8       -        NaN       63.8         9.0 1.00      9.3 202.08        0.5         0.3     1.00      0.86       0.00 1.00    0.0     0.40     0.62      0.4
-  UCTT   PASS     equipment   mid broken trend                   58.8 -27.4      7d 2026-10-27       88.6         4.6 0.79      2.4  52.32        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.00     1.00      0.4
-  AEHR   PASS     equipment   mid broken trend                   58.8 -33.3     13d 2026-11-02      135.5         6.9 0.79      2.0  62.59        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.00     1.00      0.4
-  EXTR   PASS comms/optical   mid        watch                   58.3  -1.8      7d 2026-10-28       45.9         6.5 0.79      2.9  22.21        0.5         1.0      NaN      1.00       0.00 0.58    0.7     0.08     1.00      1.0
-  ALGM   PASS         semis   mid broken trend                   55.8  -6.9      8d 2026-10-29       37.2        10.1 1.00      6.3  33.96        1.0         1.0     0.80      0.94       0.00 0.66    0.0     0.00     1.00      0.4
-   VSH   PASS         semis   mid broken trend                   54.7 -11.8     14d 2026-11-04       38.4         6.3 1.00      4.4  28.40        0.5         1.0     0.67      1.00       0.00 1.00    0.0     0.00     1.00      1.0
-  CGNX   PASS comms/optical   mid broken trend                   54.4  -6.6     15d 2026-11-04       27.9         6.4 1.00      9.6  56.78        0.5         1.0     0.67      0.80       0.00 0.75    0.0     0.46     0.70      0.4
-  AAOI   PASS comms/optical   mid broken trend                   54.2 -29.1     16d 2026-11-05      108.7         5.3 1.00      6.5  77.14        1.0         0.3     0.60      1.00       0.00 1.00    0.0     0.00     0.94      0.4
-  HIMX   PASS         semis   mid broken trend                   53.2 -13.4     15d 2026-11-05       31.5         5.6 0.79      2.1  11.98        0.5         1.0      NaN      0.25       0.00 1.00    0.0     0.47     1.00      0.4
-  CAMT   PASS     equipment   mid broken trend                   53.0 -11.5     19d 2026-11-09       36.7         6.5 1.00      6.1 130.22        0.5         0.3     1.00      0.64       0.00 0.73    0.0     0.31     0.55      0.4
-  LASR   PASS         semis   mid broken trend                   51.8 -12.9     16d 2026-11-05      121.1         8.0 0.79      2.1  36.22        1.0         1.0      NaN      0.82       0.00 0.80    0.0     0.00     1.00      1.0
-  OUST   PASS      hardware   mid broken trend                   48.2 -22.4     14d 2026-11-03       75.6         6.2 0.79      2.1  29.53        1.0         1.0      NaN      0.00       0.00 0.82    0.0     0.17     1.00      0.4
-  PLAB   PASS     equipment small broken trend                   47.9  -3.9     49d 2026-12-09       32.4         5.6 0.79      1.7  28.63        0.5         0.3      NaN      1.00       0.00 0.74    0.0     0.53     1.00      1.0
-  ITRI   PASS comms/optical   mid broken trend                   47.3  -8.2      6d 2026-10-27       27.3         4.5 1.00      3.7  85.02        0.0         1.0     0.90      1.00       0.00 0.20    0.0     0.75     0.35      1.0
-   VNT   PASS comms/optical   mid        watch                   45.8   4.8     15d 2026-11-05        7.8        10.3 1.00      4.6  33.90        0.0         1.0     0.00      1.00       0.00 0.23    0.7     1.00     0.39      1.0
-  POWI   PASS         semis   mid broken trend                   44.3  -9.4     15d 2026-11-04       40.1         9.7 1.00      2.6  47.05        0.5         0.3     0.75      1.00       0.00 0.66    0.0     0.00     1.00      0.4
-  VSAT   PASS comms/optical   mid broken trend                   38.3 -16.4     16d 2026-11-05       46.7         3.7 1.00      8.3  60.26        0.0         1.0     0.00      1.00       0.00 1.00    0.0     0.24     0.88      0.4
-  AMBA   PASS     equipment   mid broken trend                   36.6  -7.3     42d 2026-12-01       43.0         7.4 1.00      2.8  63.87        0.5         0.3     0.50      0.77       0.00 0.29    0.0     0.48     1.00      1.0
-  INFQ   PASS       quantum small broken trend                   36.2 -30.5     23d 2026-11-12       72.7         3.9 0.58      2.0   8.72        1.0         0.3      NaN      0.12       0.00  NaN    0.0     0.46     0.81      1.0
-  SEDG   PASS         solar   mid broken trend                   35.9  -1.1     14d 2026-11-04       52.7         9.0 1.00      2.0  32.51        0.5         1.0     0.36      1.00       0.00 0.40    0.0     0.02     1.00      1.0
-  CRUS   PASS         semis   mid broken trend                   33.6  -4.4     15d 2026-11-04       24.3         4.7 1.00      5.5 110.24        0.5         1.0     0.20      0.57       0.00 0.42    0.0     0.28     0.97      0.4
-  ONDS   PASS comms/optical   mid broken trend                   33.1 -19.3     22d 2026-11-12       62.6         5.7 0.79      3.6   6.14        1.0         0.3      NaN      0.00       0.00 0.49    0.0     0.15     1.00      1.0
-   RUN   PASS         solar small broken trend                   33.1 -10.4     15d 2026-11-04       47.2        10.8 0.79      1.8   7.60        1.0         1.0      NaN      1.00       0.00 0.00    0.0     0.05     1.00      0.4
-  QUBT   PASS       quantum small broken trend                   32.1 -19.3     20d 2026-11-09       49.1         7.1 0.79      1.5   6.55        1.0         0.3      NaN      1.00       0.00 0.03    0.0     0.30     0.85      0.4
-  NVTS   PASS         semis   mid broken trend                   29.7 -24.4     14d 2026-11-03       69.4         6.2 1.00      2.3   8.82        0.0         1.0     0.57      0.77       0.00 0.23    0.0     0.05     1.00      0.4
-  RGTI   PASS      hardware   mid broken trend                   27.7 -24.5     21d 2026-11-10       65.3         5.2 0.79      3.9  11.72        1.0         1.0      NaN      0.09       0.00 0.00    0.0     0.19     0.95      0.4
-  OLED   PASS      hardware   mid broken trend                   25.7   1.4      8d 2026-10-28       14.6        13.5 1.00      3.8  81.85        0.0         0.3     0.00      0.62       0.00 0.03    0.4     0.81     0.14      0.4
-  ENPH   PASS         solar   mid broken trend                   22.6  -9.7      7d 2026-10-27       35.6        10.4 1.00      4.2  31.91        0.0         1.0     0.00      0.46       0.00 0.42    0.0     0.27     1.00      0.4
-  HIVE   PASS crypto/ai-hpc small broken trend                   20.9 -30.6     23d 2026-11-12       81.8         2.8 0.79      0.5   1.98        1.0         0.3      NaN      0.00       0.00 0.13    0.0     0.00     1.00      1.0
-  ARQQ   PASS       quantum micro broken trend                   10.2 -27.5     49d 2026-12-09       66.6        11.3 0.53      0.3  15.07        NaN         NaN      NaN       NaN       0.00 0.08    0.0     0.27     0.73      0.4
-  QBTS   PASS      hardware   mid broken trend                    2.9 -29.8     15d 2026-11-05       86.4         3.9 0.79      4.5  11.81        0.0         0.3      NaN      0.00       0.00 0.01    0.0     0.00     1.00      0.4
+  QMCO   PASS       quantum small        watch                   92.9 -28.6     19d 2026-11-09       97.0         4.4 0.79      0.7  18.09        1.0         1.0      NaN      1.00       0.00 1.00    0.7     1.00     0.00      0.4
+  COHU   PASS     equipment   mid        watch                   89.9  -3.7      7d 2026-10-28       35.5        10.1 0.79      2.6  55.90        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.83     0.61      0.4
+   MXL   PASS         semis   mid        watch                   86.0  -3.5      1d 2026-10-22       50.2         6.9 0.79      6.8  75.30        1.0         1.0      NaN      0.81       0.00 1.00    0.7     0.70     0.94      0.4
+   RAL   PASS      hardware   mid        watch                   84.9   2.5     13d 2026-11-04        8.1         6.7 0.79      7.7  69.58        0.5         1.0      NaN      0.96       0.61 1.00    1.0     0.58     0.39      1.0
+  SIMO   PASS         semis   mid     extended                   82.1 -13.6      7d 2026-10-28       33.5         7.5 1.00      7.5 221.02        1.0         1.0     1.00      1.00       0.00 1.00    0.7     0.12     1.00      1.0
+  SYNA   PASS         semis   mid        watch                   79.7  12.9     15d 2026-11-05        3.7        19.3 0.79      4.7 117.65        0.5         1.0      NaN      0.60       0.00 0.86    1.0     0.68     1.00      0.4
+  AXTI   PASS     equipment   mid broken trend                   76.5 -16.7      8d 2026-10-29       68.9        12.7 0.79      3.8  57.91        1.0         1.0      NaN      1.00       0.00 1.00    0.0     1.00     0.77      0.4
+    ST   PASS comms/optical   mid        watch                   74.8   1.0      6d 2026-10-27       18.8         7.1 0.79      6.2  42.83        0.5         1.0      NaN      0.75       0.00 0.80    1.0     0.42     0.69      1.0
+    KN   PASS      hardware   mid     extended                   74.3  -3.1      1d 2026-10-22       17.1         6.3 1.00      3.0  34.87        0.5         1.0     0.75      0.91       0.00 1.00    0.7     0.39     0.97      1.0
+  FORM   PASS     equipment   mid broken trend                   72.3  -6.7      7d 2026-10-28       35.0         7.2 0.79      8.7 111.99        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.77     0.72      1.0
+  ICHR   PASS     equipment small broken trend                   67.4 -23.4     12d 2026-11-02       90.9         5.9 1.00      1.6  43.58        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.00     1.00      0.4
+  CGNX   PASS comms/optical   mid     extended                   66.2  -4.0     14d 2026-11-04       24.6         8.8 1.00      9.8  58.25        0.5         1.0     0.67      0.80       0.00 0.71    0.7     0.42     0.63      0.4
+  VIAV   PASS comms/optical   mid broken trend                   65.0  -9.0     14d 2026-11-04       36.2         6.3 1.00      8.7  35.54        1.0         1.0     0.67      1.00       0.00 1.00    0.0     0.32     0.61      1.0
+  VICR   PASS      hardware   mid broken trend                   64.4  -6.5    117d 2027-02-16       54.4        14.2 1.00      9.9 214.41        0.5         0.3     1.00      0.86       0.00 1.00    0.0     0.61     0.78      0.4
+  ACMR   PASS     equipment   mid broken trend                   62.6 -24.2     14d 2026-11-05       67.6         4.1 1.00      3.8  55.22        1.0         0.3     1.00      1.00       0.00 1.00    0.0     0.00     1.00      0.4
+  AEHR   PASS     equipment   mid broken trend                   61.8 -31.2     12d 2026-11-02      130.7         8.8 0.79      2.1  63.88        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.17     1.00      0.4
+  UCTT   PASS     equipment   mid broken trend                   58.8 -26.1      6d 2026-10-27       87.2         5.3 0.79      2.4  52.72        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.00     1.00      0.4
+  EXTR   PASS comms/optical   mid        watch                   56.4  -0.7      6d 2026-10-28       44.6         7.4 0.79      3.0  22.41        0.5         1.0      NaN      1.00       0.00 0.57    0.7     0.00     1.00      1.0
+  ALGM   PASS         semis   mid broken trend                   55.1  -4.3      7d 2026-10-29       34.0        12.2 1.00      6.5  34.76        1.0         1.0     0.80      0.94       0.00 0.63    0.0     0.00     1.00      0.4
+   VSH   PASS         semis   mid broken trend                   54.7  -8.7     13d 2026-11-04       34.0         9.2 1.00      4.5  29.33        0.5         1.0     0.67      1.00       0.00 1.00    0.0     0.00     1.00      1.0
+  AAOI   PASS comms/optical   mid broken trend                   54.3 -28.0     15d 2026-11-05      107.7         5.8 1.00      6.6  77.51        1.0         0.3     0.60      1.00       0.00 1.00    0.0     0.01     1.00      0.4
+  CAMT   PASS     equipment   mid broken trend                   52.7  -9.8     13d 2026-11-04       34.7         7.8 1.00      6.2 132.13        0.5         0.3     1.00      0.64       0.00 0.72    0.0     0.31     0.63      0.4
+  HIMX   PASS         semis   mid broken trend                   52.5 -13.5     14d 2026-11-05       32.3         5.1 0.79      2.1  11.90        0.5         1.0      NaN      0.25       0.00 1.00    0.0     0.43     1.00      0.4
+  LASR   PASS         semis   mid broken trend                   51.5 -10.5     15d 2026-11-05      116.5        10.0 0.79      2.1  37.00        1.0         1.0      NaN      0.82       0.00 0.78    0.0     0.00     1.00      1.0
+  OUST   PASS      hardware   mid broken trend                   48.5 -19.9     13d 2026-11-03       71.5         8.4 0.79      2.2  30.24        1.0         1.0      NaN      0.00       0.00 0.75    0.0     0.29     1.00      0.4
+  ACLS   PASS     equipment   mid broken trend                   48.1  -4.8     14d 2026-11-05       28.7         8.3 1.00      3.6 116.50        0.5         0.3     0.50      1.00       0.00 0.92    0.0     0.25     1.00      1.0
+  PLAB   PASS     equipment small broken trend                   46.7  -2.4     48d 2026-12-09       30.7         6.8 0.79      1.7  29.00        0.5         0.3      NaN      1.00       0.00 0.74    0.0     0.46     1.00      1.0
+  POWI   PASS         semis   mid broken trend                   44.4  -6.7     14d 2026-11-04       36.7        11.8 1.00      2.7  48.20        0.5         0.3     0.75      1.00       0.00 0.66    0.0     0.00     1.00      0.4
+   VNT   PASS comms/optical   mid        watch                   43.7   5.9     14d 2026-11-05        6.7        11.2 1.00      4.6  34.26        0.0         1.0     0.00      1.00       0.00 0.23    0.7     0.86     0.41      1.0
+  SEDG   PASS         solar   mid broken trend                   42.4   0.4     13d 2026-11-04       50.4        10.3 1.00      2.0  33.01        0.5         1.0     0.36      1.00       0.00 0.36    0.4     0.01     1.00      1.0
+  INFQ   PASS       quantum   mid broken trend                   40.2 -26.5     22d 2026-11-12       64.1         8.7 0.58      2.1   9.18        1.0         0.3      NaN      0.12       0.00  NaN    0.0     0.63     0.79      1.0
+  VECO   PASS     equipment   mid broken trend                   39.2  -3.6     14d 2026-11-04       31.4         8.0 1.00      2.8  45.67        0.0         0.3     0.25      1.00       0.00 1.00    0.0     0.28     0.96      1.0
+  VSAT   PASS comms/optical   mid broken trend                   38.1 -13.5     15d 2026-11-05       42.7         6.4 1.00      8.5  61.95        0.0         1.0     0.00      1.00       0.00 1.00    0.0     0.23     0.85      0.4
+  AMBA   PASS     equipment   mid broken trend                   38.0  -1.7     41d 2026-12-01       35.5        12.3 1.00      3.0  67.43        0.5         0.3     0.50      0.77       0.00 0.31    0.0     0.55     1.00      1.0
+   BMI   PASS comms/optical   mid broken trend                   35.7   1.4      0d 2026-10-22        6.9         7.3 0.79      3.8 131.57        0.0         0.3      NaN      0.54       0.00 0.26    0.4     0.69     1.00      0.4
+  QUBT   PASS       quantum small broken trend                   34.2 -16.3     19d 2026-11-09       44.5        10.0 0.79      1.5   6.76        1.0         0.3      NaN      1.00       0.00 0.07    0.0     0.35     0.83      0.4
+  ONDS   PASS comms/optical   mid broken trend                   33.0 -16.4     21d 2026-11-12       58.4         8.1 0.79      3.7   6.30        1.0         0.3      NaN      0.00       0.00 0.53    0.0     0.09     1.00      1.0
+  NVTS   PASS         semis   mid broken trend                   32.6 -21.2     13d 2026-11-03       63.8         9.3 1.00      2.4   9.12        0.0         1.0     0.57      0.77       0.00 0.29    0.0     0.16     1.00      0.4
+   RUN   PASS         solar small broken trend                   32.4  -9.9     14d 2026-11-04       47.2        10.8 0.79      1.8   7.60        1.0         1.0      NaN      1.00       0.00 0.00    0.0     0.00     1.00      0.4
+  CRUS   PASS         semis   mid broken trend                   31.9  -3.8     14d 2026-11-04       23.7         5.1 1.00      5.6 110.79        0.5         1.0     0.20      0.57       0.00 0.42    0.0     0.15     0.96      0.4
+  RGTI   PASS      hardware   mid broken trend                   28.0 -21.6     20d 2026-11-10       60.4         8.0 0.79      4.0  12.07        1.0         1.0      NaN      0.09       0.00 0.00    0.0     0.21     0.93      1.0
+  ENPH   PASS         solar   mid broken trend                   22.0  -8.8      6d 2026-10-27       35.0        10.8 1.00      4.2  32.06        0.0         1.0     0.00      0.46       0.00 0.39    0.0     0.26     1.00      0.4
+  HIVE   PASS crypto/ai-hpc small broken trend                   20.3 -28.0     22d 2026-11-12       76.0         5.6 0.79      0.6   2.05        1.0         0.3      NaN      0.00       0.00 0.11    0.0     0.00     1.00      1.0
+  ARQQ   PASS       quantum micro broken trend                   17.3 -20.6     48d 2026-12-09       53.2        18.4 0.53      0.3  16.39        NaN         NaN      NaN       NaN       0.00 0.08    0.0     0.53     0.64      0.4
+  QBTS   PASS      hardware   mid broken trend                    3.2 -27.0     14d 2026-11-05       80.9         6.7 0.79      4.6  12.16        0.0         0.3      NaN      0.00       0.00 0.02    0.0     0.00     1.00      0.4
 ```
 
 ### Full position monitor
 ```
 ticker action  price   stop  to_stop_%                                                                                                       signals
-    MU   TRIM 910.55 968.17       -6.3                                                                below 50d; lagging market; below trailing stop
-   WDC   EXIT 363.72 400.37      -10.1                                             downtrend (below 50d & 200d); lagging market; below trailing stop
-   STX   TRIM 678.67 794.10      -17.0                                                                below 50d; lagging market; below trailing stop
-  RMBS   EXIT  94.16  96.79       -2.8                      downtrend (below 50d & 200d); 12m momentum negative; lagging market; below trailing stop
-  NVDA   TRIM 217.19 226.52       -4.3                                                                below 50d; lagging market; below trailing stop
-   AMD   TRIM 540.91 578.29       -6.9                                                                           lagging market; below trailing stop
-  AVGO   EXIT 335.20 348.54       -4.0 downtrend (below 50d & 200d); 12m momentum negative; estimates being cut; lagging market; below trailing stop
-  MRVL   TRIM 241.97 255.12       -5.4                                                                                below 50d; below trailing stop
-  COHR   EXIT 233.12 279.75      -20.0                                             downtrend (below 50d & 200d); lagging market; below trailing stop
-  LITE   TRIM 826.49 942.10      -14.0                                                                below 50d; lagging market; below trailing stop
-  CIEN   EXIT 341.79 380.87      -11.4                                             downtrend (below 50d & 200d); lagging market; below trailing stop
-  ALAB   TRIM 287.86 329.29      -14.4                                                                below 50d; lagging market; below trailing stop
-  CRDO   EXIT 173.46 187.86       -8.3                                             downtrend (below 50d & 200d); lagging market; below trailing stop
-   NOK   EXIT   9.06   9.71       -7.2                                             downtrend (below 50d & 200d); lagging market; below trailing stop
-  GDDY   HOLD 109.43  97.40       11.0                                                                                         12m momentum negative
-   NOW   TRIM 149.69 136.22        9.0                                                                    12m momentum negative; estimates being cut
-    ZS   HOLD 214.62 205.95        4.0                                                                                         12m momentum negative
-   CRM   HOLD 242.62 226.84        6.5                                                                                         12m momentum negative
-  SNOW   TRIM 321.43 324.50       -1.0                                                                                below 50d; below trailing stop
-  TSLA   TRIM 374.53 353.94        5.5                                                        below 200d; 12m momentum negative; estimates being cut
-  MRAM   EXIT  13.33  16.54      -24.0                        downtrend (below 50d & 200d); estimates being cut; lagging market; below trailing stop
-  AMPX   EXIT   7.61   9.47      -24.3                      downtrend (below 50d & 200d); 12m momentum negative; lagging market; below trailing stop
-  ALMU   EXIT   7.88  11.39      -44.5                      downtrend (below 50d & 200d); 12m momentum negative; lagging market; below trailing stop
+    MU   TRIM 917.71 969.49       -5.6                                                                below 50d; lagging market; below trailing stop
+   WDC   EXIT 379.98 400.90       -5.5                                             downtrend (below 50d & 200d); lagging market; below trailing stop
+   STX   TRIM 702.23 796.15      -13.4                                                                below 50d; lagging market; below trailing stop
+  RMBS   EXIT  93.60  97.92       -4.6                      downtrend (below 50d & 200d); 12m momentum negative; lagging market; below trailing stop
+  NVDA   TRIM 221.70 226.69       -2.3                                                                                below 50d; below trailing stop
+   AMD   TRIM 553.44 583.08       -5.4                                                                                           below trailing stop
+  AVGO   EXIT 338.60 349.02       -3.1 downtrend (below 50d & 200d); 12m momentum negative; estimates being cut; lagging market; below trailing stop
+  MRVL   TRIM 244.73 255.64       -4.5                                                                                           below trailing stop
+  COHR   EXIT 237.31 280.35      -18.1                                             downtrend (below 50d & 200d); lagging market; below trailing stop
+  LITE   TRIM 853.96 941.57      -10.3                                                                                below 50d; below trailing stop
+  CIEN   EXIT 360.60 380.74       -5.6                                             downtrend (below 50d & 200d); lagging market; below trailing stop
+  ALAB   TRIM 288.70 332.41      -15.1                                                                below 50d; lagging market; below trailing stop
+  CRDO   TRIM 183.49 187.11       -2.0                                                                below 50d; lagging market; below trailing stop
+   NOK   EXIT   9.27   9.67       -4.4                                             downtrend (below 50d & 200d); lagging market; below trailing stop
+  GDDY   HOLD 107.35  98.23        8.5                                                                                         12m momentum negative
+   NOW   TRIM 153.07 136.10       11.1                                                                    12m momentum negative; estimates being cut
+    ZS   HOLD 230.51 205.41       10.9                                                                                         12m momentum negative
+   CRM   HOLD 242.83 226.59        6.7                                                                                         12m momentum negative
+  SNOW   HOLD 324.77 324.40        0.1                                                                                                     below 50d
+  TSLA   TRIM 387.26 354.08        8.6                                                                    12m momentum negative; estimates being cut
+  MRAM   EXIT  13.57  16.74      -23.3                        downtrend (below 50d & 200d); estimates being cut; lagging market; below trailing stop
+  AMPX   EXIT   8.32   9.42      -13.1                      downtrend (below 50d & 200d); 12m momentum negative; lagging market; below trailing stop
+  ALMU   EXIT   7.78  11.47      -47.5                      downtrend (below 50d & 200d); 12m momentum negative; lagging market; below trailing stop
 ```
 
 ### Regime detail
 ```
-  SPX trend                         SPY above 200d (+6.5%)    risk-on  (+1)
+  SPX trend                         SPY above 200d (+7.0%)    risk-on  (+1)
   Breadth (RSP-SPY 50d)                      -2.0%   risk-off  (-1)
-  Credit (HYG/IEF 50d)                       -0.2%    neutral  (+0)
-  Volatility (VIX)                            17.5    risk-on  (+1)
-  Yield curve (10y-3mo)                    +1.04pp    risk-on  (+1)
-  Semis leadership (SOXX-SPY 63d)           -13.1%   risk-off  (-1)
+  Credit (HYG/IEF 50d)                       -0.1%    neutral  (+0)
+  Volatility (VIX)                            16.6    risk-on  (+1)
+  Yield curve (10y-3mo)                    +1.05pp    risk-on  (+1)
+  Semis leadership (SOXX-SPY 63d)            -8.0%   risk-off  (-1)
 
   caveats:
    - SPX trend: below 200d historically precedes most drawdowns, but whipsaws
