@@ -1,51 +1,51 @@
-# Daily Sector Report — 2026-11-14
-_Generated 2026-11-14 18:42 UTC. Regime: **RISK-ON** (+3/6). Not investment advice._
+# Daily Sector Report — 2026-11-15
+_Generated 2026-11-15 19:17 UTC. Regime: **RISK-ON** (+3/6). Not investment advice._
 
 ## TL;DR
-- **Top setups:** TXN, ANET, MSI, RAL, VNT
+- **Top setups:** TXN, ANET, RAL, MSI, VNT
 - 🎯 **PRIMED\*** (coiled near highs): MSI
 - ⚠ **Exit signals:** MU (TRIM), WDC (EXIT), STX (EXIT), RMBS (EXIT), NVDA (EXIT), AVGO (TRIM), MRVL (EXIT), COHR (EXIT), LITE (EXIT), CIEN (EXIT), ALAB (EXIT), CRDO (EXIT), NOK (EXIT), NOW (EXIT), ZS (TRIM), CRM (TRIM), SNOW (TRIM), TSLA (TRIM), MRAM (EXIT), AMPX (EXIT), ALMU (EXIT)
-- 📅 **Earnings ≤14d (strong names):** ADI (9d), HPE (9d), DELL (10d), KEYS (5d)
+- 📅 **Earnings ≤14d (strong names):** ADI (8d), HPE (8d), DELL (9d), KEYS (4d)
 
 ## Top setups (large-cap)
 ```
 ticker signal         theme   cap         verdict setup  score   ext  near_high  mom  eps_rev earn_in
-   TXN  WATCH         semis  mega early (fundies)         99.3   7.4       0.49 1.00     1.00     73d
-   ADI   PASS         semis large        extended         97.7   0.8       0.31 1.00     1.00      9d
-   AMD   PASS         semis  mega        extended         91.9  -3.7       0.00 1.00     0.92     80d
-  ANET  WATCH      hardware  mega early (fundies)         91.4   2.3       0.40 0.86     1.00     87d
-  GRMN   PASS comms/optical large        extended         90.8   0.2       0.38 0.98     1.00     94d
-   ASX   PASS         semis large           watch         90.0 -13.6       0.00 1.00      NaN     81d
-  MPWR   PASS         semis large        extended         89.1   8.3       0.00 0.82     1.00     82d
-   APH   PASS      hardware large        extended         85.4  -3.6       0.22 0.68     1.00     73d
-   HPE   PASS comms/optical large           watch         85.3 -17.9       0.00 1.00      NaN      9d
-    MU   PASS         semis  mega        extended         79.9 -17.5       0.00 1.00     0.75     39d
-  DELL   PASS      hardware  mega           watch         79.4 -30.1       0.00 1.00      NaN     10d
-   TEL   PASS      hardware large        extended         79.1   1.4       0.20 0.41     1.00     66d
+   TXN  WATCH         semis  mega early (fundies)         99.3   7.4       0.49 1.00     1.00     72d
+   ADI   PASS         semis large        extended         97.7   0.8       0.31 1.00     1.00      8d
+   AMD   PASS         semis  mega        extended         91.9  -3.7       0.00 1.00     0.92     79d
+  ANET  WATCH      hardware  mega early (fundies)         91.4   2.3       0.40 0.86     1.00     86d
+  GRMN   PASS comms/optical large        extended         90.8   0.2       0.38 0.98     1.00     93d
+   ASX   PASS         semis large           watch         90.0 -13.6       0.00 1.00      NaN     80d
+  MPWR   PASS         semis large        extended         89.1   8.3       0.00 0.82     1.00     81d
+   APH   PASS      hardware large        extended         85.4  -3.6       0.22 0.68     1.00     72d
+   HPE   PASS comms/optical large           watch         85.3 -17.9       0.00 1.00      NaN      8d
+    MU   PASS         semis  mega        extended         79.9 -17.5       0.00 1.00     0.75     38d
+  DELL   PASS      hardware  mega           watch         79.4 -30.1       0.00 1.00      NaN      9d
+   TEL   PASS      hardware large        extended         79.1   1.4       0.20 0.41     1.00     65d
 ```
 
 ## Top setups (small/mid)
 ```
 ticker signal         theme   cap         verdict setup  score   ext  near_high  mom  eps_rev earn_in
-  SYNA   PASS         semis   mid           watch         89.1   7.3       0.00 1.00      NaN     82d
-  EXTR   PASS comms/optical   mid        extended         88.6  16.9       0.00 0.73     1.00     73d
-  SLAB    M&A         semis   mid      M&A target         88.4   0.1       0.96 1.00     0.50     81d
-   RAL  WATCH      hardware   mid early (fundies)         76.5  -0.4       0.53 0.91     0.60    103d
-  QMCO   PASS       quantum small           watch         75.7 -34.3       0.00 1.00      NaN     87d
-    PI   PASS         semis   mid        extended         75.4  -5.4       0.00 0.72     0.71     82d
-   VSH   PASS      hardware   mid    broken trend         72.8 -12.6       0.00 1.00     1.00     80d
-   VNT  WATCH comms/optical   mid          primed         72.5  27.2       0.96 0.42     0.83     88d
-   MXL   PASS         semis   mid    broken trend         71.8 -26.6       0.00 1.00     1.00     75d
-  VIAV   PASS comms/optical   mid    broken trend         70.9 -15.5       0.00 1.00     1.00     81d
+  SYNA   PASS         semis   mid           watch         89.1   7.3       0.00 1.00      NaN     81d
+  EXTR   PASS comms/optical   mid        extended         88.6  16.9       0.00 0.73     1.00     72d
+  SLAB    M&A         semis   mid      M&A target         88.4   0.1       0.96 1.00     0.50     80d
+   RAL  WATCH      hardware   mid early (fundies)         82.3  -0.4       0.53 0.91     0.88    102d
+  QMCO   PASS       quantum small           watch         75.7 -34.3       0.00 1.00      NaN     86d
+    PI   PASS         semis   mid        extended         73.5  -5.4       0.00 0.72     0.62     81d
+   VSH   PASS      hardware   mid    broken trend         72.8 -12.6       0.00 1.00     1.00     79d
+   VNT  WATCH comms/optical   mid          primed         72.5  27.2       0.96 0.42     0.83     87d
+   MXL   PASS         semis   mid    broken trend         71.8 -26.6       0.00 1.00     1.00     74d
+  VIAV   PASS comms/optical   mid    broken trend         70.9 -15.5       0.00 1.00     1.00     80d
 ```
 
 ## 📅 Earnings watch
 ```
 ticker         theme      verdict  score earn_in  next_earn  eps_rev
-   ADI         semis     extended   97.7      9d 2026-11-24      1.0
-   HPE comms/optical        watch   85.3      9d 2026-11-23      NaN
-  DELL      hardware        watch   79.4     10d 2026-11-24      NaN
-  KEYS comms/optical broken trend   68.9      5d 2026-11-19      NaN
+   ADI         semis     extended   97.7      8d 2026-11-24      1.0
+   HPE comms/optical        watch   85.3      8d 2026-11-23      NaN
+  DELL      hardware        watch   79.4      9d 2026-11-24      NaN
+  KEYS comms/optical broken trend   68.9      4d 2026-11-19      NaN
 ```
 
 ## 🎯 Coiled watch (volatility squeeze; PRIMED\* = bullseye)
@@ -90,9 +90,9 @@ ticker         theme      verdict  score  squeeze  near_high  eps_rev
    NOK comms/optical broken trend   55.6     0.89       0.00     0.88
  KXIAY         semis broken trend   54.8     1.00       0.00      NaN
   CGNX comms/optical broken trend   54.4     0.61       0.00     0.58
+  ACMR     equipment broken trend   54.3     1.00       0.00     0.67
     ST comms/optical broken trend   53.2     0.83       0.00     0.33
   CAMT     equipment broken trend   52.3     1.00       0.00     0.86
-  ACMR     equipment broken trend   51.0     1.00       0.00      NaN
   INTC         semis broken trend   49.1     0.63       0.00     0.12
   IPGP     equipment broken trend   48.1     1.00       0.00     0.67
   CRUS         semis   recovering   47.4     0.71       0.00     0.20
@@ -154,101 +154,101 @@ _Everything below is the complete data behind the summary above._
 ### Full screen — CORE (large-cap)
 ```
 ticker signal          theme   cap         verdict deal flag setup  score   ext earn_in  next_earn  to_resist  to_support  cov  mcap_$B   price  rev_accel  margin_exp  eps_rev  surprise  near_high  mom  trend  rel_str  squeeze  vol_dry
-   TXN  WATCH          semis  mega early (fundies)                   99.3   7.4     73d 2027-01-26        4.5        10.8 1.00    277.4  303.60        1.0         1.0     1.00      0.90       0.49 1.00    1.0     1.00     0.00      0.4
-   ADI   PASS          semis large        extended                   97.7   0.8      9d 2026-11-24        9.0        10.9 1.00    192.8  397.97        1.0         1.0     1.00      0.67       0.31 1.00    1.0     1.00     0.00      0.4
-   AMD   PASS          semis  mega        extended                   91.9  -3.7     80d 2027-02-02       23.3        24.7 1.00    875.9  534.06        1.0         1.0     0.92      0.87       0.00 1.00    0.7     1.00     0.00      0.9
-  ANET  WATCH       hardware  mega early (fundies)                   91.4   2.3     87d 2027-02-09       10.2        19.7 1.00    249.3  197.29        1.0         0.3     1.00      1.00       0.40 0.86    1.0     0.94     0.07      0.9
-  GRMN   PASS  comms/optical large        extended                   90.8   0.2     94d 2027-02-17        5.2         6.2 1.00     54.5  283.03        0.5         1.0     1.00      1.00       0.38 0.98    1.0     0.78     0.00      0.4
-   ASX   PASS          semis large           watch                   90.0 -13.6     81d 2027-02-04       34.8        16.8 0.79     78.5   35.55        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.83     0.00      0.4
-  MPWR   PASS          semis large        extended                   89.1   8.3     82d 2027-02-04        8.8        19.1 1.00     67.8 1390.54        1.0         1.0     1.00      0.78       0.00 0.82    0.7     1.00     0.17      0.4
-   APH   PASS       hardware large        extended                   85.4  -3.6     73d 2027-01-27       15.0         8.7 1.00    193.2   78.23        1.0         1.0     1.00      0.97       0.22 0.68    0.7     0.85     0.00      0.4
-   HPE   PASS  comms/optical large           watch                   85.3 -17.9      9d 2026-11-23       52.3        10.2 0.79     64.1   48.29        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.56     0.19      1.0
-    MU   PASS          semis  mega        extended                   79.9 -17.5     39d 2026-12-23       42.4        16.5 1.00    880.6  778.31        1.0         1.0     0.75      0.75       0.00 1.00    0.7     0.46     0.66      0.4
-  DELL   PASS       hardware  mega           watch                   79.4 -30.1     10d 2026-11-24       72.6         8.6 0.79    219.1  344.53        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.23     0.21      0.4
-   TEL   PASS       hardware large        extended                   79.1   1.4     66d 2027-01-20        6.3         5.4 1.00     62.0  216.34        0.5         1.0     1.00      0.61       0.20 0.41    1.0     1.00     0.00      0.4
-   MSI    BUY  comms/optical large        PRIMED *                   78.5  12.4     87d 2027-02-09        3.2        13.8 1.00     87.8  531.20        0.5         1.0     0.60      0.79       0.95 0.72    1.0     1.00     0.69      0.4
-  ASML   PASS      equipment  mega    broken trend                   73.9  -9.9     73d 2027-01-27       25.1         9.4 1.00    576.3 1495.16        1.0         1.0     1.00      0.99       0.00 1.00    0.0     0.47     0.41      0.4
-   TSM   PASS          semis  mega    broken trend                   71.9  -7.3     60d 2027-01-14       22.3        11.9 1.00   2068.0  398.73        1.0         1.0     0.83      0.58       0.00 0.98    0.0     0.81     0.00      0.4
-  NXPI   PASS          semis large        extended                   71.1  10.5     79d 2027-02-01        3.4        14.5 1.00     66.8  265.09        0.5         1.0     0.64      0.60       0.00 0.66    0.7     1.00     0.00      0.4
-  CIEN   PASS  comms/optical large    broken trend                   69.1 -18.3     25d 2026-12-10       62.1        19.6 1.00     39.8  280.54        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.12     0.84      0.4
-  KEYS   PASS  comms/optical large    broken trend                   68.9 -11.1      5d 2026-11-19       31.0        13.4 0.79     50.7  297.68        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.57     0.00      0.4
-  COHR   PASS  comms/optical large    broken trend                   68.4 -17.8     81d 2027-02-03       56.7        26.6 1.00     43.0  218.15        1.0         1.0     1.00      0.80       0.00 1.00    0.0     0.17     1.00      0.4
-  LITE   PASS  comms/optical large    broken trend                   68.2 -31.2     79d 2027-02-02       91.6        15.1 1.00     54.1  596.62        1.0         1.0     1.00      0.91       0.00 1.00    0.0     0.10     0.73      0.4
-   WDC   PASS       hardware large    broken trend                   67.4 -24.5     75d 2027-01-28       67.6        12.5 1.00    110.7  295.65        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.00     1.00      0.4
-  MRVL   PASS          semis large    broken trend                   66.4 -31.6     17d 2026-12-01       92.1        15.5 1.00    141.0  156.76        1.0         1.0     0.96      0.55       0.00 1.00    0.0     0.21     0.30      0.4
-  KLAC   PASS      equipment large    broken trend                   66.3 -12.0     75d 2027-01-28       37.0        15.9 1.00    198.5  152.32        1.0         1.0     0.89      0.68       0.00 0.93    0.0     0.35     0.58      0.4
-  CSCO   PASS  comms/optical  mega    broken trend                   65.9 -11.1     88d 2027-02-10       24.1         2.4 1.00    376.5   95.64        0.5         1.0     1.00      0.78       0.00 0.91    0.0     0.54     0.60      0.4
-   TER   PASS      equipment large    broken trend                   65.9 -27.2     74d 2027-01-27       81.1        15.2 1.00     39.0  249.55        1.0         1.0     0.93      1.00       0.00 1.00    0.0     0.00     0.86      0.4
-   VRT   PASS dc-power-cooli large    broken trend                   65.9 -12.6     87d 2027-02-10       46.1        15.5 1.00     77.8  202.07        1.0         1.0     1.00      1.00       0.00 0.76    0.0     0.25     0.00      0.4
-  ALAB   PASS   connectivity large    broken trend                   65.6 -24.6     87d 2027-02-09       81.1        19.9 1.00     38.8  221.83        1.0         0.3     1.00      1.00       0.00 1.00    0.0     0.22     0.95      0.4
- TELWY   PASS      equipment large    broken trend                   64.5 -14.3     83d 2027-02-05       44.3        14.4 0.72    129.9   28.70        1.0         1.0      NaN       NaN       0.00 1.00    0.0     0.50     0.50      0.9
-   STX   PASS       hardware large    broken trend                   64.0 -28.7     73d 2027-01-26       79.1        15.0 1.00    121.3  528.29        1.0         1.0     0.94      0.67       0.00 1.00    0.0     0.00     1.00      0.4
-  AVGO   PASS          semis  mega    broken trend                   63.0   0.5     25d 2026-12-09        9.7        16.5 0.79   1656.5  347.01        1.0         1.0      NaN      0.63       0.00 0.47    0.4     0.68     0.01      0.4
-  SITM   PASS         timing large    broken trend                   62.9 -19.4     81d 2027-02-03       64.5        24.6 1.00     13.4  444.54        1.0         0.3     1.00      1.00       0.00 1.00    0.0     0.03     0.94      0.9
-  SNDK   PASS       hardware large    broken trend                   62.8 -38.6     93d 2027-02-15      115.8         9.2 1.00    125.9  885.01        1.0         1.0     0.83      0.83       0.00 1.00    0.0     0.00     1.00      0.4
-  NVDA   PASS          semis  mega    broken trend                   62.2 -24.1      3d 2026-11-17       49.4         8.6 1.00   3932.3  162.85        1.0         1.0     1.00      0.81       0.00 0.65    0.0     0.25     0.00      0.9
-   GLW   PASS       hardware large    broken trend                   60.4 -19.2     72d 2027-01-26       49.8        10.9 1.00     98.3  114.08        0.5         1.0     0.93      0.67       0.00 1.00    0.0     0.18     1.00      0.4
-  AMAT   PASS      equipment  mega    broken trend                   59.7 -15.4     89d 2027-02-11       47.7        14.5 1.00    294.0  370.50        1.0         1.0     0.62      0.63       0.00 1.00    0.0     0.19     0.82      0.4
-   STM   PASS          semis large    broken trend                   59.3  -5.2     74d 2027-01-28       26.9        15.1 1.00     41.8   46.73        0.5         1.0     0.80      0.01       0.00 1.00    0.0     0.63     0.22      0.4
-  LRCX   PASS      equipment  mega    broken trend                   59.2 -18.6     74d 2027-01-27       56.1        18.4 1.00    282.2  225.92        1.0         1.0     0.68      0.55       0.00 1.00    0.0     0.12     0.94      0.4
-   ARM   PASS          semis  mega    broken trend                   56.7 -23.2     81d 2027-02-03       76.9        14.4 1.00    203.9  190.53        1.0         0.3     0.55      0.97       0.00 1.00    0.0     0.27     1.00      0.4
-   NOK   PASS  comms/optical large    broken trend                   55.6 -15.7     74d 2027-01-28       38.4         8.8 1.00     45.7    8.07        0.5         0.3     0.88      1.00       0.00 0.85    0.0     0.33     0.89      1.0
+   TXN  WATCH          semis  mega early (fundies)                   99.3   7.4     72d 2027-01-26        4.5        10.8 1.00    277.4  303.60        1.0         1.0     1.00      0.90       0.49 1.00    1.0     1.00     0.00      0.4
+   ADI   PASS          semis large        extended                   97.7   0.8      8d 2026-11-24        9.0        10.9 1.00    192.8  397.97        1.0         1.0     1.00      0.67       0.31 1.00    1.0     1.00     0.00      0.4
+   AMD   PASS          semis  mega        extended                   91.9  -3.7     79d 2027-02-02       23.3        24.7 1.00    875.9  534.06        1.0         1.0     0.92      0.87       0.00 1.00    0.7     1.00     0.00      0.9
+  ANET  WATCH       hardware  mega early (fundies)                   91.4   2.3     86d 2027-02-09       10.2        19.7 1.00    249.3  197.29        1.0         0.3     1.00      1.00       0.40 0.86    1.0     0.94     0.07      0.9
+  GRMN   PASS  comms/optical large        extended                   90.8   0.2     93d 2027-02-17        5.2         6.2 1.00     54.5  283.03        0.5         1.0     1.00      1.00       0.38 0.98    1.0     0.78     0.00      0.4
+   ASX   PASS          semis large           watch                   90.0 -13.6     80d 2027-02-04       34.8        16.8 0.79     78.5   35.55        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.83     0.00      0.4
+  MPWR   PASS          semis large        extended                   89.1   8.3     81d 2027-02-04        8.8        19.1 1.00     67.8 1390.54        1.0         1.0     1.00      0.78       0.00 0.82    0.7     1.00     0.17      0.4
+   APH   PASS       hardware large        extended                   85.4  -3.6     72d 2027-01-27       15.0         8.7 1.00    193.2   78.23        1.0         1.0     1.00      0.97       0.22 0.68    0.7     0.85     0.00      0.4
+   HPE   PASS  comms/optical large           watch                   85.3 -17.9      8d 2026-11-23       52.3        10.2 0.79     64.1   48.29        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.56     0.19      1.0
+    MU   PASS          semis  mega        extended                   79.9 -17.5     38d 2026-12-23       42.4        16.5 1.00    880.6  778.31        1.0         1.0     0.75      0.75       0.00 1.00    0.7     0.46     0.66      0.4
+  DELL   PASS       hardware  mega           watch                   79.4 -30.1      9d 2026-11-24       72.6         8.6 0.79    219.1  344.53        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.23     0.21      0.4
+   TEL   PASS       hardware large        extended                   79.1   1.4     65d 2027-01-20        6.3         5.4 1.00     62.0  216.34        0.5         1.0     1.00      0.61       0.20 0.41    1.0     1.00     0.00      0.4
+   MSI    BUY  comms/optical large        PRIMED *                   78.5  12.4     86d 2027-02-09        3.2        13.8 1.00     87.8  531.20        0.5         1.0     0.60      0.79       0.95 0.72    1.0     1.00     0.69      0.4
+  ASML   PASS      equipment  mega    broken trend                   73.9  -9.9     72d 2027-01-27       25.1         9.4 1.00    576.3 1495.16        1.0         1.0     1.00      0.99       0.00 1.00    0.0     0.47     0.41      0.4
+   TSM   PASS          semis  mega    broken trend                   71.9  -7.3     59d 2027-01-14       22.3        11.9 1.00   2068.0  398.73        1.0         1.0     0.83      0.58       0.00 0.98    0.0     0.81     0.00      0.4
+  NXPI   PASS          semis large        extended                   71.1  10.5     78d 2027-02-01        3.4        14.5 1.00     66.8  265.09        0.5         1.0     0.64      0.60       0.00 0.66    0.7     1.00     0.00      0.4
+  CIEN   PASS  comms/optical large    broken trend                   69.1 -18.3     24d 2026-12-10       62.1        19.6 1.00     39.8  280.54        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.12     0.84      0.4
+  KEYS   PASS  comms/optical large    broken trend                   68.9 -11.1      4d 2026-11-19       31.0        13.4 0.79     50.7  297.68        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.57     0.00      0.4
+  COHR   PASS  comms/optical large    broken trend                   68.4 -17.8     80d 2027-02-03       56.7        26.6 1.00     43.0  218.15        1.0         1.0     1.00      0.80       0.00 1.00    0.0     0.17     1.00      0.4
+  LITE   PASS  comms/optical large    broken trend                   68.2 -31.2     78d 2027-02-02       91.6        15.1 1.00     54.1  596.62        1.0         1.0     1.00      0.91       0.00 1.00    0.0     0.10     0.73      0.4
+   WDC   PASS       hardware large    broken trend                   67.4 -24.5     74d 2027-01-28       67.6        12.5 1.00    110.7  295.65        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.00     1.00      0.4
+  MRVL   PASS          semis large    broken trend                   66.4 -31.6     16d 2026-12-01       92.1        15.5 1.00    141.0  156.76        1.0         1.0     0.96      0.55       0.00 1.00    0.0     0.21     0.30      0.4
+  KLAC   PASS      equipment large    broken trend                   66.3 -12.0     74d 2027-01-28       37.0        15.9 1.00    198.5  152.32        1.0         1.0     0.89      0.68       0.00 0.93    0.0     0.35     0.58      0.4
+  CSCO   PASS  comms/optical  mega    broken trend                   65.9 -11.1     87d 2027-02-10       24.1         2.4 1.00    376.5   95.64        0.5         1.0     1.00      0.78       0.00 0.91    0.0     0.54     0.60      0.4
+   TER   PASS      equipment large    broken trend                   65.9 -27.2     73d 2027-01-27       81.1        15.2 1.00     39.0  249.55        1.0         1.0     0.93      1.00       0.00 1.00    0.0     0.00     0.86      0.4
+   VRT   PASS dc-power-cooli large    broken trend                   65.9 -12.6     86d 2027-02-10       46.1        15.5 1.00     77.8  202.07        1.0         1.0     1.00      1.00       0.00 0.76    0.0     0.25     0.00      0.4
+  ALAB   PASS   connectivity large    broken trend                   65.6 -24.6     86d 2027-02-09       81.1        19.9 1.00     38.8  221.83        1.0         0.3     1.00      1.00       0.00 1.00    0.0     0.22     0.95      0.4
+ TELWY   PASS      equipment large    broken trend                   64.5 -14.3     82d 2027-02-05       44.3        14.4 0.72    129.9   28.70        1.0         1.0      NaN       NaN       0.00 1.00    0.0     0.50     0.50      0.9
+   STX   PASS       hardware large    broken trend                   64.0 -28.7     72d 2027-01-26       79.1        15.0 1.00    121.3  528.29        1.0         1.0     0.94      0.67       0.00 1.00    0.0     0.00     1.00      0.4
+  AVGO   PASS          semis  mega    broken trend                   63.0   0.5     24d 2026-12-09        9.7        16.5 0.79   1656.5  347.01        1.0         1.0      NaN      0.63       0.00 0.47    0.4     0.68     0.01      0.4
+  SITM   PASS         timing large    broken trend                   62.9 -19.4     80d 2027-02-03       64.5        24.6 1.00     13.4  444.54        1.0         0.3     1.00      1.00       0.00 1.00    0.0     0.03     0.94      0.9
+  SNDK   PASS       hardware large    broken trend                   62.8 -38.6     92d 2027-02-15      115.8         9.2 1.00    125.9  885.01        1.0         1.0     0.83      0.83       0.00 1.00    0.0     0.00     1.00      0.4
+  NVDA   PASS          semis  mega    broken trend                   62.2 -24.1      2d 2026-11-17       49.4         8.6 1.00   3932.3  162.85        1.0         1.0     1.00      0.81       0.00 0.65    0.0     0.25     0.00      0.9
+   GLW   PASS       hardware large    broken trend                   60.4 -19.2     71d 2027-01-26       49.8        10.9 1.00     98.3  114.08        0.5         1.0     0.93      0.67       0.00 1.00    0.0     0.18     1.00      0.4
+  AMAT   PASS      equipment  mega    broken trend                   59.7 -15.4     88d 2027-02-11       47.7        14.5 1.00    294.0  370.50        1.0         1.0     0.62      0.63       0.00 1.00    0.0     0.19     0.82      0.4
+   STM   PASS          semis large    broken trend                   59.3  -5.2     73d 2027-01-28       26.9        15.1 1.00     41.8   46.73        0.5         1.0     0.80      0.01       0.00 1.00    0.0     0.63     0.22      0.4
+  LRCX   PASS      equipment  mega    broken trend                   59.2 -18.6     73d 2027-01-27       56.1        18.4 1.00    282.2  225.92        1.0         1.0     0.68      0.55       0.00 1.00    0.0     0.12     0.94      0.4
+   ARM   PASS          semis  mega    broken trend                   56.7 -23.2     80d 2027-02-03       76.9        14.4 1.00    203.9  190.53        1.0         0.3     0.55      0.97       0.00 1.00    0.0     0.27     1.00      0.4
+   NOK   PASS  comms/optical large    broken trend                   55.6 -15.7     73d 2027-01-28       38.4         8.8 1.00     45.7    8.07        0.5         0.3     0.88      1.00       0.00 0.85    0.0     0.33     0.89      1.0
  KXIAY   PASS          semis large    broken trend                   54.8 -42.6       -        NaN      139.8         8.7 0.72     88.4    5.53        1.0         1.0      NaN       NaN       0.00 1.00    0.0     0.00     1.00      0.4
-  INTC   PASS          semis  mega    broken trend                   49.1 -37.2     75d 2027-01-28      113.6        13.7 1.00    317.1   59.66        1.0         1.0     0.12      1.00       0.00 1.00    0.0     0.00     0.63      0.4
-  QCOM   PASS          semis large           watch                   47.0  -3.5     81d 2027-02-03       19.4        14.0 1.00    184.5  172.47        0.0         0.3     0.18      0.52       0.00 0.51    0.7     1.00     0.00      0.4
-  CRDO   PASS   connectivity large    broken trend                   41.1 -23.7     17d 2026-12-01       85.9        15.7 0.79     24.7  131.51        1.0         0.3      NaN      0.63       0.00 0.69    0.0     0.00     1.00      0.4
-  IONQ   PASS        quantum large    broken trend                   39.0 -20.5    102d 2027-02-24       65.9        13.7 1.00     13.4   28.88        1.0         0.3     0.67      1.00       0.00 0.19    0.0     0.03     0.55      0.4
+  INTC   PASS          semis  mega    broken trend                   49.1 -37.2     74d 2027-01-28      113.6        13.7 1.00    317.1   59.66        1.0         1.0     0.12      1.00       0.00 1.00    0.0     0.00     0.63      0.4
+  QCOM   PASS          semis large           watch                   47.0  -3.5     80d 2027-02-03       19.4        14.0 1.00    184.5  172.47        0.0         0.3     0.18      0.52       0.00 0.51    0.7     1.00     0.00      0.4
+  CRDO   PASS   connectivity large    broken trend                   41.1 -23.7     16d 2026-12-01       85.9        15.7 0.79     24.7  131.51        1.0         0.3      NaN      0.63       0.00 0.69    0.0     0.00     1.00      0.4
+  IONQ   PASS        quantum large    broken trend                   39.0 -20.5    101d 2027-02-24       65.9        13.7 1.00     13.4   28.88        1.0         0.3     0.67      1.00       0.00 0.19    0.0     0.03     0.55      0.4
 ```
 
 ### Full screen — EARLY (small/mid)
 ```
 ticker signal         theme   cap         verdict           deal flag setup  score   ext earn_in  next_earn  to_resist  to_support  cov  mcap_$B  price  rev_accel  margin_exp  eps_rev  surprise  near_high  mom  trend  rel_str  squeeze  vol_dry
-  SYNA   PASS         semis   mid           watch                             89.1   7.3     82d 2027-02-04        3.3         1.8 0.79      4.7 118.14        0.5         1.0      NaN      0.60       0.00 1.00    1.0     1.00     1.00      0.4
-  EXTR   PASS comms/optical   mid        extended                             88.6  16.9     73d 2027-01-27        2.1        24.5 1.00      3.5  26.75        0.5         1.0     1.00      1.00       0.00 0.73    1.0     1.00     0.17      0.4
-  SLAB    M&A         semis   mid      M&A target TXN $231 H1'27              88.4   0.1     81d 2027-02-03        0.9         0.3 1.00      7.4 221.43        1.0         1.0     0.50      1.00       0.96 1.00    1.0     0.92     0.80      0.4
-   RAL  WATCH      hardware   mid early (fundies)                             76.5  -0.4    103d 2027-02-25        9.4        10.4 1.00      7.6  68.73        0.5         1.0     0.60      1.00       0.53 0.91    0.7     0.87     0.00      0.4
-  QMCO   PASS       quantum small           watch                             75.7 -34.3     87d 2027-02-09      132.4        16.1 0.79      0.6  15.34        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.02     0.62      0.4
-    PI   PASS         semis   mid        extended                             75.4  -5.4     82d 2027-02-04       20.2         5.4 1.00      5.2 168.54        0.5         1.0     0.71      1.00       0.00 0.72    0.7     0.90     0.05      1.0
-   VSH   PASS      hardware   mid    broken trend                             72.8 -12.6     80d 2027-02-03       46.3        19.5 1.00      4.1  26.62        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.38     0.83      0.4
-   VNT  WATCH comms/optical   mid          primed                             72.5  27.2     88d 2027-02-11        1.4        24.5 1.00      5.8  43.64        0.0         1.0     0.83      0.96       0.96 0.42    1.0     1.00     0.00      0.9
-   MXL   PASS         semis   mid    broken trend                             71.8 -26.6     75d 2027-01-28      102.8        20.9 1.00      5.1  55.78        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.31     0.51      0.4
-  VIAV   PASS comms/optical   mid    broken trend                             70.9 -15.5     81d 2027-02-03       57.6        21.6 1.00      7.6  30.72        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.25     0.73      0.4
-    KN   PASS      hardware   mid    broken trend                             70.7  -6.4     82d 2027-02-04       22.1         8.4 1.00      2.8  33.00        1.0         0.3     1.00      0.81       0.00 1.00    0.0     0.68     0.56      0.4
-  ITRI   PASS comms/optical   mid        extended                             70.3   5.2     93d 2027-02-16        7.5        15.5 1.00      4.2  96.06        0.0         1.0     0.88      1.00       0.32 0.33    1.0     0.89     0.10      0.4
-  FORM   PASS     equipment   mid    broken trend                             69.6 -22.4     81d 2027-02-03       72.7        20.2 1.00      6.8  87.53        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.15     0.71      0.4
-  DIOD   PASS         semis   mid    broken trend                             69.3  -3.0     87d 2027-02-09       27.1        22.8 0.79      4.0  87.25        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.59     0.65      0.4
-  SIMO   PASS         semis   mid    broken trend                             68.6 -27.6     80d 2027-02-02       73.5         8.6 1.00      5.7 169.45        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.08     0.97      0.4
-  TTMI   PASS      hardware   mid    broken trend                             67.2 -29.3     80d 2027-02-03       86.1        20.4 1.00      7.8  74.08        1.0         1.0     1.00      1.00       0.00 0.99    0.0     0.00     1.00      0.4
-  VICR   PASS      hardware   mid    broken trend                             66.9 -27.3     93d 2027-02-16      108.1        19.0 1.00      7.3 159.05        1.0         1.0     1.00      0.86       0.00 1.00    0.0     0.03     0.43      1.0
-  VSAT   PASS comms/optical   mid           watch                             63.8  -3.5     82d 2027-02-04       20.1        15.3 0.79      9.4  67.72        0.5         0.3      NaN      0.00       0.00 1.00    0.7     0.62     0.23      0.4
-  KLIC   PASS     equipment   mid    broken trend                             63.6 -15.8      4d 2026-11-18       47.6        17.6 0.79      3.6  69.07        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.27     0.93      0.4
-  ALGM   PASS         semis   mid    broken trend                             63.1 -11.3     74d 2027-01-28       32.9        13.9 1.00      5.6  30.13        1.0         1.0     0.90      0.82       0.00 0.75    0.0     0.30     0.54      0.4
-   BMI   PASS comms/optical   mid        extended                             62.4  12.8     74d 2027-01-28        7.8        19.2 1.00      4.5 154.72        0.5         1.0     0.67      0.59       0.00 0.22    0.7     1.00     0.00      0.4
-  NOVT   PASS comms/optical   mid    broken trend                             59.4 -15.3    100d 2027-02-23       29.7         4.8 1.00      4.5 118.88        1.0         0.3     1.00      0.93       0.00 0.68    0.0     0.28     0.27      0.4
-  AEHR   PASS          test small    broken trend                             58.8 -26.9     82d 2027-02-04       92.1        17.5 0.79      1.9  56.98        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.00     1.00      0.4
-  AAOI   PASS comms/optical   mid    broken trend                             58.8 -43.1    103d 2027-02-25      168.0         9.5 0.79      4.5  49.89        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.00     1.00      0.4
-  ACLS   PASS     equipment   mid    broken trend                             57.3  -9.3     93d 2027-02-16       43.6        21.4 1.00      3.2 104.42        0.5         0.3     1.00      1.00       0.00 0.81    0.0     0.32     0.70      0.4
-  ONTO   PASS     equipment   mid    broken trend                             57.1 -17.9     96d 2027-02-18       66.5        23.8 0.79     10.0 203.62        1.0         1.0      NaN      0.80       0.00 1.00    0.0     0.01     1.00      0.4
-   ESE   PASS comms/optical   mid    broken trend                             56.1  -8.9      5d 2026-11-19       24.8         2.8 1.00      6.0 231.50        0.5         1.0     1.00      0.69       0.00 0.65    0.0     0.28     1.00      1.0
-  SANM   PASS      hardware   mid    broken trend                             56.0 -16.6     79d 2027-02-01       46.9        20.2 0.79      8.5 158.31        1.0         1.0      NaN      1.00       0.00 0.64    0.0     0.39     0.39      0.9
-  RMBS   PASS         semis   mid    broken trend                             54.9 -11.2     79d 2027-02-01       39.8        17.1 1.00      8.8  82.23        1.0         0.3     0.86      0.83       0.00 0.44    0.0     0.59     0.41      1.0
-  CGNX   PASS comms/optical   mid    broken trend                             54.4 -13.9     88d 2027-02-10       33.2         6.8 1.00      8.4  50.01        0.5         1.0     0.58      0.60       0.00 0.96    0.0     0.37     0.61      0.4
-  OLED  WATCH      hardware   mid      recovering                             54.0   9.4     96d 2027-02-18        7.3        12.2 1.00      4.0  89.29        0.5         0.3     0.67      1.00       0.00 0.18    0.4     1.00     0.21      1.0
-    ST   PASS comms/optical   mid    broken trend                             53.2  -6.9     96d 2027-02-18       14.2         2.6 1.00      5.6  38.56        0.5         1.0     0.33      1.00       0.00 0.84    0.0     0.63     0.83      0.4
-  CAMT   PASS     equipment   mid    broken trend                             52.3 -24.0     95d 2027-02-18       65.9        12.4 1.00      4.8 101.73        1.0         0.3     0.86      0.51       0.00 0.80    0.0     0.02     1.00      0.4
-  ACMR   PASS     equipment   mid    broken trend                             51.0 -23.6    102d 2027-02-25       79.8        21.9 0.79      3.4  47.95        1.0         0.3      NaN      0.81       0.00 1.00    0.0     0.00     1.00      0.4
-  IPGP   PASS     equipment   mid    broken trend                             48.1 -10.0     88d 2027-02-11       27.5         9.1 1.00      2.9  67.78        0.5         1.0     0.67      1.00       0.00 0.37    0.0     0.48     1.00      0.4
-  CRUS  WATCH         semis   mid      recovering                             47.4   4.3     80d 2027-02-02        3.8        10.8 1.00      6.0 120.19        0.0         1.0     0.20      1.00       0.00 0.40    0.4     0.96     0.71      0.4
-  AMKR   PASS     equipment   mid    broken trend                             44.5 -20.5     86d 2027-02-08       56.6        15.9 1.00      8.9  36.11        0.5         1.0     0.56      0.34       0.00 0.82    0.0     0.04     1.00      0.4
-   BDC   PASS comms/optical   mid    broken trend                             39.4  -6.2     81d 2027-02-04       22.9         7.0 1.00      4.0 101.88        1.0         0.3     0.40      0.50       0.00 0.42    0.0     0.36     0.64      0.4
-  ONDS   PASS comms/optical   mid    broken trend                             29.9 -22.6    127d 2027-03-22       71.3        15.2 0.79      3.0   5.16        1.0         0.3      NaN      0.16       0.00 0.42    0.0     0.00     0.91      0.4
-  INFQ   PASS       quantum small    broken trend                             25.8 -23.5      2d 2026-11-16       77.6        17.3 0.58      1.9   8.48        1.0         0.3      NaN      0.12       0.00  NaN    0.0     0.03     0.65      1.0
-  QUBT   PASS       quantum small    broken trend                             22.2 -24.5    107d 2027-03-01       75.5         3.1 0.79      1.3   5.56        1.0         0.3      NaN      0.10       0.00 0.13    0.0     0.02     0.48      0.4
-  ENPH   PASS         solar   mid    broken trend                             15.6 -18.3     80d 2027-02-02       52.7         8.6 1.00      3.4  26.07        0.0         0.3     0.00      0.00       0.00 0.56    0.0     0.13     0.06      0.4
-  RGTI   PASS      hardware   mid    broken trend                              8.8 -29.1    110d 2027-03-04       87.7         4.5 0.79      3.3   9.62        0.0         1.0      NaN      0.00       0.00 0.00    0.0     0.00     0.46      0.4
-  HIVE   PASS crypto/ai-hpc small    broken trend                              4.1 -36.9     93d 2027-02-15      129.3         3.8 0.79      0.4   1.57        0.0         0.3      NaN      0.00       0.00 0.05    0.0     0.00     1.00      1.0
-  QBTS   PASS      hardware   mid    broken trend                              2.7 -31.4    102d 2027-02-25      115.4        11.3 0.79      3.6   9.56        0.0         0.3      NaN      0.00       0.00 0.00    0.0     0.00     1.00      0.4
-  ARQQ   PASS       quantum micro    broken trend                              2.2 -21.1     24d 2026-12-09       70.1        20.6 0.53      0.3  14.76        NaN         NaN      NaN       NaN       0.00 0.01    0.0     0.07     0.54      0.4
+  SYNA   PASS         semis   mid           watch                             89.1   7.3     81d 2027-02-04        3.3         1.8 0.79      4.7 118.14        0.5         1.0      NaN      0.60       0.00 1.00    1.0     1.00     1.00      0.4
+  EXTR   PASS comms/optical   mid        extended                             88.6  16.9     72d 2027-01-27        2.1        24.5 1.00      3.5  26.75        0.5         1.0     1.00      1.00       0.00 0.73    1.0     1.00     0.17      0.4
+  SLAB    M&A         semis   mid      M&A target TXN $231 H1'27              88.4   0.1     80d 2027-02-03        0.9         0.3 1.00      7.4 221.43        1.0         1.0     0.50      1.00       0.96 1.00    1.0     0.92     0.80      0.4
+   RAL  WATCH      hardware   mid early (fundies)                             82.3  -0.4    102d 2027-02-25        9.4        10.4 1.00      7.6  68.73        0.5         1.0     0.88      1.00       0.53 0.91    0.7     0.87     0.00      0.4
+  QMCO   PASS       quantum small           watch                             75.7 -34.3     86d 2027-02-09      132.4        16.1 0.79      0.6  15.34        1.0         1.0      NaN      1.00       0.00 1.00    0.7     0.02     0.62      0.4
+    PI   PASS         semis   mid        extended                             73.5  -5.4     81d 2027-02-04       20.2         5.4 1.00      5.2 168.54        0.5         1.0     0.62      1.00       0.00 0.72    0.7     0.90     0.05      1.0
+   VSH   PASS      hardware   mid    broken trend                             72.8 -12.6     79d 2027-02-03       46.3        19.5 1.00      4.1  26.62        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.38     0.83      0.4
+   VNT  WATCH comms/optical   mid          primed                             72.5  27.2     87d 2027-02-11        1.4        24.5 1.00      5.8  43.64        0.0         1.0     0.83      0.96       0.96 0.42    1.0     1.00     0.00      0.9
+   MXL   PASS         semis   mid    broken trend                             71.8 -26.6     74d 2027-01-28      102.8        20.9 1.00      5.1  55.78        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.31     0.51      0.4
+  VIAV   PASS comms/optical   mid    broken trend                             70.9 -15.5     80d 2027-02-03       57.6        21.6 1.00      7.6  30.72        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.25     0.73      0.4
+    KN   PASS      hardware   mid    broken trend                             70.7  -6.4     81d 2027-02-04       22.1         8.4 1.00      2.8  33.00        1.0         0.3     1.00      0.81       0.00 1.00    0.0     0.68     0.56      0.4
+  ITRI   PASS comms/optical   mid        extended                             70.3   5.2     92d 2027-02-16        7.5        15.5 1.00      4.2  96.06        0.0         1.0     0.88      1.00       0.32 0.33    1.0     0.89     0.10      0.4
+  FORM   PASS     equipment   mid    broken trend                             69.6 -22.4     80d 2027-02-03       72.7        20.2 1.00      6.8  87.53        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.15     0.71      0.4
+  DIOD   PASS         semis   mid    broken trend                             69.3  -3.0     86d 2027-02-09       27.1        22.8 0.79      4.0  87.25        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.59     0.65      0.4
+  SIMO   PASS         semis   mid    broken trend                             68.6 -27.6     79d 2027-02-02       73.5         8.6 1.00      5.7 169.45        1.0         1.0     1.00      1.00       0.00 1.00    0.0     0.08     0.97      0.4
+  TTMI   PASS      hardware   mid    broken trend                             67.2 -29.3     79d 2027-02-03       86.1        20.4 1.00      7.8  74.08        1.0         1.0     1.00      1.00       0.00 0.99    0.0     0.00     1.00      0.4
+  VICR   PASS      hardware   mid    broken trend                             66.9 -27.3     92d 2027-02-16      108.1        19.0 1.00      7.3 159.05        1.0         1.0     1.00      0.86       0.00 1.00    0.0     0.03     0.43      1.0
+  VSAT   PASS comms/optical   mid           watch                             63.8  -3.5     81d 2027-02-04       20.1        15.3 0.79      9.4  67.72        0.5         0.3      NaN      0.00       0.00 1.00    0.7     0.62     0.23      0.4
+  KLIC   PASS     equipment   mid    broken trend                             63.6 -15.8      3d 2026-11-18       47.6        17.6 0.79      3.6  69.07        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.27     0.93      0.4
+  ALGM   PASS         semis   mid    broken trend                             63.1 -11.3     73d 2027-01-28       32.9        13.9 1.00      5.6  30.13        1.0         1.0     0.90      0.82       0.00 0.75    0.0     0.30     0.54      0.4
+   BMI   PASS comms/optical   mid        extended                             62.4  12.8     73d 2027-01-28        7.8        19.2 1.00      4.5 154.72        0.5         1.0     0.67      0.59       0.00 0.22    0.7     1.00     0.00      0.4
+  NOVT   PASS comms/optical   mid    broken trend                             59.4 -15.3     99d 2027-02-23       29.7         4.8 1.00      4.5 118.88        1.0         0.3     1.00      0.93       0.00 0.68    0.0     0.28     0.27      0.4
+  AEHR   PASS          test small    broken trend                             58.8 -26.9     81d 2027-02-04       92.1        17.5 0.79      1.9  56.98        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.00     1.00      0.4
+  AAOI   PASS comms/optical   mid    broken trend                             58.8 -43.1    102d 2027-02-25      168.0         9.5 0.79      4.5  49.89        1.0         1.0      NaN      1.00       0.00 1.00    0.0     0.00     1.00      0.4
+  ACLS   PASS     equipment   mid    broken trend                             57.3  -9.3     92d 2027-02-16       43.6        21.4 1.00      3.2 104.42        0.5         0.3     1.00      1.00       0.00 0.81    0.0     0.32     0.70      0.4
+  ONTO   PASS     equipment   mid    broken trend                             57.1 -17.9     95d 2027-02-18       66.5        23.8 0.79     10.0 203.62        1.0         1.0      NaN      0.80       0.00 1.00    0.0     0.01     1.00      0.4
+   ESE   PASS comms/optical   mid    broken trend                             56.1  -8.9      4d 2026-11-19       24.8         2.8 1.00      6.0 231.50        0.5         1.0     1.00      0.69       0.00 0.65    0.0     0.28     1.00      1.0
+  SANM   PASS      hardware   mid    broken trend                             56.0 -16.6     78d 2027-02-01       46.9        20.2 0.79      8.5 158.31        1.0         1.0      NaN      1.00       0.00 0.64    0.0     0.39     0.39      0.9
+  RMBS   PASS         semis   mid    broken trend                             54.9 -11.2     78d 2027-02-01       39.8        17.1 1.00      8.8  82.23        1.0         0.3     0.86      0.83       0.00 0.44    0.0     0.59     0.41      1.0
+  CGNX   PASS comms/optical   mid    broken trend                             54.4 -13.9     87d 2027-02-10       33.2         6.8 1.00      8.4  50.01        0.5         1.0     0.58      0.60       0.00 0.96    0.0     0.37     0.61      0.4
+  ACMR   PASS     equipment   mid    broken trend                             54.3 -23.6    101d 2027-02-25       79.8        21.9 1.00      3.4  47.95        1.0         0.3     0.67      0.81       0.00 1.00    0.0     0.00     1.00      0.4
+  OLED  WATCH      hardware   mid      recovering                             54.0   9.4     95d 2027-02-18        7.3        12.2 1.00      4.0  89.29        0.5         0.3     0.67      1.00       0.00 0.18    0.4     1.00     0.21      1.0
+    ST   PASS comms/optical   mid    broken trend                             53.2  -6.9     95d 2027-02-18       14.2         2.6 1.00      5.6  38.56        0.5         1.0     0.33      1.00       0.00 0.84    0.0     0.63     0.83      0.4
+  CAMT   PASS     equipment   mid    broken trend                             52.3 -24.0     94d 2027-02-18       65.9        12.4 1.00      4.8 101.73        1.0         0.3     0.86      0.51       0.00 0.80    0.0     0.02     1.00      0.4
+  IPGP   PASS     equipment   mid    broken trend                             48.1 -10.0     87d 2027-02-11       27.5         9.1 1.00      2.9  67.78        0.5         1.0     0.67      1.00       0.00 0.37    0.0     0.48     1.00      0.4
+  CRUS  WATCH         semis   mid      recovering                             47.4   4.3     79d 2027-02-02        3.8        10.8 1.00      6.0 120.19        0.0         1.0     0.20      1.00       0.00 0.40    0.4     0.96     0.71      0.4
+  AMKR   PASS     equipment   mid    broken trend                             44.5 -20.5     85d 2027-02-08       56.6        15.9 1.00      8.9  36.11        0.5         1.0     0.56      0.34       0.00 0.82    0.0     0.04     1.00      0.4
+   BDC   PASS comms/optical   mid    broken trend                             39.4  -6.2     80d 2027-02-04       22.9         7.0 1.00      4.0 101.88        1.0         0.3     0.40      0.50       0.00 0.42    0.0     0.36     0.64      0.4
+  ONDS   PASS comms/optical   mid    broken trend                             29.9 -22.6    126d 2027-03-22       71.3        15.2 0.79      3.1   5.16        1.0         0.3      NaN      0.16       0.00 0.42    0.0     0.00     0.91      0.4
+  INFQ   PASS       quantum small    broken trend                             25.8 -23.5      1d 2026-11-16       77.6        17.3 0.58      1.9   8.48        1.0         0.3      NaN      0.12       0.00  NaN    0.0     0.03     0.65      1.0
+  QUBT   PASS       quantum small    broken trend                             22.2 -24.5    106d 2027-03-01       75.5         3.1 0.79      1.3   5.56        1.0         0.3      NaN      0.10       0.00 0.13    0.0     0.02     0.48      0.4
+  ENPH   PASS         solar   mid    broken trend                             15.6 -18.3     79d 2027-02-02       52.7         8.6 1.00      3.4  26.07        0.0         0.3     0.00      0.00       0.00 0.56    0.0     0.13     0.06      0.4
+  RGTI   PASS      hardware   mid    broken trend                              8.8 -29.1    109d 2027-03-04       87.7         4.5 0.79      3.3   9.62        0.0         1.0      NaN      0.00       0.00 0.00    0.0     0.00     0.46      0.4
+  HIVE   PASS crypto/ai-hpc small    broken trend                              4.1 -36.9     92d 2027-02-15      129.3         3.8 0.79      0.4   1.57        0.0         0.3      NaN      0.00       0.00 0.05    0.0     0.00     1.00      1.0
+  QBTS   PASS      hardware   mid    broken trend                              2.7 -31.4    101d 2027-02-25      115.4        11.3 0.79      3.6   9.56        0.0         0.3      NaN      0.00       0.00 0.00    0.0     0.00     1.00      0.4
+  ARQQ   PASS       quantum micro    broken trend                              2.2 -21.1     23d 2026-12-09       70.1        20.6 0.53      0.3  14.76        NaN         NaN      NaN       NaN       0.00 0.01    0.0     0.07     0.54      0.4
 ```
 
 ### Full position monitor
